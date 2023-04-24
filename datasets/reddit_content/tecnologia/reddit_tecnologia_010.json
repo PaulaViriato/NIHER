@@ -1,0 +1,801 @@
+{
+    "posts": [
+        {
+            "title": "Pe\u00e7as usadas valem a pena?",
+            "selftext": "Tava dando uma olhada no olx e o pessoal na minha cidade t\u00e1 vendendo seus PCs com configs boas, por um pre\u00e7o relativamente barato, n\u00e3o muito abaixo do mercado (se comparados com aliexpress) mas ainda t\u00e1 top. Vale a pena?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "10646yd",
+            "num_comments": 3,
+            "comments": [
+                "Se estiverem funcionando... e n\u00e3o estiverem acima de 50-60% de uma nova, at\u00e9 vale.\n\nDe que tipo de configura\u00e7\u00e3o e pre\u00e7o tu t\u00e1 falando?"
+            ]
+        },
+        {
+            "title": "Meu ryzen 5 gargala com uma RTX 3060 TI OC ???",
+            "selftext": "Tenho um Ryzen 5 2600x na minha b450m e uso minha rx 570 8gb atualmente e estou pensando em comprar uma RTX 3060 TI de 8gb da Asus (vers\u00e3o mini)  mas n\u00e3o tenho ideia se o meu ryzen vai conseguir aguentar a RTX... vai ter gargalo caso eu coloque esse upgrade?  \n\n\n  \n\n\nhttps://preview.redd.it/puc3sk4z2paa1.png?width=414&format=png&auto=webp&v=enabled&s=23694f279792a70b49a6cb52eb20abb585ad5cff",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "106192w",
+            "num_comments": 4,
+            "comments": [
+                "Ryzen 5 2600X n\u00e3o tem PCIe 4.0... e a 3060 \u00e9 PCIe 4.0 x16. Pode haver algum gargalo, mas acho que a 3060 TI n\u00e3o satura os lanes todos."
+            ]
+        },
+        {
+            "title": "Tela de BIOS",
+            "selftext": "Meu PC n\u00e3o aparece a tela de BIOS, d\u00e1 uma tela preta e depois j\u00e1 aparece o Windows, se eu apertar as teclas de boot como f2 del e etc ele fica na tela preta e n\u00e3o sai mais, s\u00f3 reiniciando o PC, j\u00e1 mudei a resolu\u00e7\u00e3o mas n\u00e3o adianta, quando preciso dar boot tenho que ligar o PC na TV a\u00ed aparece a tela de BIOS, oq pode ser?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "105qxah",
+            "num_comments": 4,
+            "comments": [
+                "Qual o processador que tu t\u00e1 usando? Tem placa de v\u00eddeo?\n\nSe o processador tiver v\u00eddeo onboard, liga nele. Caso contr\u00e1rio, liga na placa de v\u00eddeo.",
+                "Provavelmente, fastboot ativo. \n\nReinicie o Windows, segurando a tela Shift, e v\u00e1 na op\u00e7\u00e3o de firmware. Veja se funciona?",
+                "voc\u00ea usa o monitor no HDMI? Se sim, usa no DVI que provavelmente o problema vai acabar. Ja passei por esse problema e a solu\u00e7\u00e3o foi mudar a entrada."
+            ]
+        },
+        {
+            "title": "posso usar meu pc sem cooler?",
+            "selftext": "eu estou montando um pc baratinho, com um xeon 2420 V2, eu acabei comprando um fan cooler ao inv\u00e9s de um cpu cooler, depois de perceber a minha burrice fiz a compra de um cpu cooler, mas tem problema eu usar o meu pc s\u00f3 com esse fan cooler enquanto o meu outro chega? no caso eu n\u00e3o jogaria ou faria nada que for\u00e7asse demais o pc",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "105nqsc",
+            "num_comments": 8,
+            "comments": [
+                "N\u00e3o. E espero que vc tenha pegado um decente com no m\u00ednimo 4 heatpipes tipo o Rise Mode Z3. Xeon esquenta bastante.",
+                "Espera o cooler chegar, n\u00e3o use sem.",
+                "n\u00e3o tem problema, mas pega um decente. Xeon tem problema com esquentar demais, toma cuidado com isso.",
+                "Poder, at\u00e9 tu pode... mas n\u00e3o deve. Eu sinceramente n\u00e3o recomendo...\n\nO CPU vai trabalhar \u00e0 105\u00b0C, travando e morrer\u00e1 logo. hahaha",
+                "N\u00e3o recomendo. J\u00e1 usei sem em processadores que n\u00e3o esquentavam muito (Pentium com cooler quebrando e um Core 2 Duo que esqueci de fixar), o que n\u00e3o \u00e9 o caso dos Xeons.",
+                "olhe bem a temperatura da cpu, chegando a 80\u00ba j\u00e1 est\u00e1 passando do normal que deve ser mantido ali nos 60/70\u00ba",
+                "Melhor n\u00e3o Man, esse processador e meio esquentadinho, a\u00ed tem risco de vc ficar sem ele!",
+                "N\u00e3o use. O processador vai esquentar muito podendo at\u00e9 danificar!"
+            ]
+        },
+        {
+            "title": "Fonte KCAS 500w 80plus bronze com RTX 2060",
+            "selftext": " Vou comprar uma rtx 2060 e tenho a fonte kcas 500w mas falam que ela n e uma fonte confi\u00e1vel, posso usar a 2060 com ela at\u00e9 eu conseguir uma fonte melhor em 3-4 meses ou vai acontecer algo como queimar algum componente do pc?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "105hxyj",
+            "num_comments": 4,
+            "comments": [
+                "Eu sinceramente n\u00e3o recomendaria usar a AeroCool KCAS com uma placa que puxe tanto da fonte... Tu pode arriscar por **tua pr\u00f3pria conta e risco**... ela pode, com algum azar, queimar algum hardware no caso de uma falha e esse hardware pode ser uma placa de v\u00eddeo por exemplo... (se n\u00e3o me engano, ela tamb\u00e9m tinha ripple bem alto quando em load)",
+                "Uma 2060 comunzona puxa ~165w. Junta isso com seu kit (vou supor que \u00e9 um i5-10400 com um ou dois SSDs), poder\u00e1 usar de boa at\u00e9 trocar a fonte (recomendo corsair). Agora, se vc possui um cpu parrudo igual um i9 ou ryzen 9, que consomem bastante, eu j\u00e1 providenciaria uma fonte melhor o quanto antes. Oq pode ocorrer \u00e9 o pc desligar sozinho no meio do jogo, e a fonte pifar, se n\u00e3o possuir nenhum circuito de prote\u00e7\u00e3o."
+            ]
+        },
+        {
+            "title": "Kit xeon",
+            "selftext": "Pessoal, estou montando um PC com configura\u00e7\u00e3o xeon, e queria saber qual o melhor kit pra se usar com o processador xeon e5 2670 v3.\nObs, vou comprar pela aliexpress",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "105aexi",
+            "num_comments": 4,
+            "comments": [
+                "Ps.: at\u00e9 qual valor? Por que no AliExpress deve ter Xeon Platinum de 40 mil reais. haha"
+            ]
+        },
+        {
+            "title": "Estou pensando em comprar uma rtx 3070 qual e a melhor ao pior das marcas?",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "10575op",
+            "num_comments": 3,
+            "comments": [
+                "Olha... eu compraria uma MSI Gaming X ou uma EVGA FTW3 Ultra... dependendo do bolso."
+            ]
+        },
+        {
+            "title": "Qual eu escolho rtx 3070 aorus master 8gb ou rtx 3070 Asus Tuf gaming?",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1056xw8",
+            "num_comments": 0
+        },
+        {
+            "title": "Quais pe\u00e7as preciso para ter um pc funcional ?",
+            "selftext": "Tenho uma placa m\u00e3e , processador sem v\u00eddeo integrado , memoria ram e ssd . Faltaria um cpu cooler , placa de v\u00eddeo e fonte para poder ligar e usar ,certo ? Pretendo testar isso num cabo hdmi ligado na tv . \u00c9 poss\u00edvel ou falta algo mais ? Irei comprar o monitor e o gabinete por \u00faltimo .",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1056d0m",
+            "num_comments": 4,
+            "comments": [
+                "De necess\u00e1rio vc j\u00e1 falou. Falta s\u00f3 teclado e mouse claro. Kkkk.",
+                "Eu imagino estar montando o PC e fa\u00e7o a sequencia das coisas na ordem que tem de ser plugadas pra lembrar se falta ou n\u00e3o: primeiro a **placa m\u00e3e** na mesa, coloca o **processador**, **pasta t\u00e9rmica** e instala o **cooler**. Encaixa os **m\u00f3dulos de RAM** (mem\u00f3ria RAM \u00e9 pleonasmo, o M j\u00e1 \u00e9 Memoria) para funcionar. Instala o **M.2** (muitas vezes fica embaixo da placa de v\u00eddeo). Ai coloca **placa de v\u00eddeo** para dar video e a **fonte** para conseguir ligar. (\"fonte pra dar video\"... mds... o que eu fumei?!) - ainda tem o case, mas o case \u00e9 \u00f3bvio...\n\nFaltaria teclado, mouse, gabinete, etc. T\u00e9cnicamente falando, tu consegue iniciar o PC. Se o sistema j\u00e1 estiver instalado, tu consegue ir usando com teclado virtual, mas ai \u00e9 muito masoquismo. haha\n\n&#x200B;\n\nPs.: cuidado com a fonte. N\u00e3o economiza em fonte."
+            ]
+        },
+        {
+            "title": "GTX 1050 TI E i5 9400f DANDO TELA PRETA, TENHO QUE REINICIAR O PC TODA VEZ PRECISO DE AJUDA",
+            "selftext": "Ol\u00e1, bem recentemente vem ocorrendo um problema no meu pc, jogo muito o jogo Genshin impact e meu monitor tem a resolu\u00e7\u00e3o 1600x900, se eu jogo em tela cheia o jogo fica piscando a tela e fica bem ruim jogar, comecei a jogar em modo tela cheia em janela por\u00e9m vem acontecendo de simplesmente o pc dar tela preta e eu escuto o som meio que pausado se repetindo varias vezes, ent meu monitor fica piscando como se n tivesse achando nenhum sinal para dar v\u00eddeo e para sair disso tenho que desligar o pc for\u00e7ado segurando o dedo no bot\u00e3o e esperando ele desligar, queria saber se algu\u00e9m teria uma solu\u00e7\u00e3o, meu pc tem 2 anos apenas e seria mt triste ter que trocar as pe\u00e7as j\u00e1, troquei a pasta termica recentemente tmb, abaixo as config  \n\n\n&#x200B;\n\n&#x200B;\n\nhttps://preview.redd.it/irw4hoxzghaa1.png?width=380&format=png&auto=webp&v=enabled&s=cdf7ea34d06b2eca99ea9c56d420ec9b14f18751\n\nhttps://preview.redd.it/f2ywu120hhaa1.png?width=380&format=png&auto=webp&v=enabled&s=96464219b78d7272e686bdee4e280e9eb65b3708\n\nhttps://preview.redd.it/af8djh60hhaa1.png?width=396&format=png&auto=webp&v=enabled&s=9802365f43ea1901c25fe6095a3c8e9d040b04e0\n\nhttps://preview.redd.it/900jpja0hhaa1.png?width=408&format=png&auto=webp&v=enabled&s=101804ad0ab936ecfbc4b8cd257e3cb7fb514cc8",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1054or1",
+            "num_comments": 2,
+            "comments": [
+                "Tenta essas coisas antes de achar que tu tem defeito de hardware...\n\n1. tira o cabo de video dos dois lados e recoloca.\n2. troca o cabo de video.\n3. remove os drivers com DDU e reinstala E N\u00c3O MEXE NAS CONFIGURA\u00c7\u00d5ES.\n\nS\u00f3 acontece quando tu t\u00e1 jogando?"
+            ]
+        },
+        {
+            "title": "Fonte TX 550M ou CV 550?",
+            "selftext": "T\u00f4 em d\u00favida em qual fonte comprar, acabei interessado por alguma dessas duas da corsair mas n\u00e3o sei se realmente valem a pena",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1053409",
+            "num_comments": 8,
+            "comments": [
+                "A TX550M \u00e9 semi modular (2017), a CV550 n\u00e3o \u00e9 modular (2019). (N\u00e3o tenho certeza das datas, mas \u00e9 a primeira vez que apareceram no Amazon)\n\nMas seria bom tu olhar resenha das fontes. S\u00f3 ser Corsair n\u00e3o basta.",
+                "Eu iria de corsair sem duvida, estou usando uma VS 500W sempre fui de corsair em PC gamer e nunca tive problema algum, e olha que as vezes chove forte ou derrepente tenho queda de energia e sempre segurou, indiferente seja em game ou em IDLE, R7 3700X 1650S 16GB",
+                "As duas tem uma diferen\u00e7a boa de pre\u00e7o. Eu tenho uma pol\u00edtica de compra que o maior valor \u00e9 melhor. Kkkkk. E tbm vai depender se consigo pagar. Acho que a TX \u00e9 melhor",
+                "TX \u00e9 uma s\u00e9rie superior a CV, usualmente em pre\u00e7o tamb\u00e9m, estranho ter achado as duas na mesma faixa"
+            ]
+        },
+        {
+            "title": "Algu\u00e9m a\u00ed me recomenda um cooler box custo barateza at\u00e9 uns 300 conto, LGA1151 e se poss\u00edvel com luzinha frufru",
+            "selftext": "&#x200B;\n\nhttps://preview.redd.it/r2v1d08ojgaa1.png?width=500&format=png&auto=webp&v=enabled&s=a9b746a3c3c43ceca48b46f277df70c1f79b3c13",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "104zxy0",
+            "num_comments": 6,
+            "comments": [
+                "Cooler box \u00e9 o cooler que vem com o CPU... eles custam bem menos que 300.\n\nPor 300 reais tu pode pegar um Watercooler 120mm se tiver onde prender.\n\nPs.: eu dividiria esse valor entre um case novo (com fan) e um cooler melhorzinho.\n\nTipo: \n\nUm gabinete tipo [https://www.pichau.com.br/gabinete-gamer-mancer-dread-lateral-de-vidro-com-3-fans-preto-mcr-drd-bk01](https://www.pichau.com.br/gabinete-gamer-mancer-dread-lateral-de-vidro-com-3-fans-preto-mcr-drd-bk01) \n\ne um cooler desse tipo [https://www.pichau.com.br/cooler-para-processador-t-dagger-idun-m-rainbow-90mm-t-tgc9109-m](https://www.pichau.com.br/cooler-para-processador-t-dagger-idun-m-rainbow-90mm-t-tgc9109-m)",
+                "Air cooler x water cooler barato em 90% das vezes o Air Cooler \u00e9 muito mais eficiente.\n\n&#x200B;\n\nPesquisa o Gammaxx 400, menos de 150 reais e \u00e9 eficiente pra caramba."
+            ]
+        },
+        {
+            "title": "D\u00favida sobre placa m\u00e3e",
+            "selftext": "Gostaria de comprar um \"conjunto\" de placa m\u00e3e, processador e placa de v\u00eddeo para dar um upgrade no meu computador. Ap\u00f3s uma pesquisa, e de acordo com meu or\u00e7amento decidi comprar essas gpu e cpu: RX 6600 e Ryzen 5 5600. Entretanto n\u00e3o consigo me decidir sobre a placa m\u00e3e, n\u00e3o entendo muito bem as diferen\u00e7as entre elas e gostaria de pedir ajuda para essa decis\u00e3o.\nSugest\u00f5es de modifica\u00e7\u00f5es para gpu ou cpu s\u00e3o bem vindas. Or\u00e7amento total \u2248 R$ 4000,00",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "104xpf9",
+            "num_comments": 5,
+            "comments": [
+                "Pega uma placa m\u00e3e com B450, B550 ou X570. Mas tem de ver se as B450 ou B550 tem o suporte \u00e0 PCIe 4.0 ativos. (A X570 tem, mas \u00e9 absurdamente mais cara). - A AMD resolveu tirar suporte \u00e0 PCIe 4.0 das n\u00e3o X570, mas tem empresa rebelde que manteve o suporte ativo.\n\nAh, se o or\u00e7amento estiver apertado, n\u00e3o economiza muito na fonte e tenta pegar ao menos uma MSI MAG 550W. (Eu nunca usei, mas o pessoal tem falado bem dela)",
+                "B450 n\u00e3o tem mais suporte a PCIe 4.0... Tinha no come\u00e7o dos Ryzen 3, ativado pela bios, mas depois a AMD descotinuou. No seu caso, n\u00e3o faz diferen\u00e7a, mas se vc faz mta quest\u00e3o de ter, vai na B550."
+            ]
+        },
+        {
+            "title": "Usu\u00e1rio do reddit algu\u00e9m poderia me ajudar a baixar um mod de rusted warfare, \u00e9 o mod zumbi,mas n\u00e3o sei usar zarchive nesse tipo de mod,poderiam me ajudar ?",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "104u4i4",
+            "num_comments": 9,
+            "comments": [
+                "Qual \u00e9 o formato do arquivo?  (zip/rar/7z/etc)\n\nN\u00e3o fa\u00e7o ideia de como se instala mod l\u00e1, mas tu j\u00e1 olhou se precisa descompactar?",
+                "Se o pacote n\u00e3o estiver o nome \"zip\" no final pode ser um erro de instala\u00e7\u00e3o tamb\u00e9m. Basta voc\u00ea renomear o pacote mandando as \u00faltimas letras e alterando por \"zip\" pra ele mudar o formato do arquivo",
+                "Nada S2"
+            ]
+        },
+        {
+            "title": "Ahmn, oi. Eu n\u00e3o entendo muito de computador e tenho uma pergunta est\u00fapida:",
+            "selftext": "Meu PC tem uns 11-12 anos e eu usava ele pra escrever (minhas hist\u00f3rias mesmo), ele n\u00e3o t\u00e1 muito bem n\u00e3o e eu queria saber se consigo por o  disco r\u00edgido dele em outro computador pra conseguir pegar minhas hist\u00f3rias, uma das minhas obras eu passei pro drive do google, mas outra eu n\u00e3o passei toda. Eu estava em per\u00edodo depressivo ent\u00e3o fiquei muito tempo sem escrever ou ligar meu computador, mas agora mesmo com ele ligado e o monitor, n\u00e3o aparece nada. \nQualquer ajuda \u00e9 bem-vinda.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "104n2ur",
+            "num_comments": 5,
+            "comments": [
+                "Tu pode fazer algumas coisas antes de se desesperar.\n\n1. Tenta outro monitor, monitores morrem.\n2. Tenta outra placa de v\u00eddeo, mas tem de ver se \u00e9 AGP ou PCIe\n3. Tenta trocar a fonte\n\nDepende qual \u00e9 o tipo do HD. Se for SATA e ele estiver funcionando sim. Qualquer placa m\u00e3e atual aceita.\n\nPor\u00e9m se ele for do tipo mais antigo, PATA/IDE... ai vai ser chatinho recuperar os dados. Tu vai precisar de uma dessas coisas:\n\n1. computador funcionando que tenha PATA, mas \u00e9 tecnologia obsoleta e os processadores tem mais de uma d\u00e9cada agora\n2. uma gaveta/dock IDE",
+                "Da sim , tira s\u00f3 o HD e bota em um outro qualquer, s\u00f3 que dependendo do sistema que tinha nele ,vai ser f\u00e1cil ou dif\u00edcil recuperar.",
+                "Primeiro tenta consertar o que vc tem depois v\u00ea esse neg\u00f3cio a\u00ed de trocar o HD",
+                "P\u00f4, j\u00e1 falou que n\u00e3o entende muito de pc e o pessoal vem falando de AGP, PCIe, se \u00e9 SATA. Da pra tirar sim e colocar em outro numa boa"
+            ]
+        },
+        {
+            "title": "Tou Com Bit na Cabe\u00e7a; apresenta alguns desktops do Windows dos anos 90 [V\u00eddeo do YouTube de 2008]",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "104jy3u",
+            "num_comments": 5,
+            "comments": [
+                "Cara esse v\u00eddeo tem mais de 20 anos de idade (o autor disse que criou em 99) e \u00e9 sobre computadores. E \u00e9 brasileiro. Caralho...",
+                "Porra. Meus ouvidos n\u00e3o mereciam isso. S\u00e9rio mesmo."
+            ]
+        },
+        {
+            "title": "Montagem de um primeiro pc",
+            "selftext": "Algu\u00e9m poderia me dar uma ajudinha? Estou pensando em montar um PC, por\u00e9m n\u00e3o tenho muito conhecimento sobre. Posso gastar de 8-10k. Lembrando que isso com tudo: monitor, teclado, mouse etc. Algu\u00e9m poderia me dar umas ideias de config boa? De prefer\u00eancia pe\u00e7as daqui do Brasil.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "104fosy",
+            "num_comments": 9,
+            "comments": [
+                "Separa quanto tu quer gastar em mesa/cadeira, teclado/mouse e quanto sobra pro PC em si.",
+                "Sinceramente do Brasil n\u00e3o sei, mas com esse valor n\u00e3o deve ser dif\u00edcil conseguir um bom Pc. \n\nTenho dicas de como importar sem risco de barrarem na alf\u00e2ndega.\n\n1- compre pela Aliexpress\n\n2- pesquise por lojas de confian\u00e7a, veja coment\u00e1rios, estrelas e todo tipo de informa\u00e7\u00e3o que o aplicativo te der para verificar a confiabilidade.\n\n3- pe\u00e7a de lojas diferentes para chegarem em dias diferentes na alf\u00e2ndega.\n\n4- se o pre\u00e7o for muito alto voc\u00ea pode entrar em contato com o fornecedor e pedir a ele que coloque um valor menor na nota de despacho.",
+                "Opa, voc\u00ea pode come\u00e7ar pelos perif\u00e9ricos\u2026 \n> Monitor aconselh\u00e1vel com Painel IPS e 24 polegadas - \u00e9 o ideal - preferencialmente LG UltraGear;\n> Teclado conveniente seria um mec\u00e2nico para que aguente tranquilamente anos e anos de digita\u00e7\u00e3o;\n> Mouse fica mais a seu crit\u00e9rio por causa da conveni\u00eancia para m\u00e3o, mas n\u00e3o deixe de conferir reviews\u2026\n> Cadeira seria legal se voc\u00ea testasse em loja f\u00edsica, em alguns casos \u00e9 muito particular. Atente-se a postura e conforto dos bra\u00e7os;\n> Gabinete, particularmente, prefiro os que tem porta lateral de vidro, ao inv\u00e9s de ser parafusado, mas o importante \u00e9 verificar as sa\u00eddas de ar, principalmente a da parte superior;\n> Hardware h\u00e1 dois mundos, multiprocessamento voc\u00ea busca um Processador AMD, com o dinheiro que voc\u00ea tem a disposi\u00e7\u00e3o, pode buscar a partir do Ryzen 7 s\u00e9rie 5000 +, com Placa-M\u00e3e AM4 de Chipset B550M - pois permite SSD NVME de velocidade superior a 3000mb/s, bem como \u00e9 mais indicado para as placas de v\u00eddeo da nova gera\u00e7\u00e3o (PCI-E 4.0). Quanto a Placa de V\u00eddeo cabe a voc\u00ea verificar o que pretende com a m\u00e1quina, tenho uma RTX 2060 Super 8GB, atende super bem ao que fa\u00e7o - home office + FIFA 23 no ultra, Warzone e afins - por\u00e9m voc\u00ea pode buscar uma RTX 3060 ou superior. Para essa configura\u00e7\u00e3o o m\u00ednimo \u00e9 16GB de RAM, mas j\u00e1 mentalize os 32GB de RAM DDR4 3200MHz. Quanto ao dispositivo de armazenamento \u00e9 aconselh\u00e1vel um NVME de 1TB com velocidade alta (\u22485000mb/s) e HD para Backup de arquivos pessoais e tudo mais.\n\nTalvez tenha ficado um pouco longo, mas o b\u00e1sico \u00e9 isso, qualquer coisa reformulo para ficar mais did\u00e1tico"
+            ]
+        },
+        {
+            "title": "Como resolver ?",
+            "selftext": "Acabei de montar meu 1\u00ba PC, mas ta dando esse erro e quando aperto F1 n\u00e3o acontece nada, at\u00e9 antes dessa tela fico apertando delet pra entrar na bios e n\u00e3o vai, o que fa\u00e7o?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "104clws",
+            "num_comments": 15,
+            "comments": [
+                "Tira o pendrive e tenta entrar no BIOS. Parece que o NVMe est\u00e1 em modo RAID.\n\nPs.: DDR4-2400 vai fazer o video onboard perder muito desempenho, tu precisaria de DDR4-3200\n\nE por que tem DOIS teclados ligados ai? hahaha Deixa s\u00f3 um.",
+                "F2 \u263a\ufe0f"
+            ]
+        },
+        {
+            "title": "ESSE PARAFUSO DE NVME SERVE PRA MINHA PLACA????",
+            "selftext": "Esses dias comprei um ssd nvme pro meu pc, mas na hora de checar como seria a instala\u00e7\u00e3o eu percebi que eu n\u00e3o possuo o parafuso, somente a porca (pecinha q fica embaixo do ssd), ent\u00e3o na hora de instalar eu n\u00e3o conseguiria por conta disso, o parafuso n\u00e3o veio na caixa e nem parafusado na outra pe\u00e7a. Minha placa m\u00e3e \u00e9 uma ASROCK A320M HD. Tava vendo uns an\u00fancio no mercado livre e qria saber se esse serve:\n\nhttps://produto.mercadolivre.com.br/MLB-1951489857-kit-com-2-parafusos-2-porcas-sextavadas-para-ssd-m2-asus-_JM#is_advertising=true&position=1&search_layout=stack&type=pad&tracking_id=fdec192a-35b5-4578-a448-401882619816&is_advertising=true&ad_domain=VQCATCORE_LST&ad_position=1&ad_click_id=MGFjYzQ3Y2ItMjk4Ni00YWY3LWJmYzYtNTg1OGYzNDc5NTI0\n\nMODELO DA PLACA M\u00c3E\nasrock a320m hd",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "104alwt",
+            "num_comments": 3,
+            "comments": [
+                "O parafuso \u00e9 padr\u00e3o at\u00e9 onde eu lembro... mas recomendo tu ir numa lojinha e pedir, geralmente o pessoal tem isso sobrando...\n\nSe tu optou por uma A320 por causa do custo, 40 reais (ou mais dependendo do frete) sai meio caro....\n\nMas d\u00e1 uma olhada melhor se esse parafuso n\u00e3o est\u00e1 preso na placa m\u00e3e... (pela foto da ASROCK A320M HD que eu vi, ele est\u00e1 preso l\u00e1. Se n\u00e3o tiver, deve ter vindo um saquinho junto com a placa m\u00e3e)"
+            ]
+        },
+        {
+            "title": "Algu\u00e9m conhece algum Sistema PDV gratuito e que n\u00e3o seja nescess\u00e1rio o uso do CNPJ ou de fiscaliza\u00e7\u00e3o?",
+            "selftext": "N\u00e3o \u00e9 uma d\u00favida nescess\u00e1riamente sobre computador, mas sobre um tipo de programa, o PDV ou frente de caixa. Queria saber se algum sabe de algum sistema que seja gratuito e que n\u00e3o pe\u00e7a CNPJ?\nS\u00f3 queria usar ele para consulta de pre\u00e7os e estoque mesmo, pois j\u00e1 tenho um sistema para nota fiscal.\nSe n\u00e3o conhecem, ser\u00e1 que teria um programa que eu pudesse usar para fazer cadastro de produtos e fazer pesquisa r\u00e1pida sobre ele? Tipo uma banco de dados, por\u00e9m mais simples e flex\u00edvel",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "10497f9",
+            "num_comments": 1,
+            "comments": [
+                "[https://www.google.com/search?q=ponto+de+venda+software+gratuito](https://www.google.com/search?q=ponto+de+venda+software+gratuito)\n\nPrimeiro link tem v\u00e1rios."
+            ]
+        },
+        {
+            "title": "O r/computadores apoia a comunidade de hardware de subreddits brasileiros",
+            "selftext": "O r/computadores h\u00e1 alguns meses possu\u00eda somente 50 membros, hoje somos 18.000. Pelo que eu saiba, nos tornamos o maior subreddit brasileiro relacionados a hardware, mesmo o subreddit n\u00e3o sendo somente focado nisso. \n\nCom o sucesso do r/computadores, decidimos apoiar e divulgar os outros subreddits brasileiros de hardware, achamos que existe espa\u00e7o para todos, j\u00e1 que cada sub t\u00eam um foco diferente mesmo existindo semelhan\u00e7a no conte\u00fado. Al\u00e9m do mais, \u00e9 uma boa oportunidade de montar um grande ecossistema colaborativo entre os subreddits de tech brasileiros.\n\nEstamos divulgando estes subreddits:\n\nr/hardwarebrasil - Tudo sobre hardware: computadores, perif\u00e9ricos, problemas t\u00e9cnicos.\n\nr/AssistenciaTecnica - Comunidade que ajuda com problemas t\u00e9cnicos relacionados a tecnologia como se fosse uma Assist\u00eancia T\u00e9cnica.\n\nr/craftmybox - Comunidade do MEUPC.NET, para quem quer montar um PC por um pre\u00e7o justo.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1046oqx",
+            "num_comments": 6,
+            "comments": [
+                "craftmybox \u00e9 topdemais",
+                "Nice.",
+                "Some of us also speak English too. / Alguns de n\u00f3s tamb\u00e9m falam ingl\u00eas tamb\u00e9m.\n\nSe algu\u00e9m aqui tamb\u00e9m fala ingl\u00eas, tamb\u00e9m temos o /r/Computer_Memories para contribuir tamb\u00e9m se voc\u00ea quiser fazer postagens de computador em ingl\u00eas.",
+                "Boa"
+            ]
+        },
+        {
+            "title": "N\u00e3o aparece a BIOS",
+            "selftext": "Eu terminei de montar meu Pc, usei um SSD do antigo que deu problema, e ele t\u00e1 funcionando muito bem, por\u00e9m eu n\u00e3o consigo acessar a BIOS dele, e n\u00e3o aparece nem a logo da marca da placa m\u00e3e quando eu ligo o Pc, procurei en varios lugares m\u00e1s n\u00e3o achei solu\u00e7\u00e3o, algu\u00e9m sabe oq pode ser?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1042h55",
+            "num_comments": 2,
+            "comments": [
+                "Tu tem duas op\u00e7\u00f5es.\n\n1. ClearCMOS\n2. Iniciar o Windows, Winkey+I => Update e seguran\u00e7a => Recupera\u00e7\u00e3o => Reinicializa\u00e7\u00e3o Avan\u00e7ada => Reiniciar agora => Solu\u00e7\u00e3o de problemas => UEFI"
+            ]
+        },
+        {
+            "title": "Algu\u00e9m viu a ultima bizarrice chinesa? Um CPU mobile ES da 11th soldado na placa m\u00e3e... diz ser tipo o i9-11900H. hahaha (mais detalhe em coment\u00e1rio)",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "104258a",
+            "num_comments": 13,
+            "comments": [
+                "Engra\u00e7ado que eles dizem ser semelhante \u00e0 um i9-11900H. Mas \u00e9 chip ES. Engineering Sample, ou em portugu\u00eas, amostra de engenharia. S\u00e3o processadores que podem ou n\u00e3o ser identicos aos do mercado.\n\nO que eu tinha visto de reclama\u00e7\u00e3o com rela\u00e7\u00e3o aos i9-11900H era que eles trabalhavam super quentes nos notebooks... imagina nessa gambiarra que ningu\u00e9m sabe se a press\u00e3o do cooler ser\u00e1 ideal?\n\nSe algu\u00e9m arriscar um desses, comenta. hahaha",
+                "Bah, eu at\u00e9 duvidava dos chinas e tal, mas os caras s\u00e3o brabos, teve uma \u00e9poca que come\u00e7ou a rolar gra\u00fado uns interposer de 8\u00aa e 9\u00aa gera\u00e7\u00e3o, n\u00e3o botaria jamais a m\u00e3o no fogo por aquilo, at\u00e9 que uns 3 conhecidos daqui resolveram arriscar e... o neg\u00f3cio era bom.\n\nAs vezes rola de vir um CPU que rende pouca coisa abaixo do esperado (me baseio pelo score no CPUz), mas mesmo na pior das hipoteses, se vier com 10% a menos que o 11900h, ainda \u00e9 uma barganha por 950. Mas o esquema \u00e9 esperar por uns reviews.\n\nTenho a m\u00e3o uma GTX 1050 de 4gb (vers\u00e3o de notebook) da Kllisre, que \u00e9 soldada em uma pcb de GPU, funciona certinho, em X16, instala os drivers mais novos e ainda rola um leve overzinho, paguei uns 250 na \u00e9poca.",
+                "Vou falar para voc\u00eas que nunca tive problema com as pe\u00e7as do Aliexpress tanto usadas como novas",
+                "Someone just review it  \n\n&#x200B;\n\n[https://www.youtube.com/watch?v=FR6AkUx-q8g](https://www.youtube.com/watch?v=FR6AkUx-q8g)"
+            ]
+        },
+        {
+            "title": "Montar computador at\u00e9 1500 ou notebook",
+            "selftext": "Ent\u00e3o rapaziada, t\u00f4 querendo me livrar do meu computador que acabou por dar problema na placa-m\u00e3e (Ryzen 5 3350G, 16 RAM e v\u00eddeo integrado) e queria vender ele e comprar algum computador melhorzinho com pe\u00e7as do Aliexpress (apesar de duvidosas) ou ent\u00e3o usar o dinheiro pra comprar um notebook de n\u00edvel ok (um notebook com uma 1050 j\u00e1 seria bom), queria vossas opini\u00f5es a respeito disso e tamb\u00e9m recomenda\u00e7\u00f5es sobre pe\u00e7as no Aliexpress e dicas de notebook",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "103zpln",
+            "num_comments": 8,
+            "comments": [
+                "https://youtu.be/RNrECG05CjQ",
+                "Qual a proced\u00eancia desse Ryzen PRO 5 3350G? Tu lembra se chegou \u00e0 ativar o AMD PSB? Porque se ativou, o processador n\u00e3o funcionar\u00e1 em outro sistema.\n\nMas eu acho pouquissimo prov\u00e1vel que tu consiga vender 3350G + 16GB de RAM por 1500... o 4600G NOVO (que \u00e9 quase 100% mais r\u00e1pido) t\u00e1 600 reais, 16GB NOVOS Kingston Fury Beast (2x8GB DDR 3200) t\u00e1 400... \n\nDe qualquer forma, tem kit Xeon com 16GB de RAM por 700 e RX 5500 XT por 600. Ai tu guarda os 200 pra caso de imposto de importa\u00e7\u00e3o)"
+            ]
+        },
+        {
+            "title": "\"nenhum driver de dispositivo encontrado\"",
+            "selftext": "Ent\u00e3o, eu formatei meu PC pelo CMD por conta de alguns problemas e agora sempre que eu tento instalar o windows aparece a mesma mensagem de \"nenhum driver de dispositivo encontrado\". J\u00e1 tentei diversos tutoriais, levei em um t\u00e9cnico que disse que o problema era meu HD, comprei um novo e continua a mesma coisa, algu\u00e9m aqui sabe como ajudar?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "103ku0f",
+            "num_comments": 16,
+            "comments": [
+                "Aparece o hd ba bios?",
+                "Vamos come\u00e7ar do zero...\n\nTu sabe dar boot pelo UEFI/BIOS? (Pelo UEFI se o PC for mais recente e tiver suporte)",
+                "Teu PC \u00e9 Intel? Voc\u00ea t\u00e1 tentando instalar via USB?",
+                "Qual programa voc\u00ea usou para criar o pendrive de boot com a instala\u00e7\u00e3o do Windows 10?\nRecomendo usar o Rufus visto que certa vez eu usei um programa \"esqueci o nome\" mas era s\u00f3 copiar a ISO de instala\u00e7\u00e3o para o pendrive e deu esse mesmo problema que voc\u00ea mencionou?!"
+            ]
+        },
+        {
+            "title": "Meu pc ta com esse problema como eu resolvo",
+            "selftext": "O problema \u00e9 reboot and select proper boot device",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1033nd5",
+            "num_comments": 2,
+            "comments": [
+                "4 op\u00e7\u00f5es:\n\n1. Tu n\u00e3o instalou o sistema operacional.\n2. Tu desconectou o HD com o sistema operacional ou o HD morreu\n3. Falta ajustar no BIOS, se\u00e7\u00e3o BOOT, Boot Sequence/Priority\n4. Tu instalou o OS em outro PC que era UEFI enquanto esse teu PC s\u00f3 suporta CSM ou vice versa... (d\u00e1 para ajustar no BIOS tamb\u00e9m...)",
+                "Ele n\u00e3o est\u00e1 detectando um sistema operacional bootavel, d\u00e1 uma olhada na ordem de boot que aparece na Bios.\n\nNo mais, n\u00e3o esquece de conectar esse cabo de ponteira azul que est\u00e1 solto, naquele conector retangular verde logo abaixo do cabo de 24 pinos da fonte (a direita das mem\u00f3rias), se n\u00e3o, as USBs 3.0 do gabinete n\u00e3o ir\u00e3o funcionar."
+            ]
+        },
+        {
+            "title": "Notebook H\u00e9lios 300 n\u00e3o liga ap\u00f3s limpeza",
+            "selftext": "Ap\u00f3s fazer a limpeza das ventoinhas, limpei-as como de costume e montei novamente. Ap\u00f3s isso a luz da bateria acende, mas ao acionar o bot\u00e3o power do notebook n\u00e3o liga e nem da sinal. Algu\u00e9m j\u00e1 passou por algo parecido? Desde j\u00e1 agrade\u00e7o!",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "103if7e",
+            "num_comments": 2,
+            "comments": [
+                "Desmonta de novo e remonta... agora prestando aten\u00e7\u00e3o. hahaha \n\nTem chance de tu ter deixado o bot\u00e3o power desligado ou quebrado ele...",
+                "Remontei por\u00e9m n\u00e3o consegui identificar nada errado, mas obrigado pela sugest\u00e3o!"
+            ]
+        },
+        {
+            "title": "Dica de controles sem fio para o PC",
+            "selftext": "Oi pessoal, estou precisando de uma ajuda.\n\nPreciso de um controle sem fio para usar no meu PC. Estava vendo alguns e queria saber se prestam.\n\nPor enquanto eu vi o [Xuelili](https://www.amazon.com.br/gp/product/B091FS3G59/ref=ox_sc_act_title_2?smid=A16MQX9MFIHHQG&psc=1) e o [Datafrog 2.0](https://www.amazon.com.br/Controle-controle-Zamia-compat%C3%ADvel-integrada/dp/B08GBXWGYR/ref=asc_df_B08GBXWGYR/?tag=googleshopp00-20&linkCode=df0&hvadid=379707937854&hvpos=&hvnetw=g&hvrand=14413657048584375839&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9102125&hvtargid=pla-1719160419002&psc=1)\n\nMinha \u00fanica preocupa\u00e7\u00e3o \u00e9 a dist\u00e2ncia que eles funcionam porque minha ideia \u00e9 usar com o computador no quarto e a imagem espelhada na minha TV.\n\nEnt\u00e3o a conex\u00e3o precisa ser de uns 10m porque vou estar jogando na sala e meu PC no quarto.\n\nTamb\u00e9m se puderem indica um f\u00f3rum para eu postar e ver mais opini\u00f5es eu agrade\u00e7o. \n\nObrigado pessoal.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "103hx1l",
+            "num_comments": 0
+        },
+        {
+            "title": "Ryzen 5500 com um rx 5500 xt 8gb \u00e9 uma boa combina\u00e7\u00e3o ?",
+            "selftext": "Tenho um ryzen 5500 e uma placa m\u00e3e A520M da SOYO que comprei no Aliexpress , estou pensando em comprar uma rx 5500 para usar , ser\u00e1 que \u00e9 uma boa combina\u00e7\u00e3o pra baixo or\u00e7amento ? Pois o ryzen 5500 e a placa m\u00e3e n\u00e3o tem suporte ao pci 4.0 , ent\u00e3o eu fiquei na duvida se iria perder muito desempenho por causa disso . \n\nOutra duvida seria substituir a 5500xt por uma rx5700xt ? ser\u00e1 que vale a pena ?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "103gusp",
+            "num_comments": 2,
+            "comments": [
+                "A RX 5500 deve gargalar um tanto, mas gargala menos que a RX 6500 XT. A RX 5700 XT quase n\u00e3o gargala porque \u00e9 PCIe 4.0 X16 mas n\u00e3o \u00e9 potente o suficiente para saturar os x16.",
+                "Se cabe no teu or\u00e7amento, vai firme, a 5500xt ainda leva em 1080p e d\u00e1 pra achar por um bom pre\u00e7o no Ali"
+            ]
+        },
+        {
+            "title": "Perdi meus arqvuivos que estavam salvos em uma reparti\u00e7\u00e3o",
+            "selftext": "Fui formatar meu notebook e acabei formatando a reparti\u00e7\u00e3o que eu guardava meus arquivos. Tem como recuperar? Algu\u00e9m indica algum programa que ajude nessa situa\u00e7\u00e3o, por favor.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "103bnu7",
+            "num_comments": 5,
+            "comments": [
+                "Tu vai ter de recuperar esses arquivos em OUTRO HD... Em hipotese alguma recupere na mesma parti\u00e7\u00e3o, pois tu pode (e murphy garante que) tu vai sobreescrever os arquivos e perder-los de forma permanente.\n\nSe tu n\u00e3o fez um zero fill E n\u00e3o instalou o Windows nesse HD/gravou QUALQUER coisa, d\u00e1 para recuperar com o Recuva.",
+                "Instala um sistema em outro HD,  deixa esse secund\u00e1rio, usa o Revuva e reza, se n\u00e3o sobreescreveu nada, vai dar pra recuperar"
+            ]
+        },
+        {
+            "title": "Tela de reparo autom\u00e1tico infinita (Loop)",
+            "selftext": "Boa tarde, desde ontem, por volta das 16:00, Desliguei meu computador de forma errada! \u00c9 isso causou uma infeliz tela de reparo autom\u00e1tico toda vez que eu ligo o computador, n\u00e3o \u00e9 poss\u00edvel formatar o computador pois d\u00e1 erro em todas as vezes, j\u00e1 tentei alguns comandos no prompt de comandos, mas ainda n\u00e3o funcionou, n\u00e3o ligo de perder meus arquivos, meu medo \u00e9 perder o computador! Podem me ajudar?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1039xc9",
+            "num_comments": 9,
+            "comments": [
+                "Pergunta: Tu tinha um HD e instalou o Windows num SSD ou em outro HD?\n\nSe sim, vai no BIOS e seta o 1st boot pro Windows Boot Manager  e o 2nd boot pro SSD com Windows que deve resolver."
+            ]
+        },
+        {
+            "title": "Indicacoes de marcas e modelos de tablets?",
+            "selftext": "Tenho inten\u00e7\u00e3o de comprar um tablet pra fazer anota\u00e7\u00f5es e utilizar como caderno digital, utilizo caderno f\u00edsico mas acho muito desorganizado e ja vi que existem varios apps de caderno digital que sao super organizados e faceis de usar.\nN\u00e3o quero um puta tablet pra rodar coisas pesadas e nem com uma super mem\u00f3ria, sabem me recomendar alguma marca barata q eu consiga usar pra escrever/fazer anota\u00e7\u00f5es com caneta digital? (Se der pra desenhar tbm \u00e9 luxo mas n \u00e9 prioridade)\nQueria pagar barato, menos de mil reais caso exista.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1038y0s",
+            "num_comments": 6,
+            "comments": [
+                "Samsung, Apple, Xiaomi, \n\nBarato, com caneta e novo. Escolha dois.\n\nBarato e com caneta, provavelmente n\u00e3o novo.\n\nNovo com caneta, n\u00e3o \u00e9 barato.\n\nBarato e novo, provavelmente sem caneta.",
+                "Galaxy Tab S7 FE. Voc\u00ea consegue comprar entre 1500 - 2000 um usado na OLX e vale muito a pena.",
+                "pra isso q voce quer, ipad ou galaxy tab S6, pois ambos tem como utilizar a caneta e tem tamanhos bons. por\u00e9m, eu tenho um da amazon, \u00e9 o amazon fire HD 10, tem 10 polegadas e 32gb de memoria, e eu acho ele muito bom, consigo estudar, assistir midias, jogar qualquer jogo e funciona bem, n\u00e3o trava",
+                "Tem alguns tablets chineses que pra navega\u00e7\u00e3o na Internet, jogos, netflix, s\u00e3o bons, eu tenho h\u00e1 um ano o Teclast M40, paguei pouco menos de 1000 reais e ele me atende bem, s\u00f3 deixa a desejar no microfone e nas c\u00e2meras, mas se vc n\u00e3o vai gravar conte\u00fado gravando a tela, ele \u00e9 muito bom."
+            ]
+        },
+        {
+            "title": "Microfone n\u00e3o funciona /Microphone doesn't work / Ardour",
+            "selftext": "\nTLDR;  Fui hackeado, malware na \u00e1rea de trabalho, \u00e1rea de trabalho limpa, programas recarregados e agora nenhum dos meus DAW (Ardour ou FL Studio) est\u00e1 captando meu microfone.  Verifiquei o Gerenciador de dispositivos para drivers/atualiza\u00e7\u00f5es/habilita\u00e7\u00e3o, selecionei o dispositivo de entrada correto, tentei 41K e 48K hz, desconectei, reconectei o cabo XLR no conector de \u00e1udio traseiro, reiniciei a \u00e1rea de trabalho, procurei atualiza\u00e7\u00f5es do Windows, reinstalei Ardour, Fl  Studio e at\u00e9 ASIO4All etc. \u00c9 apenas meu Shure SM58. Fiz um podcast hoje e aquele microfone era bom.  No aplicativo de grava\u00e7\u00e3o da Microsoft, posso selecionar o Shure e ele capta o som da grava\u00e7\u00e3o.  Quando estou em qualquer um dos dois, n\u00e3o est\u00e1 funcionando e tenho seguido a toca do coelho dos conselhos de ajuda que n\u00e3o parecem ter funcionado.\nTLDR; Got hacked, malware on desktop, wiped desktop, reloaded programs, and now neither one of my DAW (Ardour or FL Studio) are picking up my microphone. I checked the Device Manager for drivers/updates/enabling, I selected the correct input device, I tried both 41K and 48K hz, unplugged replugged the XLR cable into the rear audio jack, restarted desktop, looked for windows updates, reinstalled Ardour, Fl Studio, and even ASIO4All etc. Its only my Shure SM58 I did a podcast today and that microphone was good. In microsoft record app I can select the Shure, and it picks up sound of recording. When I\u2019m in either its not working, and I have been following the rabbit hole of help advice non of which seems to have worked",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "10389b1",
+            "num_comments": 2,
+            "comments": [
+                "Cara. Fica horrivel ler um paragrafo todo zoado com sessenta linhas dessa forma... tenta estruturar o par\u00e1grafo da pr\u00f3xima vez. T\u00e1 parecendo tradu\u00e7\u00e3o feita pelo Google Translate... se tu falar ingl\u00eas nativamente, tem o /r/computers. O pessoal l\u00e1 \u00e9 mais ativo. hahaha\n\nMas eu sinceramente n\u00e3o entendi o que tu quis dizer com \"malware na \u00e1rea de trabalho\", mas beleza.\n\nMas:\n\n1. Tu j\u00e1 viu se a permiss\u00e3o de microfone do Windows est\u00e1 ativa? \n\n2. N\u00e3o tinha alguma configura\u00e7\u00e3o a ser feita nos softwares que tu usa? \n\n3. Os softwares n\u00e3o est\u00e3o mutados no mixer? \n\n4. j\u00e1 testou o Shure SM58 em outro PC?"
+            ]
+        },
+        {
+            "title": "Fonte Corsair CX650F",
+            "selftext": "Bom dia,\nEu achei essa fonte full modular de 650W e 80 plus bronze por 440 reais, e pensei em comprar, j\u00e1 que est\u00e1 em uma promo\u00e7\u00e3o boa, eu n\u00e3o acho fontes de 650W de marcas conhecidas por um pre\u00e7o menor, essa compra seria um bom neg\u00f3cio? \nSegue o link: https://www.terabyteshop.com.br/produto/18899/fonte-corsair-cx650f-rgb-550w-80-plus-bronze-cp-9020217-br",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1035487",
+            "num_comments": 6,
+            "comments": [
+                "J\u00e1 te aviso que o desconto que a Terabyte est\u00e1 oferecendo, dizendo que ela vale 1270, \u00e9 falso. Essa fonte custa 555 reais, sem promo\u00e7\u00e3o, na Kabum. (Se bem que na Kabum esgotou, mas t\u00e1 555 na Amazon tamb\u00e9m)\n\nMas sim, deve ser uma boa fonte. \u00c9 Corsair. E a Corsair pelo que lembro, s\u00f3 teve duas s\u00e9ries semi-bombas. VX e a CV (mas n\u00e3o tenho certeza que era CV)"
+            ]
+        },
+        {
+            "title": "Jogando em ambiente Linux",
+            "selftext": "Queria saber se algu\u00e9m aqui joga em ambiente Linux e se tem uma boa experi\u00eancia/tem boa compatibilidade com placas de v\u00eddeo da AMD. N\u00e3o curto muito o windows e estava cogitando essa op\u00e7\u00e3o. Jogo principalmente Overwatch 2, Elden Ring e God of War.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1034vh0",
+            "num_comments": 4,
+            "comments": [
+                "Eu joguei bastante usando o proton da steam, achei ele muito bom, alguns games eu consegui performance melhor que no windows, tenho uma RTX2060 mas acredito q AMD tenha um suporte melhor q nvidia pra Linux\n\nFora da steam t\u00fa teria q usar wine ou algum emulador(se o game n tiver suporte nativo) a\u00ed fica bem ruim e n acho q vale a pena, por\u00e9m a steam evoluiu muito pro p\u00fablico Linux, t\u00fa s\u00f3 tem q ativar essa fun\u00e7\u00e3o e ser feliz\n\nJoguei bastante age of empires, far cry, days gone, the witcher e mais alguns q n lembro de cabe\u00e7a, a maioria sem suporte oficial e rodou tranquilo",
+                "Olha, at\u00e9 tem compatibilidade para jogos... mas acho bem improvavel tu conseguir rodar jogos online ou recentes nos \"emuladores\" de Windows que tem no Linux. Tu teria de checar qual \u00e9 o mais compat\u00edvel e quais os jogos compat\u00edveis com ele. Mas pelo que lembro, jogo online geralmente n\u00e3o \u00e9 bem compat\u00edvel."
+            ]
+        },
+        {
+            "title": "Problema na tela",
+            "selftext": "Ent\u00e3o meu notebook t\u00e1 com esse problema que veio do nada depois de eu ficar sem mexer nele por 1 semana e aparecer uma atualiza\u00e7\u00e3o do sistema operacional, agora do nada ele desliga a tela sozinho, quando abro algum arquivo ele tamb\u00e9m desliga a tela, e quando fica muito tempo sem mexer ele reinicia sozinho e novamente a tela fica desligada. Pensei em formatar mas n\u00e3o queria e fica dif\u00edcil com a tela desligando se algu\u00e9m puder me ajudar eu agrade\u00e7o.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "10343od",
+            "num_comments": 1,
+            "comments": [
+                "Tu tem um monitor externo? Se sim, tenta usar ele.. se acontecer no externo tamb\u00e9m, seria interessante levar num t\u00e9cnico ai perto.\n\nTu pode tentar baixar o [DDU](https://www.guru3d.com/files-details/display-driver-uninstaller-download.html), baixa os drivers de v\u00eddeo (no site da fabricante), vai no modo de seguran\u00e7a, roda o DDU. Remove os drivers de v\u00eddeo, tira da internet, reincia e instala os drivers que tu baixou previamente."
+            ]
+        },
+        {
+            "title": "Pedi pro ChatGPT montar um PC pra mim, o que acham?",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "10337zl",
+            "num_comments": 24,
+            "comments": [
+                "O PC em si tem pe\u00e7as legais (embora iria com 16gb), mas achei caro por 3000$, ainda mais que t\u00e1 considerando pe\u00e7as do Aliexpress. Aqui no Brasil d\u00e1 pra gastar menos e levar mais por esse valor, com placa de v\u00eddeo junto.",
+                "caramba em, da pra usar esse chat ai de boas ? tipo, sem pagar nada ?",
+                "E tu acabou com um computador sem video, no caso da AMD. e um PC extremamente ruim para jogos, no caso da Intel... hahaha\n\nO problema \u00e9 que esse PC ai rodaria, com placa de v\u00eddeo (at\u00e9 150W, 1660S por exemplo), tranquilo numa fonte de 500W. As fontes citadas ai s\u00e3o absurdamente mais caras que uma MSI Mag 550W, por exemplo...\n\nEu trocaria metade do pedido.\n\nRyzen 5 3600 ou 5600, Gigabyte B450M-DS3H V2, 2x8GB DDR4 3200 Kingston Beast, 5500 XT, MSI MAG 550W, case \u00e0 escolha.",
+                "A placa-m\u00e3e pode n\u00e3o funcionar muito bem com Linux. Tenho uma ASRock B450M Steel Legend rodando Arch Linux e o PC simplesmente trava/desliga de vez em quando, mas \u00e9 raro. Antes eu tinha uma Asus Prime B450M e n\u00e3o rolava isso, com as mesmas pe\u00e7as (CPU, SSD, fonte, GPU, RAM, coolers, monitor, teclado, mouse... tudo mesmo).",
+                "Se voc\u00ea tive montando ele pra trabalhar coloca mais um HD de 500G ou 1tb pq s\u00f3 200 g \u00e9 muito pouco,e se quiser pra joga coloca mais um pente de 8GB.",
+                "u\u00e9, o chatgpt fala portugues tbm? como faz?"
+            ]
+        },
+        {
+            "title": "O Windows 95 encorajaria mais mobilidade em laptops durante os anos 90 em compara\u00e7\u00e3o com o Windows 3.1, que veio antes dele.",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "102vqih",
+            "num_comments": 7,
+            "comments": [
+                "O Windows 3.11 foi um \u00f3timo Windows, mas o 95, mudou como as pessoas estavam acostumadas a usar um PC. Foi a evolu\u00e7\u00e3o, e com essa evolu\u00e7\u00e3o, mais pessoas come\u00e7aram a entrar nesse mercado e se interessar mais e mais.",
+                "Meu primeiro PC que tive a oportunidade de usar tinha Windows 98 se n\u00e3o me engano, e eu jogava Zeus, Starcraft, Command and Conquer: Red Alert, Doom, entre outros, bons tempos."
+            ]
+        },
+        {
+            "title": "atualizar para windows 10",
+            "selftext": "Algu\u00e9m sabe como atualizar para o windows 10 com um notebook que est\u00e1 com a tela ruim, o que aconteceu \u00e9 que comprei um notebook com a tela preta mas ainda funcionou conectando na TV com HDMI mas meu irm\u00e3o queria atualizar para Windows 10, mas n\u00e3o aparece nada na tela da tv quando eu estava terminando a atualiza\u00e7\u00e3o e agora n\u00e3o aparece nada na tv quando eu conectei ao meu notebook",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "102rk3z",
+            "num_comments": 6,
+            "comments": [
+                "Hm... comprar aparelho com defeito tem esses problemas mesmo. (as vezes pode ser mais grave que parece)\n\nTenta o seguinte: tenta bootar com um Linux LiveUSB, s\u00f3 para ver se ainda d\u00e1 v\u00eddeo. Se der, provavelmente tu precisar\u00e1 instalar os drivers de v\u00eddeo ou configurar para duplicar o v\u00eddeo. (O problema de duplicar o v\u00eddeo \u00e9 que tu tem de apertar WinKey+P e clicar em duplicar v\u00eddeo, mas \u00e9 dificil clicar em algo que tu n\u00e3o v\u00ea...)\n\nPor curiosidade, qual notebook que tu comprou?"
+            ]
+        },
+        {
+            "title": "Quero montar um pc",
+            "selftext": "Queria montar um pc por at\u00e9 uns 3,500$ \nN\u00e3o precisa ser uma m\u00e1quina, mas que rode os jogos atuais. N\u00e3o quero gr\u00e1ficos extraordin\u00e1rios, apenas jogar.\n\nO \u00fanico problema disso tudo \u00e9 que eu n\u00e3o fa\u00e7o a menor ideia de como montar um pc, nem quais pe\u00e7as s\u00e3o boas ou n\u00e3o. Sou um leigo total e tenho medo de desperdi\u00e7ar dinheiro em algo que n\u00e3o dure nem por 1 ano direito. Queria algum conselho sobre algum setup bacana pra trabalhar com jogos.\nValeu ai!",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "102nfey",
+            "num_comments": 5,
+            "comments": [
+                "Deixa de ser burro vai no ali e compra um kit x79 e uma rx 580 de 8gb ,liga numa tv com entrada HDMI e economize dois mil e quinhentos",
+                "Tu sabe e quer montar? Se n\u00e3o, no TeraByteShop tem uns kits bacanas. Mas tu precisa de monitor/mouse/teclado/etc?"
+            ]
+        },
+        {
+            "title": "Pc de 2000R$",
+            "selftext": "Fala galera, bom dia.   \nRecentemente vi um video do MW inform\u00e1tica montando um pc de 2,000R$ com pe\u00e7as do aliexpress.  \nFiquei interessado pois o desempenho que foi mostrado no v\u00eddeo foi bem satisfatorio pra algu\u00e9m que s\u00f3 quer um pc pra jogar, que nem eu.   \n\n\nN\u00e3o sou um expert em inform\u00e1tica, entrei nesse mundo recentemente e venho me interessando em montar um pc pra jogar, apenas pra isso. Esse v\u00eddeo me chamou aten\u00e7\u00e3o, \u00e9 um baita custo beneficio e me atende bem. Masss, por ser algo vindo de fora, especialmente da china, tenho medo de comprar sem saber os riscos.  \n\n\nVou deixar a configura\u00e7\u00e3o do pc e mais o video abaixo.\n\nConfig:   \n\\- Placa de v\u00eddeo: RX5500 XT 8GBVRAM GDDR6   \n\\- Placa M\u00e3e: Haunanzhi Gaming x99 2xDDR4 16gb  \n\\- Processador: Xeon E5 2620 V3 6/12  \n\\- SSD Kingspec 512gb  \n\\- Fonte de alimenta\u00e7\u00e3o de 500w (Qualquer)  \n\\- Gabinete (Qualquer)    \n\\- Cooler Risemode G800    \n   Total: R$ 2080,00   \n Video do MW inform\u00e1tica:  [https://youtu.be/PLSVwRR-AtE](https://youtu.be/PLSVwRR-AtE)  \nPe\u00e7o ajuda pra saber se realmente vale a pena montar um pc desses ou se pelo mesmo valor, consigo montar coisa melhor. Desde j\u00e1, agrade\u00e7o!",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "102bxxu",
+            "num_comments": 11,
+            "comments": [
+                ">\\- Fonte de alimenta\u00e7\u00e3o de 500w (Qualquer)\n\nSe o Miguel recomendou qualquer fonte, ele \u00e9 um irrespons\u00e1vel do caramba... tu precisa de uma fonte minimamente aceit\u00e1vel... (A MSI MAG 550W t\u00e1 250 reais... e o pessoal tem falado bem dela, at\u00e9 o TecLab. - Economizar em fonte \u00e9 uma economia burra, se tu pega uma fonte aleat\u00f3ria e ela \u00e9 bomba, tu tem chance de al\u00e9m de ter de comprar outra fonte, ter de comprar hardware.)\n\nE outra coisa nesse build, acho que o Miguel esqueceu que esse Xeon \u00e9 PCIe 3.0 e a RX 5500 XT \u00e9 PCIe 4.0 x8 (se fosse PCIe 4.0 x16 seria outra hist\u00f3ria... a RX 6500 XT \u00e9 ainda pior... PCIe 4.0 x4), o que far\u00e1 a placa de v\u00eddeo gargalar em at\u00e9 20% se usar ela em PCIe 3.0... (mas ainda \u00e9 us\u00e1vel)\n\nQuanto ao SSD, \u00e9 burrada economizar 50 reais. Pega na Kabum, junto com a MSI MAG 550W, um PNY de 512GB que \u00e9 uma marca muito superior e tem garantia no Brasil... (T\u00e1 cheio de reclama\u00e7\u00e3o de KingSpec morrendo em menos de dois anos...)\n\nQuanto aos outros componentes... esses Xeons s\u00e3o processadores usados em servidores, e assim que a eficiencia deles n\u00e3o \u00e9 mais interessante ao data center/etc, eles acabam atualizando e vendendo os processadores por uma mis\u00e9ria que s\u00e3o revendidos no AliExpress.\n\nA maioria das placa m\u00e3e s\u00e3o novas, por\u00e9m o chipset usado \u00e9 recuperado de placa m\u00e3e usada. (Detalhe: at\u00e9 onde eu lembro, o X99 n\u00e3o suporta NVMe por padr\u00e3o e as empresas fizeram alguma gambiarra para adicionar suporte \u00e0 ele)\n\nJ\u00e1 a placa de v\u00eddeo pode ter sido muito usada em minera\u00e7\u00e3o e deus sabe o estado do GPU, \u00e9 uma loteria. Tu pode pegar um GPU perfeito, tanto quanto um GPU que j\u00e1 n\u00e3o aguenta os boosts padr\u00f5es devido \u00e0 degrada\u00e7\u00e3o do chip. (As vezes nem um aumento consider\u00e1vel da tens\u00e3o necess\u00e1ria resolve, mas algumas vezes a placa s\u00f3 passa a consumir mais. Em outras ela fica inst\u00e1vel.)",
+                "No geral a config t\u00e1 legal mesmo, s\u00f3 faria uns adendos (e umas enxugadas de custo).\n\nKit placa m\u00e3e \u00e9 isso ai, talvez at\u00e9 ache uns mais baratos aqui e ali, mas por 700$ voc\u00ea descolar um processador 6/12 com clock minimamente aceit\u00e1vel, AVX2 e 16gb de mem\u00f3ria, n\u00e3o tem outra escolha se n\u00e3o optar por esses kits Xeon. Sempre dou prefer\u00eancia a kits usados com placas da Asus, Gigabyte e afins pela maior confiabilidade (muita gente j\u00e1 teve dor de cabe\u00e7a com essas placas X99), mas dificilmente pega kit minimamente decente por 700$ com processador e mem\u00f3ria junto.\n\nPlaca de v\u00eddeo eu tamb\u00e9m iria na 5500xt, por ser mais nova (2019) e mais confi\u00e1vel que a RX 580 2048sp que rola em pencas no Ali (que tamb\u00e9m costumam recomendar). O fato dela trabalhar em 3.0 x8 nesse kit n\u00e3o vai fazer ela deixar de ser uma \u00f3tima placa pra rodar games em 1080p. Atualmente uso a irm\u00e3 maior dela a 5600xt, que amassa qualquer game nessa resolu\u00e7\u00e3o.\n\n&#x200B;\n\nAgora, minhas sugest\u00f5es:\n\n&#x200B;\n\n***Fonte de alimenta\u00e7\u00e3o de 500w (Qualquer)***\n\nN\u00e3o vai nessa, opte por um bom modelo de 500w com pelo menos 80 plus bronze em efici\u00eancia, pra ficar com margem pra upgrade de processador e placa de v\u00eddeo no futuro.\n\nSE estiver muito no aperto, teu setup consome bem pouco (menos de 250W no talo), pode optar por uma fonte decente de 400w, como a Bluecase BLU400R-80E, que \u00e9 aprovada pelo Teclab e realmente entrega os 400w com efici\u00eancia acima de 80% e tem o conector de 8 pinos que a 5500xt precisa. Est\u00e1 com pre\u00e7o na casa dos R$ 180/190.\n\nContudo, como ela te deixa com pouqu\u00edssima margem para upgrade, recomendo ela apenas em \u00faltimo caso. Se puder, invista um pouco mais e pegue uma Silverstone SST ET500, ou as MSI MAG de 550w, que est\u00e3o com pre\u00e7o um pouco acima, mas entregam \u00f3tima qualidade.\n\n&#x200B;\n\n***Gabinete (Qualquer)***\n\nDe fato d\u00e1 pra economizar legal aqui, se quiser, pode at\u00e9 quebrar galho com aqueles gabinetes ATX de PC antigo de firma, s\u00f3 se certifique que n\u00e3o tenha ferrugem e caiba ao menos 1 cooler na lateral pr\u00f3xima ao espelho da placa. Como teu setup dissipa pouco calor, n\u00e3o deve superaquecer num gabinete ruim, mas sempre recomendo um upgrade para algum que tenha pelo menos uns filtros de poeira e acoplamento da Fonte na parte debaixo.\n\nS\u00f3 lembre, vale mais a pena gastar bem na fonte que gastar bem em gabinete, pois gabinete tu pode comprar usado depois nos marketplaces da vida que n\u00e3o costuma ter rolo.\n\n&#x200B;\n\n***Cooler Risemode G800***\n\nConfesso que achei meio caro pro teu setup, os que vi desse modelo est\u00e3o acima de 150$, como o Xeon 2620 V3 tem TDP de 85w, uma cooler como Rise Mode Z4 (R$ 45 na Kabum), j\u00e1 d\u00e1 conta do recado, se quiser, pode gastar um pouco mais e pegar um Rise Mode X5 (70$ na Kabum), que al\u00e9m de ser recomendado pra processadores at\u00e9 130w, ainda ajuda a refrigerar o VRM dessas placas m\u00e3e, que s\u00e3o bem simplezinhos e esquentam bastante (o X5 tem o cooler montado para baixo).\n\nCom a diferen\u00e7a de valores pro G800, tu j\u00e1 investe numa fonte melhor.\n\n&#x200B;\n\nQuando ao SSD, sigo com a opini\u00e3o dos colegas, se puder, cate nem que seja um WD Green da vida por aqui, que \u00e9 mais neg\u00f3cio, como vai usar o PC s\u00f3 pra jogo, n\u00e3o precisa comprar um Samsung ultra pica das gal\u00e1xias, mas tenha prefer\u00eancia por marcas que tem maior confiabilidade, como a Western Digital que citei."
+            ]
+        },
+        {
+            "title": "compra de gabinete",
+            "selftext": "Bom dia pessoal, quero comprar um gabinete pra placa m\u00e3e ASUS PRIME H610M e placa de v\u00eddeo Geforce 1660. Algu\u00e9m tem sugest\u00e3o? Gostaria de gastar no m\u00e1ximo uns R$ 350,00 no gabinete. Vou usar o pc pra jogar alguns games.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1029wfw",
+            "num_comments": 5,
+            "comments": [
+                "Qual 1660? Tem v\u00e1rias... desde 1660 Super, 1660 Ti e s\u00f3 1660 (que \u00e9 uma p\u00e9ssima compra, 100 reais a mais e tu pega a 1660 Super que \u00e9 mais r\u00e1pida). Ai no ponto tamanho da placa, existem placas 3 slots, 2 slots, 1 slot, single fan, 2 fans, 3 fans... etc. Sabendo o modelo exato \u00e9 mais f\u00e1cil. Outra coisa, tu est\u00e1 confort\u00e1vel em mexer em gabinete pequeno/apertado? Tamanho do case faz diferen\u00e7a?"
+            ]
+        },
+        {
+            "title": "Ajuda com a bios",
+            "selftext": "Ol\u00e1, acabei de montar meu pc, fiz a instala\u00e7\u00e3o do Windows, e pra isso tive que entrar na bios e selecionar o pendrive do Windows como armazenamento pra ele fazer a instala\u00e7\u00e3o. Windows instalado blz tudo certo, mas toda vez que ligo, ele fica com aquela tela preta escrito American alguma coisa, erro, e por fim manda entrar na bios F1, e ai tenho que entrar e butar selecionado meu SSD pra poder ligar o pc, algu\u00e9m sabe como resolver?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1026vj0",
+            "num_comments": 4,
+            "comments": [
+                "nao tem como tu trocar a ordem de boot e colocar pra ser sempre o HD?",
+                "Se tu n\u00e3o se importar em reinstalar tudo, tira os outros HDs e deixa s\u00f3 o SSD. (Se o Windows estava em algum HD anteriormente, as vezes esse HD ficou com a parti\u00e7\u00e3o UEFI/Windows Boot Manager) Reinstala o Windows nele... isso criar\u00e1 a parti\u00e7\u00e3o de boot no disco do SSD e tu n\u00e3o precisar\u00e1 da parti\u00e7\u00e3o no outro HD.\n\nSe tu j\u00e1 fez isso ou n\u00e3o quer reinstalar/mexer no hardware, d\u00e1 uma olhada na sess\u00e3o BOOT do UEFI. Muda Windows Boot Manager para primeiro e o SSD para segundo."
+            ]
+        },
+        {
+            "title": "Qual o m\u00e1ximo que posso melhorar um nootbook positivo xc7660?",
+            "selftext": "Estou querendo melhorar ao m\u00e1ximo a capacidade do meu notebook, pois sinto que ele est\u00e1 deixando a desejar por j\u00e1 ter alguns anos.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "101y8l5",
+            "num_comments": 12,
+            "comments": [
+                "Trocar o HD por SSD j\u00e1 daria uma boa sobrevida. (Se puder aumentar a RAM, tamb\u00e9m seria uma boa... mas n\u00e3o achei o manual dele para ver se d\u00e1)",
+                "Dependendo do que voc\u00ea usa da pra tentar botar uma distro linux como o linux mint...",
+                "Trocando ele...nao investiria em um note de baixo custo pois logo ele vao t deixar na mao novamente. Se ele ja nao atende suas necessidades, pense em trocar",
+                "RAM faz milagre pra jogos, SSD tbm\nVoc\u00ea notaria a diferen\u00e7a",
+                "RAM ajuda em tudo pra desempenho do PC"
+            ]
+        },
+        {
+            "title": "Mouse parecido com o deathadder?",
+            "selftext": "Tenho um deathadder que ja viveu tudo que tinha pra viver e ta quase indo de comes e bebes, mas gosto bastante dele \n\nAcho o formato e o peso bom, mas agora com esse morrendo tava pensando se comprava algum outro modelo \n\nAlgu\u00e9m que ja usou e gostou do deathadder tem alguma recomenda\u00e7\u00e3o de outro mouse que seja similar e bom? (e se poss\u00edvel com pre\u00e7o bom tamb\u00e9m)",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "101s5yg",
+            "num_comments": 5,
+            "comments": [
+                "compra outro deatheadder, espero ter ajudado!",
+                "Parecidos: Glorious Model D, Logitech G403, Logitech G603, Logitech G703.\n\n\nIguais: Razer Deathadder V2 (vers\u00e3o sem fio) ou a mais recente V3 Pro, tamb\u00e9m sem fio, mas custa um rim.",
+                "Eu uso um mouse mais simples, o Logitech G203 que paguei 80 reais para substituir meu Tesoro Shrike V2... e gosto mais desse que do Tesoro. (S\u00f3 n\u00e3o gosto dos headsets da Logitech...)\n\nDependendo do teu gosto, tu pode pegar os irm\u00e3os maiores dele que a outra pessoa listou.",
+                "Tive dois destes e parece que com 2 anos quebra. Comprei o logitech G502 e achei muito melhor. Inclusive tem ajuste de peso. Pode ir nele sem medo, pegada bem parecida."
+            ]
+        },
+        {
+            "title": "Qual placa devo pegar?",
+            "selftext": "Estou em d\u00favida entre duas placa m\u00e3e\nUma ASUS Prime B450M Gaming ou Uma ASUS TUF GAMING A520M PLUS \n\nQual devo pegar?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "101n7fy",
+            "num_comments": 3,
+            "comments": [
+                "A B450. \u00c9 uma gera\u00e7\u00e3o anterior, mas \u00e9 um tier acima."
+            ]
+        },
+        {
+            "title": "Chrome fecha sozinho",
+            "selftext": "Boa tarde galera, meu irm\u00e3o me ligou e disse que o notebook dele tava fechando o chrome sozinho por falta de RAM, mandei ele olhar o gerenciador de tarefas e o uso de mem\u00f3ria estava em 74%, e o Chrome era o que estava usando mais mem\u00f3ria, eu deduzo que o arquivo de pagina\u00e7\u00e3o deve ter corrompido durante alguma atualiza\u00e7\u00e3o ou o pente de mem\u00f3ria deve estar com problema, ele pediu pra eu formatar, mas n\u00e3o sei se ser\u00e1 necess\u00e1rio, algu\u00e9m pode me ajudar?\n\nEdit: ele tem 8 GB de RAM",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "101mg1f",
+            "num_comments": 6,
+            "comments": [
+                "O arquivo de pagina\u00e7\u00e3o \u00e9 zerado toda vez que tu reinicia o computador... se ele tivesse corrompido, no pr\u00f3ximo reboot seria outro... mem\u00f3ria RAM com problema \u00e9 dificil, mas pode acontecer...\n\nAinda acho que o problema s\u00e3o os 8GB de RAM, que \u00e9 absolutamente muito pouco dependendo de quantas abas ele tenha aberto...",
+                "Se tu acha q \u00e9 algum problema no pente de mem\u00f3ria tu pode rodar um daqueles testes tipo memtest, a\u00ed tu mata se for isso  \n\n\nMas se fosse ela com problema provavelmente o pc ia desligar e n\u00e3o fechar o chrome, mais prov\u00e1vel q seja o chrome bugado, tenta reinstalar e testa sem nenhuma extens\u00e3o instalada"
+            ]
+        },
+        {
+            "title": "algu\u00e9m sabe como corrigir o erro 173 do AMD Software?",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "101izdb",
+            "num_comments": 8,
+            "comments": [
+                "Qual o hardware que tu t\u00e1 usando? CPU/GPU principalmente.\n\nO Erro 173 se refere \u00e0 quando tu tenta instalar o AMD Software sem uma placa de v\u00eddeo AMD..."
+            ]
+        },
+        {
+            "title": "Por favor, me deem recomenda\u00e7\u00f5es de configura\u00e7\u00e3o at\u00e9 R$4.500.",
+            "selftext": "Preciso que ele seja capaz que eu nao precise substitui-lo por pelo menos 10 anos. E, de preferencia, que rode todos os jogos atuais em um quadro de frame satifatorio.",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "101hzuu",
+            "num_comments": 7,
+            "comments": [
+                "4500 reais que consiga rodar jogos durante 10 anos? Acho pouco prov\u00e1vel... mal d\u00e1 para montar um PC que rode jogos atuais em high. S\u00f3 d\u00e1 para encaixar uma 1660 Super no or\u00e7amento... AliExpress t\u00e1 fora de cogita\u00e7\u00e3o se tu quer por pelo menos 10 anos.",
+                "D\u00e1 pra montar um pc muito bom com:\n\nCPU: Ryzen 5 5500 (em torno de 650)\n\nGPU: RTX 3060 (entre 2500 - 3000)\n\nPlaca-m\u00e3e: Gigabyte A520M S2H (em torno de 500)\n\nRAM: Qualquer marca, sendo de 3200 MHz (sugiro 2 RAM's de 8 Gb)\n\nSSD: Kingston NV2 1 Tb (em torno de 400)\n\nFonte: Qualquer uma de 550W pra cima da SilverStone, Corsair, MSI.\n\nN\u00e3o economiza na fonte que tem chance de dar muito ruim e voc\u00ea perder o pc todo. Esse era o setup que eu estava olhando recentemente e estava por 4500 na Terabyte, mas acabaram os estoques de 3060 deles, ent\u00e3o tem que ficar de olho. Esse \u00e9 um pc bem poderoso que roda Elden Ring no ultra com 71 fps [de acordo com esse site.](https://howmanyfps.com/pc-builder/elden-ring?gpu=B0971BRCM4&cpu=B09VCJ171S&motherboard=B08F7HPJ4F&ram=B0143UM4TC&ssd=B0BBWH1R8H&psu=B0762R8WJ4)"
+            ]
+        },
+        {
+            "title": "Computador liga mas n\u00e3o d\u00e1 imagem",
+            "selftext": "Primeiramente bom dia, esse \u00e9 meu primeiro POST aqui e espero fazer tudo certo. Ent\u00e3o, tenho um computador com placa de v\u00eddeo integrada (Ryzen 5 3400G) h\u00e1 mais ou menos 2 anos j\u00e1, nunca limpei ou troquei pasta t\u00e9rmica, e tamb\u00e9m nunca usei ele pra trabalhos muito extremos, somente jogos e uso do dia a dia. Hoje por\u00e9m ele come\u00e7ou a dar um problema, onde ele liga todas as luzes, teclado mouse e etc.. por\u00e9m n\u00e3o d\u00e1 imagem, j\u00e1 mexi nas mem\u00f3rias rams e no cabo, at\u00e9 troquei de cabo e de monitor, por\u00e9m n\u00e3o d\u00e1 imagem. Algu\u00e9m poderia me ajudar?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "101fzwz",
+            "num_comments": 10,
+            "comments": [
+                "Pelo amor de Deus, gente... limpar com borracha \u00e9 a pior dica do mundo. \nEspero que n\u00e3o seja tarde. Mas se puder, sempre limpe suas memorias e componentes eletr\u00f4nicos com alcool isopropilico:\nhttps://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwiQr_Gkvan8AhWcE9QBHQaxAuMYABAJGgJvYQ&ohost=www.google.com&cid=CAESbeD2z7uSyedfcFQX5ivBmjz2sqZRTLypw12pAsfT397xlDa0TdU0FF9FwM8aOwSiJzLDIUF4pYxgHVSbxk7w9015ieVbwlUM0H9aZtvgrap6mm0INVv8KRx_rAbqYRHue4Eoh0wyRZCT_cCf9yY&sig=AOD64_3TCJMlEr8sAZBsMi5W4Y9WxHep2g&ctype=5&q=&ved=2ahUKEwjH4uWkvan8AhX5q5UCHYb-DtcQwg8oAHoECAUQEA&adurl=",
+                "Bom dia.\nPode ser um problema com a mem\u00f3ria RAM. Se tiver conhecimento t\u00e9cnico, retire as mem\u00f3rias e limpe com uma borracha branca, use papel pra tirar os peda\u00e7os da borracha. Tamb\u00e9m indico limpar o slot de mem\u00f3ria com limpa contatos, mas s\u00f3 se voc\u00ea tiver. Quanto a pasta t\u00e9rmica, deve ser trocada a cada 1 ano no m\u00e1ximo. Mas isso n\u00e3o \u00e9 o causador do problema. Se o processador esquentar por causa da falta de pasta t\u00e9rmica, ele desliga completamente",
+                "Faz o seguinte: tira todas as mem\u00f3rias e coloca apenas uma. Tenta iniciar. Se n\u00e3o iniciar, d\u00e1 ClearCMOS. (se tu tiver multimetro, verifica aquela bateria CR2032 que tem na placa m\u00e3e se ela ainda est\u00e1 boa).\n\nSe mesmo assim ainda n\u00e3o inciar, desliga TUDO de dentro do case e deixa s\u00f3 a placa m\u00e3e. (HDs e SSDs SATA desligados, drives de CD, fans do gabinete e etc tbm)\n\nSem querer suspeitar da fonte, mas qual a fonte que esse computador tem?",
+                "Aconteceu cmg hj, eu tirei a bateria da bios e coloquei no lugar devolta, foi oq resolveu"
+            ]
+        },
+        {
+            "title": "Ajuda com fonte",
+            "selftext": "Fiz um post alguns dias atr\u00e1s sobre meu computador estar com dificuldades para ligar, e me disseram que h\u00e1 um problema na fonte, e eu tenho outra fonte que eu posso trocar, mas n\u00e3o sei se ela \u00e9 de boa qualidade, seguem os modelos das fontes:\n\nFonte com problema:\nWSNG-500-P4B2S-SK (220W)\n\nOutra fonte:\n250W 260XA 24P JITEK\n\nVoc\u00eas me aconselham trocar pela segunda fonte ou comprar uma nova?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "100rn2p",
+            "num_comments": 4,
+            "comments": [
+                "As duas s\u00e3o super gen\u00e9ricas... a primeira \u00e9 WiseCase, que de Wise n\u00e3o tem nada. A segunda \u00e9 Jitek Nilko, que \u00e9 t\u00e3o gen\u00e9rica quanto a wisecase.\n\nSe tu puder investir 250 numa fonte, pega uma MSI MAG 500W/550W e tu n\u00e3o deve ter problema de fonte por um longo tempo. (Na Kabum tamb\u00e9m tem a EVGA 400W 100-N1-0400-L por 220)"
+            ]
+        },
+        {
+            "title": "Algu\u00e9m que me ajude. Est\u00e1 assim h\u00e1 uns minutos e nem consigo entrar nele...",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "100i7kf",
+            "num_comments": 8,
+            "comments": [
+                "Se eu fosse tu, j\u00e1 teria resetado no primeiro minuto n\u00e3o respondendo. haha",
+                "Eu ontem o mouse tava bugado, n\u00e3o clicava, atualizei pro Windows 11 e resolveu o problema"
+            ]
+        },
+        {
+            "title": "Duvida quanto a placa de v\u00eddeo",
+            "selftext": "Ainda n\u00e3o manjo muito, e comprei um pc com RTX 3050, o que pelo que vi a torna offboard.\nMeu monitor \u00e9 antigo e usa VGA, tentei conectar na placa m\u00e3e e n\u00e3o d\u00e1 tela.\nIsso se d\u00e1 conta por causa do uso da placa de v\u00eddeo? N\u00e3o posso usar onboard se eu tiver offboard?\nAgrade\u00e7o desde j\u00e1 quem puder esclarecer!!!",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "10077mt",
+            "num_comments": 6,
+            "comments": [
+                "Vai ter de comprar um monitor novo ou um conversor para VGA. Mas sinceramente, n\u00e3o faz sentido ter monitor apenas com VGA quando voc\u00ea tem uma 3050...\n\nAt\u00e9 tem umas gambiarras, dependendo do CPU que tu usa, para usar o offboard passando pro onboard... mas...\n\nOutra coisa, que fonte tu usa... se for fonte fraca, tu vai torrar ela com a 3050...",
+                "\u00c9 eu sei o sofrimento. Ate as placas de video mais modestas t\u00e3o abandonando VGA. J\u00e1 que ela s\u00f3 pode fazer max 1080p 60hz. Tive que trocar de monitor tbm. Pra mim o sofrimento foi menor pq tava dando defeito j\u00e1. Durou 12 anos. Feliz ano novo!!"
+            ]
+        },
+        {
+            "title": "monitor sem sinal de entrada",
+            "selftext": "comprei um pc pela pichau e montei ele, tive uma certa dificuldade mas consegui colocar tudo corretamente, entretanto, toda vez que conecto no monitor fica aparecendo \"nao ha sinal de entrada\"\n\no placa mae veio com disco da bios mas meu gabinete nao vem com o leitor de disco\n\ntroquei a memoria ram de slot, limpei ela ate mesmo troquei o hdmi pelo vga e mesmo assim nada, tentei tamb\u00e9m dar video pela TV que tenho na sala mas mesmo assim sem sinal.\n\n\nalgum m\u00e1gico para me ajudar?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "1003864",
+            "num_comments": 8,
+            "comments": [
+                "Tira uma foto de dentro do gabinete. da placa m\u00e3e.\n\nPergunta: o PC tem v\u00eddeo onboard ou offboard? Se tem offboard, qual?",
+                "Pode ser muita coisa cara. Se voc\u00ea j\u00e1 chegou as mem\u00f3rias, o pr\u00f3ximo passo \u00e9 a placa de v\u00eddeo. Teste na entrada onboard. Se nada resolver, desconecte tudo e ligue apenas a placa m\u00e3e com um pente de mem\u00f3ria, se ligar, monte pe\u00e7a por pe\u00e7a e teste cada vez que trocar algo. Se n\u00e3o funcionar provavelmente vai ter que acionar a garantia.\nLembrando que se voc\u00ea n\u00e3o tem muito conhecimento t\u00e9cnico, \u00e9 bom levar at\u00e9 uma assist\u00eancia pra um diagn\u00f3stico e voc\u00ea possa trocar a pe\u00e7a correta e resolver todo o problema",
+                "Tenta ver se a placa-m\u00e3e e a CPU s\u00e3o compat\u00edveis. Se forem, pode ser que a placa esteja com uma vers\u00e3o da BIOS mais antiga e ela s\u00f3 suporte esse modelo de CPU numa vers\u00e3o mais nova, nesse caso voc\u00ea precisar\u00e1 baixar a BIOS no site da fabricante, por num pen-drive e conect\u00e1-lo numa porta USB especifica da placa. No manual esse processo \u00e9 melhor detalhado, e no site da fabricante sempre h\u00e1 uma tabela que relaciona vers\u00e3o de BIOS com modelo de CPU suportado."
+            ]
+        },
+        {
+            "title": "Lenovo",
+            "selftext": "Qual a principal diferen\u00e7a entre um Lenovo ideapad 3 AMD e um Lenovo v15 G2 ALC? (Com o mesmo ryzen 3 5300u)\nN\u00e3o consigo identificar diferen\u00e7as entre estes dois modelos..",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zzxqqo",
+            "num_comments": 3,
+            "comments": [
+                "Provavelmente material de constru\u00e7\u00e3o da carca\u00e7a, design e mercado. Fora pre\u00e7o.",
+                "Independente de qual escolher j\u00e1 compre um M2 pra colocar pra n ter dor de cabe\u00e7a"
+            ]
+        },
+        {
+            "title": "Quais ser\u00e3o suas Resolu\u00e7\u00f5es de Ano Novo?",
+            "selftext": "\n\n[View Poll](https://www.reddit.com/poll/zzwo9k)",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zzwo9k",
+            "num_comments": 4,
+            "comments": [
+                "Comprei um monitor 1080p esse ano pq o meu antigo de 900p que comprei em 2010 quebrou. Espero que essa resolu\u00e7\u00e3o dure at\u00e9 2030 pelo menos.",
+                "1440p porque eu preciso de espa\u00e7o mas n\u00e3o tenho a acuidade visual para deixar no 2160p",
+                "360p pra joga um psone",
+                "T\u00f4 feliz com 2160p  e n\u00e3o troco pra resolu\u00e7\u00e3o menor, mesmo com refresh rate mais alto. Quando 4K 120 Hz for acess\u00edvel e tivermos GPUs com pre\u00e7os decentes, quem sabe..."
+            ]
+        },
+        {
+            "title": "N\u00f3s adms da r/computadores desejamos um \u00f3timo ano novo para todos os membros do sub e seus familiares tamb\u00e9m, boas festas e um \u00f3timo 2023 pra todos",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zzuasc",
+            "num_comments": 1,
+            "comments": [
+                "Boas festas, pessoal!!!"
+            ]
+        },
+        {
+            "title": "Ajuda! Teclado do meu notebook parou de funcionar completamente sem motivo aparente",
+            "selftext": "De repente o teclado do meu Notebook parou de funcionar completamente, apenas a tecla de desligar funciona, o touchpad funciona normalmente.\n\n&#x200B;\n\nO problema aconteceu de repente, sem nenhum motivo, n\u00e3o fiz download de nenhum software ou driver malicioso, n\u00e3o derramei l\u00edquidos, nem danifiquei o produto, j\u00e1 tentei desinstalar meu driver atual mas n\u00e3o adiantou, alguma ideia do que pode ser? Ser\u00e1 que o teclado interno queimou?",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zze0zx",
+            "num_comments": 3,
+            "comments": [
+                "As vezes eles estragam sem motivo mesmo (ou com motivo: tipo deixar o note aquecer a ponto de sentir o teclado quente).\n\nSe tu n\u00e3o souber desmontar notebook, leva numa assist\u00eancia t\u00e9cnica para eles verificarem o que aconteceu. N\u00e3o recomendo abrir notebook sem saber. \u00c9 mais para tu n\u00e3o quebrar o notebook que nem eu fiz... haha",
+                "As vezes \u00e9 s\u00f3 um cabo. Mas tem que abrir."
+            ]
+        },
+        {
+            "title": "Ajuda",
+            "selftext": "Ola amigos do reddit estou passando por um poblema no meu pc sti ele ja antigo ja vou falar oq esta ocorendo ele esta apitando sem parar ele liga tudo a ventoinha mais n da imagem que pode ser? Ja tentei limpar a memoria ram n funcionou ae em cima tem um pequeno video que fiz mostrando ele",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zzbpkp",
+            "num_comments": 9,
+            "comments": [
+                "Hm... t\u00e1 me parecendo o HD \"clicando\" mais que um beep. Desliga a energia do HD e tenta iniciar o computador... Se parar, era o HD.\n\nSe n\u00e3o for o HD, tem 3 possibilidades: placa de v\u00eddeo morreu, mem\u00f3ria RAM morreu ou fonte deu pane/morreu.\n\nPelo que vejo, tu usa fonte gen\u00e9rica/simples que j\u00e1 deve ter vindo no computador/case. E a placa m\u00e3e n\u00e3o parece ser muito recente pela presen\u00e7a de dois PCI. Levando em conta isso, Tem um grande chance da fonte ter ido pro espa\u00e7o. Em seguida, pode ter sido a placa de v\u00eddeo (beepando de forma continua indica tanto mem\u00f3ria quanto placa de v\u00eddeo) e por ultimo, mem\u00f3ria RAM. Por\u00e9m se tu n\u00e3o alimenta a placa de v\u00eddeo, ela n\u00e3o inicia.. e ela n\u00e3o iniciando... beep beep beep beep beep... hahaha\n\nSe poss\u00edvel, tenta fazer um v\u00eddeo sem mover tanto o celular, ou movendo bem mais devagar. T\u00e1 quase igual o The Flash. hahaha"
+            ]
+        },
+        {
+            "title": "Duke Nukem 3D no Sega Megadrive da Tec Toy, parecia mais Wolfenstein 3D do que Doom, comparado ao Duke3D que todos conhecemos e amamos.",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zzbj6h",
+            "num_comments": 0
+        },
+        {
+            "title": "A \u00e1rea de trabalho do Windows XP traz de volta mem\u00f3rias do in\u00edcio dos anos 2000.",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zzb2bk",
+            "num_comments": 24,
+            "comments": [
+                "Nessa \u00e9poca  eu baixava as musicas no limewire, renomeava tudo, separava por pasta de artista, album, ano kkkkk",
+                "[removed]",
+                "Puts esse tema era incrivel, aero eu acho, nostalgia, eu amava instalar o tema do zune tambem\n\n[zune winxp](https://s2.glbimg.com/UlqCX3M7TNcbWMDKlMVK4PSkPyw=/800x0/smart/filters:strip_icc()/s.glbimg.com/po/tt2/f/original/2014/09/11/1b906159012fe0a5123139268817.jpeg)",
+                "S\u00f3 de ver essa tela o sonzinho do desktop abrindo vem na mente",
+                "Opini\u00e3o pouco popular: a interface do Windows XP \u00e9 feia pacas."
+            ]
+        },
+        {
+            "title": "Quanto ser\u00e1 que vale?",
+            "selftext": "Fala meus sigmas, tenho o seguinte computador e t\u00f4 querendo vender, me ajudem a achar um pre\u00e7o justo pra ele.\n\nConfigs:\nPentium g4560 (vulgo i3 7100)\nGTX 1650\nFonte 650 Corsair\n8gb ram ddr3\nHd padr\u00e3o 1 tera\nPlaca m\u00e3e h110 da Asus\nGabinete padr\u00e3o de escrit\u00f3rio",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zz96uq",
+            "num_comments": 3,
+            "comments": [
+                "Ou \u00e9 Pentium G4560 ou \u00e9 Core i3-7100. Os dois processadores n\u00e3o tem desempenho parecido. O i3 \u00e9 15-20% mais r\u00e1pido. N\u00e3o existe essa de chamar um processador do modelo que ele n\u00e3o \u00e9.\n\nGTX 1650 t\u00e1 1000 reais NOVA. Ent\u00e3o tu pode tirar 10% por cada ano de uso.\n\nFonte Corsair 650W depende muito de qual modelo.\n\n8GB DDR3 s\u00f3 serve para Xeon e processador antigo. Atualmente \u00e9 DDR4 e DDR5.\n\nHD 1TB padr\u00e3o SATA vale 200 reais o NOVO.\n\nASUS com chipset H110... nem sei... o H110 \u00e9 chipset de 2015... 7 anos de mercado.\n\nAcho que se tu for vender, tu pega uns 1200-1500 tudo junto...\n\nSe vender CPU (+cooler), MoBo e RAM por uns 400 (Tem kit Xeon 4x mais r\u00e1pido com DDR4 2x8GB por 600-800...)\n\nPlaca de v\u00eddeo tu pega mais uns 600-700.\n\nFonte entre 200-300. (de novo, tu n\u00e3o colocou o modelo)"
+            ]
+        },
+        {
+            "title": "oi sub! voc\u00eas acham que eu consigo rodar valorant a uns 120fps com essa config? (se acharem que devo mudar alguma coisa avisem pfv)",
+            "selftext": "https://www.terabyteshop.com.br/produto/18613/monte-seu-pc-gamer-plataforma-amd-ryzen-5000-full-custom?spec=FGSQCyJ1xl%2F3AUfBTAuR8jMybmxINE5iUjdmVDBEdVJWa0ZvcEVlVjdQcWVhSHhqekdyTDl3TnhSSzJseXVwYlpCbGdHNVpncDhtU1F5YkxMOXBQcTJsSTM1UWdmeDdRa3IySHlLR28rdnZ4SG5wQlRYTGlhMHpwTmdGWjQ3cENHbHZISHlZVzljMm45Ni95L1gyNU5mRUs5dWdNM2IvNnhvK3hqMHg4YXQ0M01NWXdhaWlRZXFFRHlrR3dWSm91c05PQlRWWXpOZlJ2SlBzdFBNT0pUTDhDMWZFMVFCbnFJVm1pbFFNSnJiSWxtdnZMaWFsSXlXcGptM1BPbWVod2pmbFduT0p3emJ3UkZGZWhsZVNTbDBEUVc5UU81c0FhSnhudHlGdldsZG5TZW9Dbm0zdmJzVUhEM1piNEtVakZPdkQvZ1pZanNPSDNpUUl2RGZQWDhXNVF4cmFERkpjeGNTWkFHT1ZLK3Yza2FHcmQyK1pVakpyRklVdFQ4NTBKUi95eFRLYjZvSkt5WERSSEhXZXQzTkhMUlRoWXVxeEpsc1pLYVJOc2V2Q2t3WVFkR0d2dHI4NkszMTI3aGJLMGFnSVAvdVJNajNRTnF6SVo%3D",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zz3ymu",
+            "num_comments": 2,
+            "comments": [
+                "Placa m\u00e3e A320. mds.. n\u00e3o, n\u00e9.... B450 ou B550 no minimo.\n\nA FONTE ESCOLHIDA \u00c9 MUITO FONTE RUIM. Pega MSI MAG 500W/550W. (acho que \u00e9 a mais barata de gente.)\n\nTu tem de ver se a placa de v\u00eddeo cabe no gabinete.\n\nhttps://www.terabyteshop.com.br/produto/18613/monte-seu-pc-gamer-plataforma-amd-ryzen-5000-full-custom?spec=J49YUnuiMTrmQINJ2AksZ2lwbE1WcGlhZnNFaURLNExUUmswNE15SWRWVEVYbGI1VTNDQ1NiVFR4dVBoMnN3RkIvb3VDdXJjaXBONnFNZnRDTGk4OUlrenFPM1NCWnVobWN2aVMxYlptZFVGb0VDWnduYXhFOVVqWG5heVN1d0R4Z1FGMXV2YVBUYVIwRUtCUUNibmZlMEhka0R6MUNrMTNMWGJRZENod2tQZkh4S1dUdmJUcXFnZzA5VVFPNHVRZlNQTnQ3R0ovMlZWQnlOSUhCZEVLM0JJSFhBZ0lQc0FObnArcFZNS2ZRTzVWa2lzaFFxSHhHWEZlSXk3MzRsdkVSS1VvelBKbzBJc2ZicGkxQlQ2eHJiL0lKbHJMeHJIcTYwUEJ4SjBvVnV4aWFsMVZIRmZiOTdTNERrVGNpT3kyeUZrMVJjc052ZjJqWWUzKzJ2S0syMFpkU2VIL1ovNWlIOTN5aG5QMzlFdGxQd25ETXJBWUhxeEUzTElVZ21tRm9tREVlTE1DVTNYeHNrbWRRNTFtSHd3UFdYR1hCYi9wdEsvTGc9PQ%3D%3D"
+            ]
+        },
+        {
+            "title": "QBasic Gorillas",
+            "selftext": "",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zyr29u",
+            "num_comments": 9,
+            "comments": [
+                "O que supostamente \u00e9 para ser isso?"
+            ]
+        },
+        {
+            "title": "ajuda para montar pc",
+            "selftext": "queria umas sugest\u00f5es de configura\u00e7\u00e3o de pc at\u00e9 2500 reais, prefer\u00eancia pra pe\u00e7as do Aliexpress que t\u00e1 mais barato e tudo mais",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zypcbm",
+            "num_comments": 5,
+            "comments": [
+                "No Ali:\n\n1.000 - Kit Xeon (tem v\u00e1rios, espero a galera postar o melhor ai pq eu n\u00e3o tenho muito conhecimento) + 16gb ram DDR4\n\n500 - RX 580 8GB 51risk\n\n350 - NVME PCI KingSpec 1TB (ou 400 na Kabum)\n\nNa Kabum:\n\n350 - Fonte 550w de marca decente 80plus com PFC Ativo\n\n60 - Air Cooler Rise Mode Z3\n\n200 - Gabinete e fans",
+                "Eu meio que desaconselharia Xeon, mas enfim... (S\u00e3o s\u00f3 exemplos, VERIFICA A REPUTA\u00c7\u00c3O DOS VENDEDORES ANTES DE COMPRAR)\n\nMoBo/CPU/RAM: Kit Xeon ([Xeon E5-2666 V3, 2x8GB DDR4-2666, placa m\u00e3e](https://www.aliexpress.com/item/1005003723593344.html)), 880  \n\nGPU: [Radeon RX 5500 XT 8GB](https://www.aliexpress.com/item/1005004691304924.html), 600 (procura da 51 RISC ou SHELY)\n\nCooler: [Snowman](https://www.aliexpress.com/item/4000307321126.html) (n\u00e3o sei o modelo, direto da loja oficial deles) - 220 (Tu pode trocar por algo mais simples por sua pr\u00f3pria conta e risco)\n\nKabum (s\u00f3 porque eu sei de cabe\u00e7a qual eram haha, tem terabyte e pichau tbm pra olhar):\n\n[MSI Mag 550W](https://www.kabum.com.br/produto/369657/), 280\n\n[SSD PNY CS1031 1 TB](https://www.kabum.com.br/produto/397220/), 400 (240TBW de endurance, n\u00e3o \u00e9 muito... mas n\u00e3o \u00e9 t\u00e3o pouco)\n\nGabinete fica \u00e0 tua escolha. Mas lembra de pegar um que tenha boa circula\u00e7\u00e3o de ar e j\u00e1 venha com fans...(fans +- costumam ser bem caros... os fans fracos custam at\u00e9 uns 35 reais cada)\n\nSem o gabinete, deu 2380 + frete (e impostos caso pegue no aliexpress e \u00e9 quase certeza que vai pegar 200 reais o kit e a gpu)"
+            ]
+        },
+        {
+            "title": "Office expirado antes da data de compra do notebook",
+            "selftext": "J\u00e1 e a terceira, algu\u00e9m sabe se \u00e9 normal ou se comprova mais que algu\u00e9m usou esse computador \"novo\"  antes e devolveu",
+            "subreddit": "computadores",
+            "topic": "tecnologia",
+            "id": "zynopz",
+            "num_comments": 6,
+            "comments": [
+                "Provavelmente algu\u00e9m pode ter devolvido o notebook, eles resetaram e revenderam como novo... tu lembra se veio na caixa original e se parecia violada/amassada? Tenta entrar em contato com a empresa que te vendeu isso e/ou com o fabricante... Tamb\u00e9m tem a possibilidade de algu\u00e9m ter feito bobagem na hora de atualizar o Windows ou testar na fabrica.",
+                "Mano, office 2019 crackeado e ja era.\n\nTem uns ativadores que usam uma ativa\u00e7\u00e3o online que \u00e9 bem de boa, me chama no PV que depois te mando, n\u00e3o tenho nesse pc aqui, mas s\u00f3 desinstala, instala o office 2019 e craqueia depois",
+                "WPS office."
+            ]
+        }
+    ]
+}
