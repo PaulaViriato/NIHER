@@ -2,7 +2,7 @@ import json
 import os
 
 def write_data (data):
-    with open("complete_dataset", 'w') as jsonfile:
+    with open("complete_dataset.json", 'w') as jsonfile:
         json.dump(data, jsonfile, indent=4)
 
 def open_file (name_file):
