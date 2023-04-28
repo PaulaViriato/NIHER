@@ -21,16 +21,17 @@ def open_files (data):
         for file in data["subdirectories"][key]["files"]:
             jsondata = open_file(key+"/"+file)
             for j in jsondata["posts"]:
-	            data["subdirectories"][key]["data"].append(j)
-	            data["alldata"].append(j)
-	            data["statistics"][key]["num_data"] += 1
-	            data["statistics"]["num_data"] += 1
+                data["subdirectories"][key]["data"].append(j)
+                data["alldata"].append(j)
+                data["statistics"][key]["num_data"] += 1
+                data["statistics"]["num_data"] += 1
     return data
 
 def all_subdirectories (path):
-    walker = './'+path
-    if (walker[-1] == '/'):
-        walker = walker[:-1]
+    walker = path
+    if (len(walker) > 0):
+        if (walker[-1] == '/'):
+            walker = walker[:-1]
     data = {"statistics": {}, "alldata": [], "subdirectories": {}}
 
     for _, subdir, _ in os.walk(walker):
@@ -38,7 +39,6 @@ def all_subdirectories (path):
             data["subdirectories"][walker+"/"+str(s)] = {}
             data["subdirectories"][walker+"/"+str(s)]["files"] = []
             data["subdirectories"][walker+"/"+str(s)]["data"] = []
-
 
     for key in data["subdirectories"].keys():
         for _, _, files in os.walk(key):
