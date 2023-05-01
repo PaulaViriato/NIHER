@@ -1,4 +1,4 @@
-de 
+﻿de 
 a 
 o 
 que 
@@ -8,6 +8,8 @@ da
 em 
 um 
 para 
+pra 
+pro 
 é 
 com 
 não 
