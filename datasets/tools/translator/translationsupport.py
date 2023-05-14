@@ -19,8 +19,6 @@ class TranslationSupport:
         self.unavailable_transla = []
         self.exceptions          = []
         self.init_values()
-        try: uliontset.preaccelerate()
-        except Exception as e: self.exceptions.append("[__init__] "+str(e))
         self.range_progress = tqdm.tqdm(range(100), desc='Process Translation Support', ncols=100)
 
     def read_translators (self):
@@ -33,13 +31,18 @@ class TranslationSupport:
                 self.path_translators = None
                 self.read_translators()
         else:
-            self.translators = {'niutrans': 0, 'alibaba': 0, 'baidu': 0, 'iciba': 0, 'myMemory': 0,
-                                'iflytek': 0, 'google': 0, 'volcEngine': 0, 'lingvanex': 0, 'bing': 0,
-                                'yandex': 0, 'itranslate': 0, 'sogou': 0, 'modernMt': 0, 'sysTran': 0,
-                                'apertium': 0, 'reverso': 0, 'cloudYi': 0, 'deepl': 0, 'qqTranSmart': 0,
-                                'translateCom': 0, 'tilde': 0, 'qqFanyi': 0, 'argos': 0, 'translateMe': 0,
-                                'youdao': 0, 'papago': 0, 'iflyrec': 0, 'yeekit': 0, 'languageWire': 0,
-                                'caiyun': 0, 'elia': 0, 'judic': 0, 'mglip': 0, 'utibet': 0}
+            self.translators = {'niutrans': 'China', 'alibaba': 'China', 'baidu': 'China',
+                                'iciba': 'China', 'myMemory': 'Italy', 'iflytek': 'China',
+                                'google': 'America', 'volcEngine': 'China', 'lingvanex': 'Cyprus',
+                                'bing': 'America', 'yandex': 'Russia', 'itranslate': 'Austria',
+                                'sogou': 'China', 'modernMt': 'Italy', 'sysTran': 'France',
+                                'apertium': 'Apertium', 'reverso': 'France', 'cloudYi': 'China',
+                                'deepl': 'Germany', 'qqTranSmart': 'China', 'translateCom': 'America',
+                                'tilde': 'Latvia', 'qqFanyi': 'China', 'argos': 'America',
+                                'translateMe': 'Lithuania', 'youdao': 'China', 'papago': 'South Korea',
+                                'mirai': 'Japan', 'iflyrec': 'China', 'yeekit': 'China',
+                                'languageWire': 'Denmark', 'caiyun': 'China', 'elia': 'Spain',
+                                'judic': 'Belgium', 'mglip': 'China', 'utibet': 'China'}
 
     def read_languages (self):
         if (self.path_languages != None):
@@ -94,8 +97,9 @@ class TranslationSupport:
         self.languages = new_languages
 
         for key in self.translators.keys():
-            count = self.translators[key]
-            self.translators[key] = {"available": count, "from": {}, "nfrom": {}}
+            region = self.translators[key]
+            self.translators[key] = {"region": region, "available": 0,
+                                     "from": {}, "nfrom": {}}
             for lang in self.languages.keys():
                 self.translators[key]["from"][lang] = []
                 self.translators[key]["nfrom"][lang] = []
@@ -253,24 +257,29 @@ class TranslationSupport:
         else: return False
 
     def translation (self, origin, destiny, translator):
-        remove = None
+        remove, region, item, tnl = None, [self.translators[translator]["region"],
+                                    "America", ""], 0, None
         try:
-            delay = time.time()
-            tnl = uliontset.translate_text(query_text = self.pattern_word,
+            while ((item < len(region))and(tnl == None)):
+                delay = time.time()
+                tnl = uliontset.translate_text(query_text = self.pattern_word,
                                 translator = translator, from_language = origin,
-                                to_language = destiny)
-            delay = time.time() - delay
+                                to_language = destiny, if_print_warning = False,
+                                region = region[item])
+                delay = time.time() - delay
+                item += 1
 
-            if (isinstance(tnl, (str, dict))):
+            if (tnl != None):
                 self.translators[translator]["from"][origin].append(destiny)
                 self.languages[origin]["from"][translator] = delay
                 self.languages[destiny]["to"][translator] = delay
                 self.available[origin]["from"].append(destiny)
                 self.available[destiny]["to"].append(origin)
                 self.translators[translator]["available"] += 1
+            else: remove = translator
         except Exception as e:
             if (self.search_new_language(str(e), translator) == False):
-                remove = destiny
+                remove = translator
                 self.exceptions.append("[translation] Error: "+str(e)+
                     "; From: "+origin+"; To: "+destiny+"; Translator: "+translator)
         return remove

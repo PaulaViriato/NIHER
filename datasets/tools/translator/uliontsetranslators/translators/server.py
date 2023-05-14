@@ -55,11 +55,9 @@ import execjs
 import requests
 import lxml.etree
 import pathos.multiprocessing
-# import cryptography.hazmat.primitives.asymmetric.rsa as cry_rsa
 import cryptography.hazmat.primitives.hashes as cry_hashes
 import cryptography.hazmat.primitives.asymmetric.padding as cry_padding
 import cryptography.hazmat.primitives.serialization as cry_serialization
-
 
 __all__ = [
     'translate_text', 'translate_html', 'translators_pool',
@@ -72,7 +70,6 @@ __all__ = [
     '_myMemory', '_niutrans', '_papago', '_qqFanyi', '_qqTranSmart', '_reverso', '_sogou', '_sysTran', '_tilde', '_translateCom',
     '_translateMe', '_utibet', '_volcEngine', '_yandex', '_yeekit', '_youdao',
 ]  # 36
-
 
 class Tse:
     def __init__(self):
@@ -243,6 +240,8 @@ class Tse:
             return func(*args, **{**kwargs, **{'query_text': query_text}})
         return _wrapper
 
+class TranslatorError(Exception):
+    pass
 
 class GuestSeverRegion(Tse):
     def __init__(self):
@@ -256,14 +255,12 @@ class GuestSeverRegion(Tse):
     @property
     def get_server_region(self, if_judge_cn=True):
         if self.default_region:
-            sys.stderr.write(f'Using customized region {self.default_region} server backend.\n')
             return ('CN' if self.default_region == 'China' else 'EN') if if_judge_cn else self.default_region
 
         _headers_fn = lambda url: self.get_headers(url, if_api=False, if_referer_for_host=True)
         try:
             try:
                 data = json.loads(requests.get(self.get_addr_url, headers=_headers_fn(self.get_addr_url)).text[9:-2])
-                sys.stderr.write(f'Using region {data.get("stateName")} server backend.\n')
                 return data.get('country') if if_judge_cn else data.get("stateName")
             except requests.exceptions.Timeout:
                 ip_address = requests.get(self.get_ip_url, headers=_headers_fn(self.get_ip_url)).json()['origin']
@@ -271,18 +268,8 @@ class GuestSeverRegion(Tse):
                 data = requests.post(url=self.ip_tb_add_url, data=payload, headers=_headers_fn(self.ip_tb_add_url)).json().get('data')
                 return data.get('country_id')  # region_id
 
-        except requests.exceptions.ConnectionError:
-            raise TranslatorError('Unable to connect the Internet.\n')
-        except:
-            warnings.warn('Unable to find server backend.\n')
-            region = input('Please input your server region need to visit:\neg: [Qatar, China, ...]\n')
-            sys.stderr.write(f'Using region {region} server backend.\n')
-            return 'CN' if region == 'China' else 'EN'
-
-
-class TranslatorError(Exception):
-    pass
-
+        except requests.exceptions.ConnectionError: raise TranslatorError('Unable to connect the Internet.')
+        except: raise TranslatorError('Unable to find server backend.')
 
 class GoogleV1(Tse):
     def __init__(self, server_region='EN'):
@@ -447,7 +434,6 @@ class GoogleV1(Tse):
         self.query_count += 1
         return data if is_detail_result else ''.join([item[0] for item in data[0] if isinstance(item[0], str)])
 
-
 class GoogleV2(Tse):
     def __init__(self, server_region='EN'):
         super().__init__()
@@ -563,7 +549,6 @@ class GoogleV2(Tse):
         self.query_count += 1
         return {'data': data} if is_detail_result else ' '.join([x[0] for x in (data[1][0][0][5] or data[1][0]) if x[0]])
 
-
 class BaiduV1(Tse):
     def __init__(self):
         super().__init__()
@@ -652,7 +637,6 @@ class BaiduV1(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else '\n'.join([item['dst'] for item in data['data']])
-
 
 class BaiduV2(Tse):
     def __init__(self):
@@ -780,7 +764,6 @@ class BaiduV2(Tse):
         self.query_count += 1
         return data if is_detail_result else '\n'.join([x['dst'] for x in data['trans_result']['data']])
 
-
 class YoudaoV1(Tse):
     def __init__(self):
         super().__init__()
@@ -902,7 +885,6 @@ class YoudaoV1(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else '\n'.join([' '.join([it['tgt'] for it in item]) for item in data['translateResult']])
-
 
 class YoudaoV2(Tse):
     def __init__(self):
@@ -1046,7 +1028,6 @@ class YoudaoV2(Tse):
         self.query_count += 1
         return data if is_detail_result else str(data)  #TODO
 
-
 class YoudaoV3(Tse):
     def __init__(self):
         super().__init__()
@@ -1119,7 +1100,6 @@ class YoudaoV3(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['translation'][0]
-
 
 class QQFanyi(Tse):
     def __init__(self):
@@ -1208,7 +1188,6 @@ class QQFanyi(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else ''.join(item['targetText'] for item in data['translate']['records'])  # auto whitespace
-
 
 class QQTranSmart(Tse):
     def __init__(self):
@@ -1326,7 +1305,6 @@ class QQTranSmart(Tse):
         self.query_count += 1
         return data if is_detail_result else ''.join(data['auto_translation'])
 
-
 class AlibabaV1(Tse):
     def __init__(self):
         super().__init__()
@@ -1433,7 +1411,6 @@ class AlibabaV1(Tse):
         self.query_count += 1
         return data if is_detail_result else data['listTargetText'][0]
 
-
 class AlibabaV2(Tse):
     def __init__(self):
         super().__init__()
@@ -1536,7 +1513,6 @@ class AlibabaV2(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['data']['translateText']
-
 
 class Bing(Tse):
     def __init__(self, server_region='EN'):
@@ -1644,7 +1620,6 @@ class Bing(Tse):
         self.query_count += 1
         return data[0] if is_detail_result else data[0]['translations'][0]['text']
 
-
 class Sogou(Tse):
     def __init__(self):
         super().__init__()
@@ -1745,7 +1720,6 @@ class Sogou(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['data']['translate']['dit']
-
 
 class Caiyun(Tse):
     def __init__(self):
@@ -1883,7 +1857,6 @@ class Caiyun(Tse):
         self.query_count += 1
         return data if is_detail_result else '\n'.join([self.decrypt(item) for item in data['target']])
 
-
 class Deepl(Tse):
     def __init__(self):
         super().__init__()
@@ -2016,7 +1989,6 @@ class Deepl(Tse):
         self.request_id += 3
         self.query_count += 1
         return data if is_detail_result else '\n'.join(item['beams'][0]['sentences'][0]["text"] for item in data['result']['translations'])
-
 
 class Yandex(Tse):
     def __init__(self):
@@ -2151,7 +2123,6 @@ class Yandex(Tse):
         self.query_count += 1
         return data if is_detail_result else '\n'.join(data['text'])
 
-
 class Argos(Tse):
     def __init__(self):
         super().__init__()
@@ -2235,7 +2206,6 @@ class Argos(Tse):
         self.query_count += 1
         return data if is_detail_result else data['translatedText']
 
-
 class Iciba(Tse):
     def __init__(self):
         super().__init__()
@@ -2310,7 +2280,6 @@ class Iciba(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['content'] if data.get('isSensitive') == 1 else data['content']['out']
-
 
 class IflytekV1(Tse):
     def __init__(self):
@@ -2403,7 +2372,6 @@ class IflytekV1(Tse):
         self.query_count += 1
         return data if is_detail_result else eval(data['data'])['trans_result']['dst']
 
-
 class IflytekV2(Tse):
     def __init__(self):
         super().__init__()
@@ -2488,7 +2456,6 @@ class IflytekV2(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else eval(data['data'])['trans_result']['dst']
-
 
 class Iflyrec(Tse):
     def __init__(self):
@@ -2577,7 +2544,6 @@ class Iflyrec(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else '\n'.join([item['translateResult'] for item in data['biz']])
-
 
 class Reverso(Tse):
     def __init__(self):
@@ -2675,7 +2641,6 @@ class Reverso(Tse):
         self.query_count += 1
         return data if is_detail_result else ''.join(data['translation'])
 
-
 class Itranslate(Tse):
     def __init__(self):
         super().__init__()
@@ -2747,7 +2712,6 @@ class Itranslate(Tse):
 
             lang_html = self.session.get(self.language_url, headers=self.host_headers, timeout=timeout, proxies=proxies).text
 
-
             self.language_map = self.get_language_map(lang_html, from_language=from_language, to_language=to_language)
 
             self.api_key = self.get_apikey(lang_html)
@@ -2766,7 +2730,6 @@ class Itranslate(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['target']['text']
-
 
 class TranslateCom(Tse):
     def __init__(self):
@@ -2850,7 +2813,6 @@ class TranslateCom(Tse):
         self.query_count += 1
         return data if is_detail_result else data['translated_text']  # translation_source is microsoft, wtf!
 
-
 class Utibet(Tse):
     def __init__(self):
         super().__init__()
@@ -2923,7 +2885,6 @@ class Utibet(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return {'data_html': data_html} if is_detail_result else self.parse_result(data_html)
-
 
 class Papago(Tse):
     def __init__(self):
@@ -3035,7 +2996,6 @@ class Papago(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['translatedText']
-
 
 class Lingvanex(Tse):
     def __init__(self):
@@ -3150,7 +3110,6 @@ class Lingvanex(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['result']['text']
-
 
 class Niutrans(Tse):
     def __init__(self):
@@ -3270,7 +3229,6 @@ class Niutrans(Tse):
         self.query_count += 1
         return data if is_detail_result else '\n'.join([' '.join([it['data'] for it in item['sentences']]) for item in data['data']])
 
-
 class Mglip(Tse):
     def __init__(self):
         super().__init__()
@@ -3336,7 +3294,6 @@ class Mglip(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['datas'][0]['paragraph'] if data['datas'][0]['type'] == 'trans' else data['datas'][0]['data']
-
 
 class VolcEngine(Tse):
     def __init__(self):
@@ -3446,7 +3403,6 @@ class VolcEngine(Tse):
         self.query_count += 1
         return data if is_detail_result else data['translation']
 
-
 class ModernMt(Tse):
     def __init__(self):
         super().__init__()
@@ -3527,7 +3483,6 @@ class ModernMt(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['data']['translation']
-
 
 class MyMemory(Tse):
     def __init__(self):
@@ -3610,7 +3565,6 @@ class MyMemory(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['responseData']['translatedText']
-
 
 class Mirai(Tse):
     def __init__(self):
@@ -3723,7 +3677,6 @@ class Mirai(Tse):
         self.query_count += 1
         return data if is_detail_result else data['ouputs'][0]['output'][0]['translation']
 
-
 class Apertium(Tse):
     def __init__(self):
         super().__init__()
@@ -3807,7 +3760,6 @@ class Apertium(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['responseData']['translatedText']
-
 
 class Tilde(Tse):
     def __init__(self):
@@ -3903,7 +3855,6 @@ class Tilde(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['translation']
-
 
 class CloudYi(Tse):
     def __init__(self):
@@ -4008,7 +3959,6 @@ class CloudYi(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['data']['translation']
-
 
 class SysTran(Tse):
     def __init__(self):
@@ -4144,7 +4094,6 @@ class SysTran(Tse):
         self.query_count += 1
         return data if is_detail_result else '\n'.join(item['output']['documents'][0]['trans_units'][0]['sentences'][0]['alt_transes'][0]['target']['text'] for item in data['outputs'])
 
-
 class TranslateMe(Tse):
     def __init__(self):
         super().__init__()
@@ -4231,7 +4180,6 @@ class TranslateMe(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return {'data': data_list} if is_detail_result else '\n'.join([item['to'] for item in data_list])
-
 
 class Elia(Tse):
     def __init__(self):
@@ -4345,7 +4293,6 @@ class Elia(Tse):
         self.query_count += 1
         return data if is_detail_result else data['translated_text'].replace('</div>', '\n').replace('<div>', '').replace('<span>', '').replace('</span>', '')
 
-
 class LanguageWire(Tse):
     def __init__(self):
         super().__init__()
@@ -4435,7 +4382,6 @@ class LanguageWire(Tse):
         self.query_count += 1
         return data if is_detail_result else data['translation']
 
-
 class Judic(Tse):
     def __init__(self):
         super().__init__()
@@ -4511,7 +4457,6 @@ class Judic(Tse):
         time.sleep(sleep_seconds)
         self.query_count += 1
         return data if is_detail_result else data['translation']
-
 
 class Yeekit(Tse):
     def __init__(self):
@@ -4591,96 +4536,114 @@ class Yeekit(Tse):
         self.query_count += 1
         return data if is_detail_result else '\n'.join(' '.join(p) for p in json.loads(data[0])['translation'][0]['translated'][0]['translation list'])
 
-
 class TranslatorsServer:
     def __init__(self):
         self.pre_acceleration_label = False
         self.cpu_cnt = os.cpu_count()
-        self.server_region = GuestSeverRegion().get_server_region
-        self._alibaba = AlibabaV2()
-        self.alibaba = self._alibaba.alibaba_api
-        self._apertium = Apertium()
-        self.apertium = self._apertium.apertium_api
-        self._argos = Argos()
-        self.argos = self._argos.argos_api
-        self._baidu = BaiduV1()  # V2
-        self.baidu = self._baidu.baidu_api
-        self._bing = Bing(server_region=self.server_region)
-        self.bing = self._bing.bing_api
-        self._caiyun = Caiyun()
-        self.caiyun = self._caiyun.caiyun_api
-        self._cloudYi = CloudYi()
-        self.cloudYi = self._cloudYi.cloudYi_api
-        self._deepl = Deepl()
-        self.deepl = self._deepl.deepl_api
-        self._elia = Elia()
-        self.elia = self._elia.elia_api
-        self._google = GoogleV2(server_region=self.server_region)
-        self.google = self._google.google_api
-        self._iciba = Iciba()
-        self.iciba = self._iciba.iciba_api
-        self._iflytek = IflytekV2()
-        self.iflytek = self._iflytek.iflytek_api
-        self._iflyrec = Iflyrec()
-        self.iflyrec = self._iflyrec.iflyrec_api
-        self._itranslate = Itranslate()
-        self.itranslate = self._itranslate.itranslate_api
-        self._judic = Judic()
-        self.judic = self._judic.judic_api
-        self._languageWire = LanguageWire()
-        self.languageWire = self._languageWire.languageWire_api
-        self._lingvanex = Lingvanex()
-        self.lingvanex = self._lingvanex.lingvanex_api
-        self._niutrans = Niutrans()
-        self.niutrans = self._niutrans.niutrans_api
-        self._mglip = Mglip()
-        self.mglip = self._mglip.mglip_api
-        self._mirai = Mirai()
-        self.mirai = self._mirai.mirai_api
-        self._modernMt = ModernMt()
-        self.modernMt = self._modernMt.modernMt_api
-        self._myMemory = MyMemory()
-        self.myMemory = self._myMemory.myMemory_api
-        self._papago = Papago()
-        self.papago = self._papago.papago_api
-        self._qqFanyi = QQFanyi()
-        self.qqFanyi = self._qqFanyi.qqFanyi_api
-        self._qqTranSmart = QQTranSmart()
-        self.qqTranSmart = self._qqTranSmart.qqTranSmart_api
-        self._reverso = Reverso()
-        self.reverso = self._reverso.reverso_api
-        self._sogou = Sogou()
-        self.sogou = self._sogou.sogou_api
-        self._sysTran = SysTran()
-        self.sysTran = self._sysTran.sysTran_api
-        self._tilde = Tilde()
-        self.tilde = self._tilde.tilde_api
-        self._translateCom = TranslateCom()
-        self.translateCom = self._translateCom.translateCom_api
-        self._translateMe = TranslateMe()
-        self.translateMe = self._translateMe.translateMe_api
-        self._utibet = Utibet()
-        self.utibet = self._utibet.utibet_api
-        self._volcEngine = VolcEngine()
-        self.volcEngine = self._volcEngine.volcEngine_api
-        self._yandex = Yandex()
-        self.yandex = self._yandex.yandex_api
-        self._yeekit = Yeekit()
-        self.yeekit = self._yeekit.yeekit_api
-        self._youdao = YoudaoV3()
-        self.youdao = self._youdao.youdao_api
+        self.server_region = ""
+        self.guest_region = GuestSeverRegion()
+
+        self._alibaba = [AlibabaV2(), AlibabaV1()]
+        self._apertium = [Apertium()]
+        self._argos = [Argos()]
+        self._baidu = [BaiduV1(), BaiduV2()]
+        self._bing = [Bing(server_region=self.server_region)]
+        self._caiyun = [Caiyun()]
+        self._cloudYi = [CloudYi()]
+        self._deepl = [Deepl()]
+        self._elia = [Elia()]
+        self._google = [GoogleV2(server_region=self.server_region), GoogleV1(server_region=self.server_region)]
+        self._iciba = [Iciba()]
+        self._iflytek = [IflytekV2(), IflytekV1()]
+        self._iflyrec = [Iflyrec()]
+        self._itranslate = [Itranslate()]
+        self._judic = [Judic()]
+        self._languageWire = [LanguageWire()]
+        self._lingvanex = [Lingvanex()]
+        self._niutrans = [Niutrans()]
+        self._mglip = [Mglip()]
+        self._mirai = [Mirai()]
+        self._modernMt = [ModernMt()]
+        self._myMemory = [MyMemory()]
+        self._papago = [Papago()]
+        self._qqFanyi = [QQFanyi()]
+        self._qqTranSmart = [QQTranSmart()]
+        self._reverso = [Reverso()]
+        self._sogou = [Sogou()]
+        self._sysTran = [SysTran()]
+        self._tilde = [Tilde()]
+        self._translateCom = [TranslateCom()]
+        self._translateMe = [TranslateMe()]
+        self._utibet = [Utibet()]
+        self._volcEngine = [VolcEngine()]
+        self._yandex = [Yandex()]
+        self._yeekit = [Yeekit()]
+        self._youdao = [YoudaoV3(), YoudaoV2(), YoudaoV1()]
+
+        self.alibaba = [self._alibaba[0].alibaba_api, self._alibaba[1].alibaba_api]
+        self.apertium = [self._apertium[0].apertium_api]
+        self.argos = [self._argos[0].argos_api]
+        self.baidu = [self._baidu[0].baidu_api, self._baidu[1].baidu_api]
+        self.bing = [self._bing[0].bing_api]
+        self.caiyun = [self._caiyun[0].caiyun_api]
+        self.cloudYi = [self._cloudYi[0].cloudYi_api]
+        self.deepl = [self._deepl[0].deepl_api]
+        self.elia = [self._elia[0].elia_api]
+        self.google = [self._google[0].google_api, self._google[1].google_api]
+        self.iciba = [self._iciba[0].iciba_api]
+        self.iflytek = [self._iflytek[0].iflytek_api, self._iflytek[1].iflytek_api]
+        self.iflyrec = [self._iflyrec[0].iflyrec_api]
+        self.itranslate = [self._itranslate[0].itranslate_api]
+        self.judic = [self._judic[0].judic_api]
+        self.languageWire = [self._languageWire[0].languageWire_api]
+        self.lingvanex = [self._lingvanex[0].lingvanex_api]
+        self.niutrans = [self._niutrans[0].niutrans_api]
+        self.mglip = [self._mglip[0].mglip_api]
+        self.mirai = [self._mirai[0].mirai_api]
+        self.modernMt = [self._modernMt[0].modernMt_api]
+        self.myMemory = [self._myMemory[0].myMemory_api]
+        self.papago = [self._papago[0].papago_api]
+        self.qqFanyi = [self._qqFanyi[0].qqFanyi_api]
+        self.qqTranSmart = [self._qqTranSmart[0].qqTranSmart_api]
+        self.reverso = [self._reverso[0].reverso_api]
+        self.sogou = [self._sogou[0].sogou_api]
+        self.sysTran = [self._sysTran[0].sysTran_api]
+        self.tilde = [self._tilde[0].tilde_api]
+        self.translateCom = [self._translateCom[0].translateCom_api]
+        self.translateMe = [self._translateMe[0].translateMe_api]
+        self.utibet = [self._utibet[0].utibet_api]
+        self.volcEngine = [self._volcEngine[0].volcEngine_api]
+        self.yandex = [self._yandex[0].yandex_api]
+        self.yeekit = [self._yeekit[0].yeekit_api]
+        self.youdao = [self._youdao[0].youdao_api, self._youdao[1].youdao_api, self._youdao[2].youdao_api]
+
         self.translators_dict = {
             'alibaba': self.alibaba, 'apertium': self.apertium, 'argos': self.argos, 'baidu': self.baidu, 'bing': self.bing,
             'caiyun': self.caiyun, 'cloudYi': self.cloudYi, 'deepl': self.deepl, 'elia': self.elia, 'google': self.google,
             'iciba': self.iciba, 'iflytek': self.iflytek, 'iflyrec': self.iflyrec, 'itranslate': self.itranslate, 'judic': self.judic,
-            'languageWire': self.languageWire, 'lingvanex': self.lingvanex, 'niutrans': self.niutrans, 'mglip': self.mglip, 'modernMt': self.modernMt,
-            'myMemory': self.myMemory, 'papago': self.papago, 'qqFanyi': self.qqFanyi, 'qqTranSmart': self.qqTranSmart, 'reverso': self.reverso,
-            'sogou': self.sogou, 'sysTran': self.sysTran, 'tilde': self.tilde, 'translateCom': self.translateCom, 'translateMe': self.translateMe,
-            'utibet': self.utibet, 'volcEngine': self.volcEngine, 'yandex': self.yandex, 'yeekit': self.yeekit, 'youdao': self.youdao,
-        }
+            'languageWire': self.languageWire, 'lingvanex': self.lingvanex, 'niutrans': self.niutrans, 'mglip': self.mglip,
+            'modernMt': self.modernMt, 'myMemory': self.myMemory, 'papago': self.papago, 'mirai': self.mirai, 'qqFanyi': self.qqFanyi,
+            'qqTranSmart': self.qqTranSmart, 'reverso': self.reverso, 'sogou': self.sogou, 'sysTran': self.sysTran, 'tilde': self.tilde,
+            'translateCom': self.translateCom, 'translateMe': self.translateMe, 'utibet': self.utibet, 'volcEngine': self.volcEngine,
+            'yandex': self.yandex, 'yeekit': self.yeekit, 'youdao': self.youdao}
         self.translators_pool = list(self.translators_dict.keys())
         self.not_en_langs = {'utibet': 'ti', 'mglip': 'mon'}
         self.not_zh_langs = {'languageWire': 'fr', 'tilde': 'fr', 'elia': 'fr', 'apertium': 'spa'}
+
+    def init_translator(self, translator: str = 'bing',
+                        region: str = 'America', item: int = 0):
+        try:
+            if (translator == 'bing'):
+                self._bing[item] = Bing(server_region=region)
+                self.bing[item] = [self._bing[item].bing_api]
+                self.translators_dict[translator] = self.bing
+            elif (translator == 'google'):
+                if (item == 0): self._google[item] = GoogleV2(server_region=region)
+                if (item == 1): self._google[item] = GoogleV1(server_region=region)
+                self.google[item] = [self._google[item].google_api]
+                self.translators_dict[translator] = self.google
+            return self.translators_dict[translator][item]
+        except Exception as e: raise TranslatorError(str(e))
 
     def translate_text(self,
                        query_text: str,
@@ -4688,6 +4651,7 @@ class TranslatorsServer:
                        from_language: str = 'auto',
                        to_language: str = 'en',
                        if_use_preacceleration: bool = False,
+                       region: str = 'America',
                        **kwargs
                        ) -> Union[str, dict]:
         """
@@ -4717,6 +4681,10 @@ class TranslatorsServer:
                 :param myMemory_mode: str, default "web", choose from ("web", "api").
         :return: str or dict
         """
+        if (region == ""):
+            self.guest_region.default_region = os.environ.get('translators_default_region', None)
+        else: self.guest_region.default_region = region
+        self.server_region = self.guest_region.get_server_region()
 
         if translator not in self.translators_pool:
             raise TranslatorError
@@ -4724,7 +4692,15 @@ class TranslatorsServer:
         if not self.pre_acceleration_label and if_use_preacceleration:
             _ = self.preaccelerate()
 
-        return self.translators_dict[translator](query_text=query_text, from_language=from_language, to_language=to_language, **kwargs)
+        result = None
+        for item in translators_dict[translator]:
+            try:
+                funct_translator = self.init_translator(translator, self.server_region, item)
+                result = funct_translator(query_text=query_text, from_language=from_language,
+                                          to_language=to_language, **kwargs)
+                if (isinstance(result, (str, dict))): return result
+            except Exception as e: raise TranslatorError(str(e))
+        return result
 
     def translate_html(self,
                        html_text: str,
@@ -4772,7 +4748,7 @@ class TranslatorsServer:
             _ = self.preaccelerate()
 
         def _translate_text(sentence):
-            return sentence, self.translators_dict[translator](query_text=sentence, from_language=from_language, to_language=to_language, **kwargs)
+            return sentence, self.translators_dict[translator][0](query_text=sentence, from_language=from_language, to_language=to_language, **kwargs)
 
         pattern = re.compile("(?:^|(?<=>))([\\s\\S]*?)(?:(?=<)|$)")  # TODO: <code></code> <div class="codetext notranslate">
         sentence_list = list(set(pattern.findall(html_text)))
@@ -4802,21 +4778,20 @@ class TranslatorsServer:
                 try:
                     from_language = self.not_zh_langs[_ts] if _ts in self.not_zh_langs else 'auto'
                     to_language = self.not_en_langs[_ts] if _ts in self.not_en_langs else 'en'
-                    _ = self.translators_dict[_ts](query_text=query_text,
-                                                   translator=_ts,
-                                                   from_language=from_language,
-                                                   to_language=to_language,
-                                                   if_print_warning=False,
-                                                   timeout=timeout,
-                                                   if_show_time_stat=if_show_time_stat
-                                                   )
+                    _ = self.translators_dict[_ts][0](query_text=query_text,
+                                                      translator=_ts,
+                                                      from_language=from_language,
+                                                      to_language=to_language,
+                                                      if_print_warning=False,
+                                                      timeout=timeout,
+                                                      if_show_time_stat=if_show_time_stat
+                                                      )
                     success_pool.append(_ts)
                 except:
                     fail_pool.append(_ts)
 
             self.pre_acceleration_label = True
         return {'success': success_pool, 'fail': fail_pool}  # after first request, empty list forever.
-
 
 tss = TranslatorsServer()
 
@@ -4898,4 +4873,3 @@ translate_html = tss.translate_html
 translators_pool = tss.translators_pool
 
 preaccelerate = tss.preaccelerate
-# sys.stderr.write(f'Support translators {translators_pool} only.\n')
