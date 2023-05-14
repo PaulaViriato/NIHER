@@ -299,7 +299,8 @@ class TranslationSupport:
                 (destiny in self.translators[translator]["nfrom"][origin])):
                 result[0] = True
         except Exception as e:
-            self.exceptions.append("[check_processed 0] "+str(e))
+            self.exceptions.append("[check_processed] Error: "+str(e)+"; Phase: 0; "+
+                        "From: "+origin+"; To: "+destiny+"; Translator: "+translator)
             result[0] = False
 
         try:
@@ -307,7 +308,8 @@ class TranslationSupport:
                 (origin in self.translators[translator]["nfrom"][destiny])):
                 result[1] = True
         except Exception as e:
-            self.exceptions.append("[check_processed 1] "+str(e))
+            self.exceptions.append("[check_processed] Error: "+str(e)+"; Phase: 1; "+
+                        "From: "+origin+"; To: "+destiny+"; Translator: "+translator)
             result[1] = False
 
         return result
