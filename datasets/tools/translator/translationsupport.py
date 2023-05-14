@@ -294,13 +294,21 @@ class TranslationSupport:
 
     def check_processed (self, origin, destiny, translator):
         result = [False, False]
-        if ((destiny in self.translators[translator]["from"][origin])or
-            (destiny in self.translators[translator]["nfrom"][origin])):
-            result[0] = True
+        try:
+            if ((destiny in self.translators[translator]["from"][origin])or
+                (destiny in self.translators[translator]["nfrom"][origin])):
+                result[0] = True
+        except Exception as e:
+            self.exceptions.append("[check_processed 0] "+str(e))
+            result[0] = False
 
-        if ((origin in self.translators[translator]["from"][destiny])or
-            (origin in self.translators[translator]["nfrom"][destiny])):
-            result[1] = True
+        try:
+            if ((origin in self.translators[translator]["from"][destiny])or
+                (origin in self.translators[translator]["nfrom"][destiny])):
+                result[1] = True
+        except Exception as e:
+            self.exceptions.append("[check_processed 1] "+str(e))
+            result[1] = False
 
         return result
 
