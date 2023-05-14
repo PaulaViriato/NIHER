@@ -140,7 +140,7 @@ class TranslationSupport:
 
             if ((len(data["available"][lang]["from"]) == 0)or
                 (len(data["available"][lang]["to"]) == 0)):
-                aux_lang.append(lang)
+                aux_avai.append(lang)
         for lang in aux_lang: _ = data["languages"].pop(lang)
         for lang in aux_avai: _ = data["available"].pop(lang)
 
