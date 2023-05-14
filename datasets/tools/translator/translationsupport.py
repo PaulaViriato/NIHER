@@ -16,8 +16,6 @@ class TranslationSupport:
         self.path_translators = path_translators
         self.path_languages   = path_languages
         self.path_write       = path_write
-        self.error_to         = "UNSUPPORTED TO_LANGUAGE"
-        self.error_from       = "UNSUPPORTED FROM_LANGUAGE"
         self.exceptions       = []
         self.init_values()
         try: ts.preaccelerate()
@@ -34,13 +32,13 @@ class TranslationSupport:
                 self.path_translators = None
                 self.read_translators()
         else:
-            self.translators = {'niutrans': 302, 'alibaba': 221, 'baidu': 201, 'iciba': 187,
-                'myMemory': 151, 'iflytek': 140, 'google': 134, 'volcEngine': 122, 'lingvanex': 112,
-                'bing': 110, 'yandex': 102, 'itranslate': 101, 'sogou': 61, 'modernMt': 56,
-                'sysTran': 52, 'apertium': 45, 'reverso': 42, 'cloudYi': 28, 'deepl': 27,
-                'qqTranSmart': 22, 'translateCom': 21, 'tilde': 21, 'qqFanyi': 17, 'argos': 17,
-                'translateMe': 16, 'youdao': 15, 'papago': 15, 'iflyrec': 12, 'yeekit': 10,
-                'languageWire': 8, 'caiyun': 7, 'elia': 6, 'judic': 4, 'mglip': 3, 'utibet': 2}
+            self.translators = {'niutrans': 0, 'alibaba': 0, 'baidu': 0, 'iciba': 0, 'myMemory': 0,
+                                'iflytek': 0, 'google': 0, 'volcEngine': 0, 'lingvanex': 0, 'bing': 0,
+                                'yandex': 0, 'itranslate': 0, 'sogou': 0, 'modernMt': 0, 'sysTran': 0,
+                                'apertium': 0, 'reverso': 0, 'cloudYi': 0, 'deepl': 0, 'qqTranSmart': 0,
+                                'translateCom': 0, 'tilde': 0, 'qqFanyi': 0, 'argos': 0, 'translateMe': 0,
+                                'youdao': 0, 'papago': 0, 'iflyrec': 0, 'yeekit': 0, 'languageWire': 0,
+                                'caiyun': 0, 'elia': 0, 'judic': 0, 'mglip': 0, 'utibet': 0}
 
     def read_languages (self):
         if (self.path_languages != None):
@@ -225,27 +223,26 @@ class TranslationSupport:
                 self.init_values()
 
     def search_new_language (self, message, translator):
-        mss_error_to = self.error_to in message.upper()
-        mss_error_from = self.error_from in message.upper()
-
-        if ((mss_error_to)or(mss_error_from)):
+        blocks = re.findall(r'\[([^]]+)\]', message)
+        if ((len(blocks) == 2)and((" from_" in message)or(" to_" in message)or
+            ((" from " in message)and(" to " in message)))):
             try:
-                blocks = re.findall(r'\[([^]]+)\]', message)
-                key = blocks[0].replace("'", "")
+                keys = blocks[0].replace("'", "").split(", ")
                 langs = blocks[1].replace("'", "").split(", ")
 
-                for lang in langs:
-                    mss_from, mss_to = key, lang
-                    if (mss_error_to): mss_from, mss_to = lang, key
-                    if (lang not in self.languages.keys()):
-                        self.languages[lang] = {"from": {}, "to": {}}
-                        self.available[lang] = {"from": [], "to": []}
+                for key in keys:
+                    for lang in langs:
+                        mss_from, mss_to = key, lang
+                        if (" to_" in message): mss_from, mss_to = lang, key
+                        if (lang not in self.languages.keys()):
+                            self.languages[lang] = {"from": {}, "to": {}}
+                            self.available[lang] = {"from": [], "to": []}
 
-                    if (mss_from not in self.translators[translator]["nfrom"].keys()):
-                        self.translators[translator]["nfrom"][mss_from] = []
-                    if (mss_from not in self.translators[translator]["from"].keys()):
-                        self.translators[translator]["from"][mss_from] = []
-                    self.translators[translator]["nfrom"][mss_from].append(mss_to)
+                        if (mss_from not in self.translators[translator]["nfrom"].keys()):
+                            self.translators[translator]["nfrom"][mss_from] = []
+                        if (mss_from not in self.translators[translator]["from"].keys()):
+                            self.translators[translator]["from"][mss_from] = []
+                        self.translators[translator]["nfrom"][mss_from].append(mss_to)
                 return True
             except Exception as e:
                 self.exceptions.append("[search_new_language] Error: "+str(e)+
@@ -255,6 +252,7 @@ class TranslationSupport:
         else: return False
 
     def translation (self, origin, destiny, translator):
+        remove = None
         try:
             delay = time.time()
             tnl = ts.translate_text(query_text = self.pattern_word, translator = translator,
@@ -269,17 +267,18 @@ class TranslationSupport:
                 self.available[destiny]["to"].append(origin)
         except Exception as e:
             if (self.search_new_language(str(e), translator) == False):
-                self.translators[translator]["nfrom"][origin].append(destiny)
+                remove = destiny
                 self.exceptions.append("[translation] Error: "+str(e)+
-                                       "; From: "+origin+
-                                       "; To: "+destiny+
-                                       "; Translator: "+translator)
+                    "; From: "+origin+"; To: "+destiny+"; Translator: "+translator)
+        return remove
 
     def check_translation (self, lang, translator, processed):
+        remove = [None, None]
         if (processed[0] == False):
-            self.translation(self.pattern_language, lang, translator)
+            remove[0] = self.translation(self.pattern_language, lang, translator)
         if (processed[1] == False):
-            self.translation(lang, self.pattern_language, translator)
+            remove[1] = self.translation(lang, self.pattern_language, translator)
+        if (None not in remove): self.translators.pop(translator)
 
     def check_threads (self, threads, size = -1):
         while (((size == -1)and(len(threads) == self.cores))or
