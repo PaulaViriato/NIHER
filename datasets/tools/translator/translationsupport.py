@@ -1,4 +1,4 @@
-from uliontsetranslators import translators as ts
+from uliontsetranslators import translators as uliontset
 from threading import Thread
 import argparse
 import tqdm
@@ -10,15 +10,16 @@ import os
 class TranslationSupport:
     def __init__ (self, pattern_language = 'en', pattern_word = '-------', path_languages = None,
                   path_translators = None, path_write = "translation_support.json", cores = 1):
-        self.pattern_language = pattern_language
-        self.pattern_word     = pattern_word
-        self.cores            = cores
-        self.path_translators = path_translators
-        self.path_languages   = path_languages
-        self.path_write       = path_write
-        self.exceptions       = []
+        self.pattern_language    = pattern_language
+        self.pattern_word        = pattern_word
+        self.cores               = cores
+        self.path_translators    = path_translators
+        self.path_languages      = path_languages
+        self.path_write          = path_write
+        self.unavailable_transla = []
+        self.exceptions          = []
         self.init_values()
-        try: ts.preaccelerate()
+        try: uliontset.preaccelerate()
         except Exception as e: self.exceptions.append("[__init__] "+str(e))
         self.range_progress = tqdm.tqdm(range(100), desc='Process Translation Support', ncols=100)
 
@@ -255,8 +256,9 @@ class TranslationSupport:
         remove = None
         try:
             delay = time.time()
-            tnl = ts.translate_text(query_text = self.pattern_word, translator = translator,
-                                    from_language = origin, to_language = destiny)
+            tnl = uliontset.translate_text(query_text = self.pattern_word,
+                                translator = translator, from_language = origin,
+                                to_language = destiny)
             delay = time.time() - delay
 
             if (isinstance(tnl, (str, dict))):
@@ -265,6 +267,7 @@ class TranslationSupport:
                 self.languages[destiny]["to"][translator] = delay
                 self.available[origin]["from"].append(destiny)
                 self.available[destiny]["to"].append(origin)
+                self.translators[translator]["available"] += 1
         except Exception as e:
             if (self.search_new_language(str(e), translator) == False):
                 remove = destiny
@@ -278,7 +281,8 @@ class TranslationSupport:
             remove[0] = self.translation(self.pattern_language, lang, translator)
         if (processed[1] == False):
             remove[1] = self.translation(lang, self.pattern_language, translator)
-        if (None not in remove): self.translators.pop(translator)
+        if ((None not in remove)and(self.translators[translator]["available"] == 0)):
+            self.unavailable_transla.append(translator)
 
     def check_threads (self, threads, size = -1):
         while (((size == -1)and(len(threads) == self.cores))or
@@ -345,6 +349,9 @@ class TranslationSupport:
                         threads[-1].start()
                     self.progress_bar(processed, lang, translator)
                 threads = self.check_threads(threads, 0)
+                for translator in self.unavailable_transla:
+                    self.translators.pop(translator)
+                self.unavailable_transla = []
                 self.write_data(False, path_data)
             processed += 1
 
