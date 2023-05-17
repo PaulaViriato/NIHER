@@ -55,6 +55,7 @@ import execjs
 import requests
 import lxml.etree
 import pathos.multiprocessing
+# import cryptography.hazmat.primitives.asymmetric.rsa as cry_rsa
 import cryptography.hazmat.primitives.hashes as cry_hashes
 import cryptography.hazmat.primitives.asymmetric.padding as cry_padding
 import cryptography.hazmat.primitives.serialization as cry_serialization
@@ -244,23 +245,27 @@ class TranslatorError(Exception):
     pass
 
 class GuestSeverRegion(Tse):
-    def __init__(self):
+    def __init__(self, default_region: str = "", exceptions = []):
         super().__init__()
         self.get_addr_url = 'https://geolocation.onetrust.com/cookieconsentpub/v1/geo/location'
         self.get_ip_url = 'https://httpbin.org/ip'
         self.ip_api_addr_url = 'http://ip-api.com/json'  # must http.
         self.ip_tb_add_url = 'https://ip.taobao.com/outGetIpInfo'
+        self.exceptions = exceptions
         self.default_region = os.environ.get('translators_default_region', None)
+        if (default_region != ""): self.default_region = default_region
 
     @property
     def get_server_region(self, if_judge_cn=True):
         if self.default_region:
+            self.exceptions.append("[get_server_region] WRITE: Using customized region "+self.default_region+" server backend.")
             return ('CN' if self.default_region == 'China' else 'EN') if if_judge_cn else self.default_region
 
         _headers_fn = lambda url: self.get_headers(url, if_api=False, if_referer_for_host=True)
         try:
             try:
                 data = json.loads(requests.get(self.get_addr_url, headers=_headers_fn(self.get_addr_url)).text[9:-2])
+                self.exceptions.append("[get_server_region] WRITE: Using region "+data.get("stateName")+" server backend.")
                 return data.get('country') if if_judge_cn else data.get("stateName")
             except requests.exceptions.Timeout:
                 ip_address = requests.get(self.get_ip_url, headers=_headers_fn(self.get_ip_url)).json()['origin']
@@ -268,8 +273,12 @@ class GuestSeverRegion(Tse):
                 data = requests.post(url=self.ip_tb_add_url, data=payload, headers=_headers_fn(self.ip_tb_add_url)).json().get('data')
                 return data.get('country_id')  # region_id
 
-        except requests.exceptions.ConnectionError: raise TranslatorError('Unable to connect the Internet.')
-        except: raise TranslatorError('Unable to find server backend.')
+        except requests.exceptions.ConnectionError:
+            raise TranslatorError('Unable to connect the Internet.\n')
+        except:
+            self.exceptions.append("[get_server_region] WARN: Unable to find server backend.")
+            self.exceptions.append("[get_server_region] WRITE: Using region EN server backend.")
+            return 'EN'
 
 class GoogleV1(Tse):
     def __init__(self, server_region='EN'):
@@ -4540,120 +4549,50 @@ class TranslatorsServer:
     def __init__(self):
         self.pre_acceleration_label = False
         self.cpu_cnt = os.cpu_count()
-        self.server_region = ""
-        self.guest_region = GuestSeverRegion()
-
-        self._alibaba = [AlibabaV2(), AlibabaV1()]
-        self._apertium = [Apertium()]
-        self._argos = [Argos()]
-        self._baidu = [BaiduV1(), BaiduV2()]
-        self._bing = [Bing(server_region=self.server_region)]
-        self._caiyun = [Caiyun()]
-        self._cloudYi = [CloudYi()]
-        self._deepl = [Deepl()]
-        self._elia = [Elia()]
-        self._google = [GoogleV2(server_region=self.server_region), GoogleV1(server_region=self.server_region)]
-        self._iciba = [Iciba()]
-        self._iflytek = [IflytekV2(), IflytekV1()]
-        self._iflyrec = [Iflyrec()]
-        self._itranslate = [Itranslate()]
-        self._judic = [Judic()]
-        self._languageWire = [LanguageWire()]
-        self._lingvanex = [Lingvanex()]
-        self._niutrans = [Niutrans()]
-        self._mglip = [Mglip()]
-        self._mirai = [Mirai()]
-        self._modernMt = [ModernMt()]
-        self._myMemory = [MyMemory()]
-        self._papago = [Papago()]
-        self._qqFanyi = [QQFanyi()]
-        self._qqTranSmart = [QQTranSmart()]
-        self._reverso = [Reverso()]
-        self._sogou = [Sogou()]
-        self._sysTran = [SysTran()]
-        self._tilde = [Tilde()]
-        self._translateCom = [TranslateCom()]
-        self._translateMe = [TranslateMe()]
-        self._utibet = [Utibet()]
-        self._volcEngine = [VolcEngine()]
-        self._yandex = [Yandex()]
-        self._yeekit = [Yeekit()]
-        self._youdao = [YoudaoV3(), YoudaoV2(), YoudaoV1()]
-
-        self.alibaba = [self._alibaba[0].alibaba_api, self._alibaba[1].alibaba_api]
-        self.apertium = [self._apertium[0].apertium_api]
-        self.argos = [self._argos[0].argos_api]
-        self.baidu = [self._baidu[0].baidu_api, self._baidu[1].baidu_api]
-        self.bing = [self._bing[0].bing_api]
-        self.caiyun = [self._caiyun[0].caiyun_api]
-        self.cloudYi = [self._cloudYi[0].cloudYi_api]
-        self.deepl = [self._deepl[0].deepl_api]
-        self.elia = [self._elia[0].elia_api]
-        self.google = [self._google[0].google_api, self._google[1].google_api]
-        self.iciba = [self._iciba[0].iciba_api]
-        self.iflytek = [self._iflytek[0].iflytek_api, self._iflytek[1].iflytek_api]
-        self.iflyrec = [self._iflyrec[0].iflyrec_api]
-        self.itranslate = [self._itranslate[0].itranslate_api]
-        self.judic = [self._judic[0].judic_api]
-        self.languageWire = [self._languageWire[0].languageWire_api]
-        self.lingvanex = [self._lingvanex[0].lingvanex_api]
-        self.niutrans = [self._niutrans[0].niutrans_api]
-        self.mglip = [self._mglip[0].mglip_api]
-        self.mirai = [self._mirai[0].mirai_api]
-        self.modernMt = [self._modernMt[0].modernMt_api]
-        self.myMemory = [self._myMemory[0].myMemory_api]
-        self.papago = [self._papago[0].papago_api]
-        self.qqFanyi = [self._qqFanyi[0].qqFanyi_api]
-        self.qqTranSmart = [self._qqTranSmart[0].qqTranSmart_api]
-        self.reverso = [self._reverso[0].reverso_api]
-        self.sogou = [self._sogou[0].sogou_api]
-        self.sysTran = [self._sysTran[0].sysTran_api]
-        self.tilde = [self._tilde[0].tilde_api]
-        self.translateCom = [self._translateCom[0].translateCom_api]
-        self.translateMe = [self._translateMe[0].translateMe_api]
-        self.utibet = [self._utibet[0].utibet_api]
-        self.volcEngine = [self._volcEngine[0].volcEngine_api]
-        self.yandex = [self._yandex[0].yandex_api]
-        self.yeekit = [self._yeekit[0].yeekit_api]
-        self.youdao = [self._youdao[0].youdao_api, self._youdao[1].youdao_api, self._youdao[2].youdao_api]
-
-        self.translators_dict = {
-            'alibaba': self.alibaba, 'apertium': self.apertium, 'argos': self.argos, 'baidu': self.baidu, 'bing': self.bing,
-            'caiyun': self.caiyun, 'cloudYi': self.cloudYi, 'deepl': self.deepl, 'elia': self.elia, 'google': self.google,
-            'iciba': self.iciba, 'iflytek': self.iflytek, 'iflyrec': self.iflyrec, 'itranslate': self.itranslate, 'judic': self.judic,
-            'languageWire': self.languageWire, 'lingvanex': self.lingvanex, 'niutrans': self.niutrans, 'mglip': self.mglip,
-            'modernMt': self.modernMt, 'myMemory': self.myMemory, 'papago': self.papago, 'mirai': self.mirai, 'qqFanyi': self.qqFanyi,
-            'qqTranSmart': self.qqTranSmart, 'reverso': self.reverso, 'sogou': self.sogou, 'sysTran': self.sysTran, 'tilde': self.tilde,
-            'translateCom': self.translateCom, 'translateMe': self.translateMe, 'utibet': self.utibet, 'volcEngine': self.volcEngine,
-            'yandex': self.yandex, 'yeekit': self.yeekit, 'youdao': self.youdao}
+        self.server_region = GuestSeverRegion().get_server_region
+        self.translators_dict = {'googlev1': GoogleV1(server_region=self.server_region).google_api,
+                                 'googlev2': GoogleV2(server_region=self.server_region).google_api,
+                                 'baiduv1': BaiduV1().baidu_api, 'baiduv2': BaiduV2().baidu_api,
+                                 'youdaov1': YoudaoV1().youdao_api, 'youdaov2': YoudaoV2().youdao_api,
+                                 'youdaov3': YoudaoV3().youdao_api, 'qqfanyi': QQFanyi().qqFanyi_api,
+                                 'qqtransmart': QQTranSmart().qqTranSmart_api,
+                                 'alibabav1': AlibabaV1().alibaba_api,
+                                 'alibabav2': AlibabaV2().alibaba_api,
+                                 'bing': Bing(server_region=self.server_region).bing_api,
+                                 'sogou': Sogou().sogou_api, 'caiyun': Caiyun().caiyun_api,
+                                 'deepl': Deepl().deepl_api, 'yandex': Yandex().yandex_api,
+                                 'argos': Argos().argos_api, 'iciba': Iciba().iciba_api,
+                                 'iflytekv1': IflytekV1().iflytek_api, 'iflytekv2': IflytekV2().iflytek_api,
+                                 'iflyrec': Iflyrec().iflyrec_api, 'reverso': Reverso().reverso_api,
+                                 'itranslate': Itranslate().itranslate_api,
+                                 'translatecom': TranslateCom().translateCom_api, 'utibet': Utibet().utibet_api,
+                                 'papago': Papago().papago_api, 'lingvanex': Lingvanex().lingvanex_api,
+                                 'niutrans': Niutrans().niutrans_api, 'mglip': Mglip().mglip_api,
+                                 'volcengine': VolcEngine().volcEngine_api, 'modernmt': ModernMt().modernMt_api,
+                                 'mymemory': MyMemory().myMemory_api, 'mirai': Mirai().mirai_api,
+                                 'apertium': Apertium().apertium_api, 'tilde': Tilde().tilde_api,
+                                 'cloudyi': CloudYi().cloudYi_api, 'systran': SysTran().sysTran_api,
+                                 'translateme': TranslateMe().translateMe_api, 'elia': Elia().elia_api,
+                                 'languagewire': LanguageWire().languageWire_api, 'judic': Judic().judic_api,
+                                 'yeekit': Yeekit().yeekit_api}
         self.translators_pool = list(self.translators_dict.keys())
         self.not_en_langs = {'utibet': 'ti', 'mglip': 'mon'}
         self.not_zh_langs = {'languageWire': 'fr', 'tilde': 'fr', 'elia': 'fr', 'apertium': 'spa'}
 
-    def init_translator(self, translator: str = 'bing',
-                        region: str = 'America', item: int = 0):
-        try:
-            if (translator == 'bing'):
-                self._bing[item] = Bing(server_region=region)
-                self.bing[item] = [self._bing[item].bing_api]
-                self.translators_dict[translator] = self.bing
-            elif (translator == 'google'):
-                if (item == 0): self._google[item] = GoogleV2(server_region=region)
-                if (item == 1): self._google[item] = GoogleV1(server_region=region)
-                self.google[item] = [self._google[item].google_api]
-                self.translators_dict[translator] = self.google
-            return self.translators_dict[translator][item]
-        except Exception as e: raise TranslatorError(str(e))
+    def set_server_region (self, translator: str = 'bing', region: str = "", exceptions: list = []):
+        if (region == ""): self.server_region = GuestSeverRegion(exceptions = exceptions).get_server_region
+        else: self.server_region = GuestSeverRegion(region, exceptions = exceptions).get_server_region
 
-    def translate_text(self,
-                       query_text: str,
-                       translator: str = 'bing',
-                       from_language: str = 'auto',
-                       to_language: str = 'en',
-                       if_use_preacceleration: bool = False,
-                       region: str = 'America',
-                       **kwargs
-                       ) -> Union[str, dict]:
+        if (translator == "googlev1"):
+            self.translators_dict["googlev1"] = GoogleV1(server_region=self.server_region).google_api
+        elif (translator == "googlev2"):
+            self.translators_dict["googlev2"] = GoogleV2(server_region=self.server_region).google_api
+        elif (translator == "bing"):
+            self.translators_dict["bing"] = Bing(server_region=self.server_region).bing_api
+
+    def translate_text (self, query_text: str, translator: str = 'bing', from_language: str = 'auto',
+                        to_language: str = 'en', if_use_preacceleration: bool = False, region: str = '',
+                        exceptions: list = [], **kwargs) -> Union[str, dict]:
         """
         :param query_text: str, must.
         :param translator: str, default 'bing'.
@@ -4681,36 +4620,16 @@ class TranslatorsServer:
                 :param myMemory_mode: str, default "web", choose from ("web", "api").
         :return: str or dict
         """
-        if (region == ""):
-            self.guest_region.default_region = os.environ.get('translators_default_region', None)
-        else: self.guest_region.default_region = region
-        self.server_region = self.guest_region.get_server_region()
-
-        if translator not in self.translators_pool:
-            raise TranslatorError
-
+        self.set_server_region(translator, region, exceptions)
+        if translator not in self.translators_pool: raise TranslatorError
         if not self.pre_acceleration_label and if_use_preacceleration:
             _ = self.preaccelerate()
+        return self.translators_dict[translator](query_text=query_text, from_language=from_language,
+                                                 to_language=to_language, **kwargs)
 
-        result = None
-        for item in translators_dict[translator]:
-            try:
-                funct_translator = self.init_translator(translator, self.server_region, item)
-                result = funct_translator(query_text=query_text, from_language=from_language,
-                                          to_language=to_language, **kwargs)
-                if (isinstance(result, (str, dict))): return result
-            except Exception as e: raise TranslatorError(str(e))
-        return result
-
-    def translate_html(self,
-                       html_text: str,
-                       translator: str = 'bing',
-                       from_language: str = 'auto',
-                       to_language: str = 'en',
-                       n_jobs: int = -1,
-                       if_use_preacceleration: bool = False,
-                       **kwargs
-                       ) -> str:
+    def translate_html (self, html_text: str, translator: str = 'bing', from_language: str = 'auto',
+                        to_language: str = 'en', n_jobs: int = -1, if_use_preacceleration: bool = False,
+                        region: str = '', exceptions: list = [], **kwargs) -> str:
         """
         Translate the displayed content of html without changing the html structure.
         :param html_text: str, must.
@@ -4740,17 +4659,19 @@ class TranslatorsServer:
                 :param myMemory_mode: str, default "web", choose from ("web", "api").
         :return: str
         """
-
-        if translator not in self.translators_pool or kwargs.get('is_detail_result', False) or n_jobs > self.cpu_cnt:
+        self.set_server_region(translator, region, exceptions)
+        if ((translator not in self.translators_pool)or
+            (kwargs.get('is_detail_result', False))or
+            (n_jobs > self.cpu_cnt)):
             raise TranslatorError
-
         if not self.pre_acceleration_label and if_use_preacceleration:
             _ = self.preaccelerate()
 
         def _translate_text(sentence):
-            return sentence, self.translators_dict[translator][0](query_text=sentence, from_language=from_language, to_language=to_language, **kwargs)
+            return sentence, self.translators_dict[translator](query_text=sentence,
+                                from_language=from_language, to_language=to_language, **kwargs)
 
-        pattern = re.compile("(?:^|(?<=>))([\\s\\S]*?)(?:(?=<)|$)")  # TODO: <code></code> <div class="codetext notranslate">
+        pattern = re.compile("(?:^|(?<=>))([\\s\\S]*?)(?:(?=<)|$)")
         sentence_list = list(set(pattern.findall(html_text)))
 
         n_jobs = self.cpu_cnt if n_jobs <= 0 else n_jobs
@@ -4761,7 +4682,8 @@ class TranslatorsServer:
         _get_result_func = lambda k: result_dict.get(k.group(1), '')
         return pattern.sub(repl=_get_result_func, string=html_text)
 
-    def preaccelerate(self, timeout: int = 5, if_show_time_stat: bool = False) -> dict:
+    def preaccelerate (self, timeout: int = 5, if_show_time_stat: bool = False,
+                       translators: dict = {}, exceptions: list = []) -> dict:
         """
         :param timeout: int, default 5.
         :param if_show_time_stat: bool, default False.
@@ -4775,101 +4697,26 @@ class TranslatorsServer:
         else:
             for i in tqdm.tqdm(range(len(self.translators_pool)), desc='Preacceleration Process', ncols=80):
                 _ts = self.translators_pool[i]
+                self.set_server_region(_ts, translators[_ts]["region"], exceptions)
                 try:
                     from_language = self.not_zh_langs[_ts] if _ts in self.not_zh_langs else 'auto'
                     to_language = self.not_en_langs[_ts] if _ts in self.not_en_langs else 'en'
-                    _ = self.translators_dict[_ts][0](query_text=query_text,
-                                                      translator=_ts,
-                                                      from_language=from_language,
-                                                      to_language=to_language,
-                                                      if_print_warning=False,
-                                                      timeout=timeout,
-                                                      if_show_time_stat=if_show_time_stat
-                                                      )
-                    success_pool.append(_ts)
+
+                    delay = time.time()
+                    _ = self.translators_dict[_ts](query_text=query_text, translator=_ts,
+                                                   from_language=from_language, to_language=to_language,
+                                                   if_print_warning=False, timeout=timeout,
+                                                   if_show_time_stat=if_show_time_stat)
+                    delay = time.time() - delay
+                    success_pool.append([_ts, delay])
                 except:
-                    fail_pool.append(_ts)
+                    fail_pool.append([_ts, float(timeout)])
 
             self.pre_acceleration_label = True
         return {'success': success_pool, 'fail': fail_pool}  # after first request, empty list forever.
 
 tss = TranslatorsServer()
-
-_alibaba = tss._alibaba
-alibaba = tss.alibaba
-_apertium = tss._apertium
-apertium = tss.apertium
-_argos = tss._argos
-argos = tss.argos
-_baidu = tss._baidu
-baidu = tss.baidu
-_bing = tss._bing
-bing = tss.bing
-_caiyun = tss._caiyun
-caiyun = tss.caiyun
-_cloudYi = tss._cloudYi
-cloudYi = tss.cloudYi
-_deepl = tss._deepl
-deepl = tss.deepl
-_elia = tss._elia
-elia = tss.elia
-_google = tss._google
-google = tss.google
-_iciba = tss._iciba
-iciba = tss.iciba
-_iflytek = tss._iflytek
-iflytek = tss.iflytek
-_iflyrec = tss._iflyrec
-iflyrec = tss.iflyrec
-_itranslate = tss._itranslate
-itranslate = tss.itranslate
-_judic = tss._judic
-judic = tss.judic
-_languageWire = tss._languageWire
-languageWire = tss.languageWire
-_lingvanex = tss._lingvanex
-lingvanex = tss.lingvanex
-_niutrans = tss._niutrans
-niutrans = tss.niutrans
-_mglip = tss._mglip
-mglip = tss.mglip
-_mirai = tss._mirai
-mirai = tss.mirai
-_modernMt = tss._modernMt
-modernMt = tss.modernMt
-_myMemory = tss._myMemory
-myMemory = tss.myMemory
-_papago = tss._papago
-papago = tss.papago
-_qqFanyi = tss._qqFanyi
-qqFanyi = tss.qqFanyi
-_qqTranSmart = tss._qqTranSmart
-qqTranSmart = tss.qqTranSmart
-_reverso = tss._reverso
-reverso = tss.reverso
-_sogou = tss._sogou
-sogou = tss.sogou
-_sysTran = tss._sysTran
-sysTran = tss.sysTran
-_tilde = tss._tilde
-tilde = tss.tilde
-_translateCom = tss._translateCom
-translateCom = tss.translateCom
-_translateMe = tss._translateMe
-translateMe = tss.translateMe
-_utibet = tss._utibet
-utibet = tss.utibet
-_volcEngine = tss._volcEngine
-volcEngine = tss.volcEngine
-_yandex = tss._yandex
-yandex = tss.yandex
-_yeekit = tss._yeekit
-yeekit = tss.yeekit
-_youdao = tss._youdao
-youdao = tss.youdao
-
 translate_text = tss.translate_text
 translate_html = tss.translate_html
 translators_pool = tss.translators_pool
-
 preaccelerate = tss.preaccelerate

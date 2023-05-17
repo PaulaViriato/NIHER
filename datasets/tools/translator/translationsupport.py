@@ -8,17 +8,28 @@ import re
 import os
 
 class TranslationSupport:
-    def __init__ (self, pattern_language = 'en', pattern_word = '-------', path_languages = None,
-                  path_translators = None, path_write = "translation_support.json", cores = 1):
+    def __init__ (self, pattern_language = 'en', pattern_word = '你好。\n欢迎你！',
+                  path_languages = None, timeout = 30.0, path_translators = None,
+                  path_write = "translation_support.json", cores = 1):
         self.pattern_language    = pattern_language
         self.pattern_word        = pattern_word
         self.cores               = cores
         self.path_translators    = path_translators
         self.path_languages      = path_languages
         self.path_write          = path_write
-        self.unavailable_transla = []
+        self.timeout             = timeout
         self.exceptions          = []
-        self.init_values()
+        self.init_values(timeout = timeout)
+
+        try:
+            result = uliontset.preaccelerate(timeout = int(timeout), translators = self.translators,
+                                             exceptions = self.exceptions)
+            for translator in result["success"]:
+                self.translators[translator[0]] = self.translators[translator[0]]
+                self.translators[translator[0]]["time"] = translator[1]
+            for translator in result["fail"]:
+                self.translators[translator[0]] = self.translators[translator[0]]
+        except Exception as e: self.exceptions.append("[__init__] "+str(e))
         self.range_progress = tqdm.tqdm(range(100), desc='Process Translation Support', ncols=100)
 
     def read_translators (self):
@@ -31,17 +42,16 @@ class TranslationSupport:
                 self.path_translators = None
                 self.read_translators()
         else:
-            self.translators = {'niutrans': 'China', 'alibaba': 'China', 'baidu': 'China',
-                                'iciba': 'China', 'myMemory': 'Italy', 'iflytek': 'China',
-                                'google': 'America', 'volcEngine': 'China', 'lingvanex': 'Cyprus',
-                                'bing': 'America', 'yandex': 'Russia', 'itranslate': 'Austria',
-                                'sogou': 'China', 'modernMt': 'Italy', 'sysTran': 'France',
-                                'apertium': 'Apertium', 'reverso': 'France', 'cloudYi': 'China',
-                                'deepl': 'Germany', 'qqTranSmart': 'China', 'translateCom': 'America',
-                                'tilde': 'Latvia', 'qqFanyi': 'China', 'argos': 'America',
-                                'translateMe': 'Lithuania', 'youdao': 'China', 'papago': 'South Korea',
-                                'mirai': 'Japan', 'iflyrec': 'China', 'yeekit': 'China',
-                                'languageWire': 'Denmark', 'caiyun': 'China', 'elia': 'Spain',
+            self.translators = {'niutrans': 'China', 'alibabav1': 'China', 'alibabav2': 'China', 'baiduv1': 'China',
+                                'baiduv2': 'China', 'iciba': 'China', 'mymemory': 'Italy', 'iflytekv1': 'China',
+                                'iflytekv2': 'China', 'googlev1': 'America', 'googlev2': 'America', 'volcengine': 'China',
+                                'lingvanex': 'Cyprus', 'bing': 'America', 'yandex': 'Russia', 'itranslate': 'Austria',
+                                'sogou': 'China', 'modernmt': 'Italy', 'systran': 'France', 'apertium': 'Apertium',
+                                'reverso': 'France', 'cloudyi': 'China', 'deepl': 'Germany', 'qqtransmart': 'China',
+                                'translatecom': 'America', 'tilde': 'Latvia', 'qqfanyi': 'China', 'argos': 'America',
+                                'translateme': 'Lithuania', 'youdaov1': 'China', 'youdaov2': 'China', 'youdaov3': 'China',
+                                'papago': 'South Korea', 'mirai': 'Japan', 'iflyrec': 'China', 'yeekit': 'China',
+                                'languagewire': 'Denmark', 'caiyun': 'China', 'elia': 'Spain',
                                 'judic': 'Belgium', 'mglip': 'China', 'utibet': 'China'}
 
     def read_languages (self):
@@ -85,7 +95,7 @@ class TranslationSupport:
                 'wls', 'wlx', 'wo', 'wrs', 'wsk', 'xal', 'xh', 'xsm', 'yap', 'yi', 'yo', 'yon', 'yua',
                 'yue', 'zh', 'zne', 'zu', 'zyb']
 
-    def init_values (self):
+    def init_values (self, timeout = 30.0):
         self.read_translators()
         self.read_languages()
         self.available = {}
@@ -98,8 +108,9 @@ class TranslationSupport:
 
         for key in self.translators.keys():
             region = self.translators[key]
-            self.translators[key] = {"region": region, "available": 0,
-                                     "from": {}, "nfrom": {}}
+            self.translators[key] = {"region": region, "nfrom": {},
+                                     "available": 0, "from": {},
+                                     "time": timeout}
             for lang in self.languages.keys():
                 self.translators[key]["from"][lang] = []
                 self.translators[key]["nfrom"][lang] = []
@@ -171,17 +182,17 @@ class TranslationSupport:
     def get_path_translators (self): return self.path_translators
     def get_path_languages (self): return self.path_languages
     def get_path_write (self): return self.path_write
+    def get_timeout (self): return self.timeout
     def get_exceptions (self): return self.exceptions
     def get_languages (self): return self.languages
     def get_available (self): return self.available
     def get_translators (self): return self.translators
-    def get_exceptions (self): return self.exceptions
 
     def set_pattern_language (self, pattern_language): self.pattern_language = pattern_language
     def set_pattern_word (self, pattern_word): self.pattern_word = pattern_word
     def set_cores (self, cores): self.cores = cores
-    def set_error_to (self, error_to): self.error_to = error_to
-    def set_error_from (self, error_from): self.error_from = error_from
+    def set_timeout (self, timeout): self.timeout = timeout
+    def set_exceptions (self, exceptions): self.exceptions = exceptions
     def set_translators (self, translators): self.translators = translators
     def set_languages (self, languages): self.languages = languages
     def set_exceptions (self, exceptions): self.exceptions = exceptions
@@ -257,17 +268,14 @@ class TranslationSupport:
         else: return False
 
     def translation (self, origin, destiny, translator):
-        remove, region, item, tnl = None, [self.translators[translator]["region"],
-                                    "America", ""], 0, None
         try:
-            while ((item < len(region))and(tnl == None)):
-                delay = time.time()
-                tnl = uliontset.translate_text(query_text = self.pattern_word,
-                                translator = translator, from_language = origin,
-                                to_language = destiny, if_print_warning = False,
-                                region = region[item])
-                delay = time.time() - delay
-                item += 1
+            delay = time.time()
+            tnl = uliontset.translate_text(query_text = self.pattern_word, translator = translator,
+                                           from_language = origin, to_language = destiny,
+                                           if_print_warning = False, timeout = float(self.timeout),
+                                           region = self.translators[translator]["region"],
+                                           exceptions = self.exceptions)
+            delay = time.time() - delay
 
             if (tnl != None):
                 self.translators[translator]["from"][origin].append(destiny)
@@ -276,22 +284,22 @@ class TranslationSupport:
                 self.available[origin]["from"].append(destiny)
                 self.available[destiny]["to"].append(origin)
                 self.translators[translator]["available"] += 1
-            else: remove = translator
+                self.translators[translator]["time"] = delay
+            else:
+                if (origin not in self.translators[translator]["nfrom"].keys()):
+                    self.translators[translator]["nfrom"][origin] = []
+                self.translators[translator]["nfrom"][origin].append(destiny)
         except Exception as e:
             if (self.search_new_language(str(e), translator) == False):
-                remove = translator
+                if (origin not in self.translators[translator]["nfrom"].keys()):
+                    self.translators[translator]["nfrom"][origin] = []
+                self.translators[translator]["nfrom"][origin].append(destiny)
                 self.exceptions.append("[translation] Error: "+str(e)+
                     "; From: "+origin+"; To: "+destiny+"; Translator: "+translator)
-        return remove
 
     def check_translation (self, lang, translator, processed):
-        remove = [None, None]
-        if (processed[0] == False):
-            remove[0] = self.translation(self.pattern_language, lang, translator)
-        if (processed[1] == False):
-            remove[1] = self.translation(lang, self.pattern_language, translator)
-        if ((None not in remove)and(self.translators[translator]["available"] == 0)):
-            self.unavailable_transla.append(translator)
+        if (processed[0] == False): self.translation(self.pattern_language, lang, translator)
+        if (processed[1] == False): self.translation(lang, self.pattern_language, translator)
 
     def check_threads (self, threads, size = -1):
         while (((size == -1)and(len(threads) == self.cores))or
@@ -358,15 +366,11 @@ class TranslationSupport:
                         threads[-1].start()
                     self.progress_bar(processed, lang, translator)
                 threads = self.check_threads(threads, 0)
-                for translator in self.unavailable_transla:
-                    self.translators.pop(translator)
-                self.unavailable_transla = []
                 self.write_data(False, path_data)
             processed += 1
 
         threads = self.check_threads(threads, 0)
         self.write_data(False, path_data)
-        print("Process Result in: "+path_data)
 
     def execute (self, path = None, times = 3):
         path_data = path
