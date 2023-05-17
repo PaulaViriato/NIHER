@@ -4549,7 +4549,7 @@ class TranslatorsServer:
     def __init__(self):
         self.pre_acceleration_label = False
         self.cpu_cnt = os.cpu_count()
-        self.server_region = GuestSeverRegion().get_server_region
+        self.server_region = ""
         self.translators_dict = {'googlev1': GoogleV1(server_region=self.server_region).google_api,
                                  'googlev2': GoogleV2(server_region=self.server_region).google_api,
                                  'baiduv1': BaiduV1().baidu_api, 'baiduv2': BaiduV2().baidu_api,
