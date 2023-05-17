@@ -270,11 +270,10 @@ class TranslationSupport:
     def translation (self, origin, destiny, translator):
         try:
             delay = time.time()
-            tnl = uliontset.translate_text(query_text = self.pattern_word, translator = translator,
-                                           from_language = origin, to_language = destiny,
-                                           if_print_warning = False, timeout = float(self.timeout),
-                                           region = self.translators[translator]["region"],
-                                           exceptions = self.exceptions)
+            tnl = uliontset.TranslatorsServer().translate_text(query_text = self.pattern_word,
+                                translator = translator, from_language = origin, to_language = destiny,
+                                if_print_warning = False, timeout = float(self.timeout),
+                                region = self.translators[translator]["region"], exceptions = self.exceptions)
             delay = time.time() - delay
 
             if (tnl != None):
