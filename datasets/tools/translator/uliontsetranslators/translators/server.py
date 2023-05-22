@@ -72,6 +72,55 @@ __all__ = [
     '_translateMe', '_utibet', '_volcEngine', '_yandex', '_yeekit', '_youdao',
 ]  # 36
 
+def unsupported_languages (message: str = '', translator: str = '',
+                           not_language: dict = {}, exceptions: list = []):
+    blocks = re.findall(r'\[([^]]+)\]', message)
+    if ((len(blocks) == 2)and((" from_" in message)or(" to_" in message)or
+        ((" from " in message)and(" to " in message)))):
+        try:
+            keys = blocks[0].replace("'", "").split(", ")
+            langs = blocks[1].replace("'", "").split(", ")
+
+            for key in keys:
+                for lang in langs:
+                    mss_from, mss_to = key, lang
+                    if ((" to_" in message)or(" to " in message)):
+                        mss_from, mss_to = lang, key
+                    if (mss_from not in not_language.keys()):
+                        not_language[mss_from] = [mss_to]
+                    elif (mss_to not in not_language[mss_from]):
+                        not_language[mss_from].append(mss_to)
+            return True
+        except Exception as e:
+            exceptions.append("[unsupported_languages] Error: "+str(e)+
+                              "; Message: "+message+"; Translator: "+translator)
+            return False
+    else: return False
+
+def translation_process (server, pattern_word: str = '----------', timeout: float = 30.0,
+                         translator: str = 'bing', origin: str = 'auto', destiny: str = 'en',
+                         region: str = '', exceptions: list = [], not_language: dict = {},
+                         **kwargs):
+    try:
+        delay = time.time()
+        tnl = server.translate_text(query_text = pattern_word, translator = translator,
+                     from_language = origin, to_language = destiny, if_print_warning = False,
+                     timeout = timeout, region = region, exceptions = exceptions, **kwargs)
+        delay = time.time() - delay
+
+        if (tnl != None): return [origin, destiny, delay, True]
+        else:
+            if (origin not in not_language.keys()): not_language[origin] = [destiny]
+            elif (destiny not in not_language[origin]): not_language[origin].append(destiny)
+            return [origin, destiny, timeout, False]
+    except Exception as e:
+        if (unsupported_languages(str(e), translator, not_language, exceptions) == False):
+            if (origin not in not_language.keys()): not_language[origin] = [destiny]
+            elif (destiny not in not_language[origin]): not_language[origin].append(destiny)
+            exceptions.append("[translation_process] Error: "+str(e)+"; From: "+origin+
+                              "; To: "+destiny+"; Translator: "+translator)
+        return [origin, destiny, timeout, False]
+
 class Tse:
     def __init__(self):
         self.author = 'Ulion.Tse'
@@ -4579,16 +4628,24 @@ class TranslatorsServer:
         self.not_en_langs = {'utibet': 'ti', 'mglip': 'mon'}
         self.not_zh_langs = {'languageWire': 'fr', 'tilde': 'fr', 'elia': 'fr', 'apertium': 'spa'}
 
-    def set_server_region (self, translator: str = 'bing', region: str = "", exceptions: list = []):
-        if (region == ""): self.server_region = GuestSeverRegion(exceptions = exceptions).get_server_region
-        else: self.server_region = GuestSeverRegion(region, exceptions = exceptions).get_server_region
+    def set_server_region (self, translator: str = 'bing', region: str = '',
+                           exceptions: list = [], attempts: int = 3):
+        attempt = 0
+        if (region == self.server_region): return
+        while (attempt < attempts):
+            try:
+                if (region == ''): self.server_region = GuestSeverRegion(exceptions = exceptions).get_server_region
+                else: self.server_region = GuestSeverRegion(region, exceptions = exceptions).get_server_region
 
-        if (translator == "googlev1"):
-            self.translators_dict["googlev1"] = GoogleV1(server_region=self.server_region).google_api
-        elif (translator == "googlev2"):
-            self.translators_dict["googlev2"] = GoogleV2(server_region=self.server_region).google_api
-        elif (translator == "bing"):
-            self.translators_dict["bing"] = Bing(server_region=self.server_region).bing_api
+                if (translator == 'googlev1'):
+                    self.translators_dict['googlev1'] = GoogleV1(server_region=self.server_region).google_api
+                elif (translator == 'googlev2'):
+                    self.translators_dict['googlev2'] = GoogleV2(server_region=self.server_region).google_api
+                elif (translator == 'bing'):
+                    self.translators_dict['bing'] = Bing(server_region=self.server_region).bing_api
+                attempt = attempts
+            except Exception as e: exceptions.append("[set_server_region] "+str(e))
+            attempt += 1
 
     def translate_text (self, query_text: str, translator: str = 'bing', from_language: str = 'auto',
                         to_language: str = 'en', if_use_preacceleration: bool = False, region: str = '',
@@ -4620,10 +4677,8 @@ class TranslatorsServer:
                 :param myMemory_mode: str, default "web", choose from ("web", "api").
         :return: str or dict
         """
-        self.set_server_region(translator, region, exceptions)
         if translator not in self.translators_pool: raise TranslatorError
-        if not self.pre_acceleration_label and if_use_preacceleration:
-            _ = self.preaccelerate()
+        if not self.pre_acceleration_label and if_use_preacceleration: _ = self.preaccelerate()
         return self.translators_dict[translator](query_text=query_text, from_language=from_language,
                                                  to_language=to_language, **kwargs)
 
@@ -4660,12 +4715,10 @@ class TranslatorsServer:
         :return: str
         """
         self.set_server_region(translator, region, exceptions)
-        if ((translator not in self.translators_pool)or
-            (kwargs.get('is_detail_result', False))or
-            (n_jobs > self.cpu_cnt)):
+        if ((translator not in self.translators_pool)or(n_jobs > self.cpu_cnt)or
+            (kwargs.get('is_detail_result', False))):
             raise TranslatorError
-        if not self.pre_acceleration_label and if_use_preacceleration:
-            _ = self.preaccelerate()
+        if not self.pre_acceleration_label and if_use_preacceleration: _ = self.preaccelerate()
 
         def _translate_text(sentence):
             return sentence, self.translators_dict[translator](query_text=sentence,
@@ -4683,37 +4736,72 @@ class TranslatorsServer:
         return pattern.sub(repl=_get_result_func, string=html_text)
 
     def preaccelerate (self, timeout: int = 5, if_show_time_stat: bool = False,
-                       translators: dict = {}, exceptions: list = []) -> dict:
+                       translators: dict = {}, exceptions: list = [],
+                       languages: list = [], attempts: int = 5) -> dict:
         """
         :param timeout: int, default 5.
         :param if_show_time_stat: bool, default False.
         :return: dict
         """
-        query_text = '你好。\n欢迎你！'
-        success_pool, fail_pool = [], []
+        query_text = '----------'
+        success_pool, fail_pool, all_pool = [], [], []
 
-        if self.pre_acceleration_label:
-            raise TranslatorError('Preacceleration can only be performed once.')
+        if self.pre_acceleration_label: exceptions.append('[preaccelerate] Preacceleration can only be performed once.')
         else:
-            for i in tqdm.tqdm(range(len(self.translators_pool)), desc='Preacceleration Process', ncols=80):
-                _ts = self.translators_pool[i]
+            for i in tqdm.tqdm(range(len(self.translators_pool)), desc='Preacceleration Process', ncols=100):
+                _ts, results, attempt, not_language, count = self.translators_pool[i], [], 0, {}, 0
                 self.set_server_region(_ts, translators[_ts]["region"], exceptions)
-                try:
-                    from_language = self.not_zh_langs[_ts] if _ts in self.not_zh_langs else 'auto'
-                    to_language = self.not_en_langs[_ts] if _ts in self.not_en_langs else 'en'
+                while ((count < 2)and(attempt < attempts)):
+                    from_language, to_language, count = '', '', 0
+                    if (len(languages) == 0):
+                        from_language, to_language = 'auto', 'en'
+                        if (_ts in self.not_zh_langs):
+                            from_language = self.not_zh_langs[_ts]
+                            if ('zh' not in not_language.keys()): not_language['zh'] = ['all']
+                        elif (_ts in self.not_en_langs):
+                            to_language = self.not_en_langs[_ts]
+                            if ('en' not in not_language.keys()): not_language['en'] = ['all']
+                        attempt = attempts
+                    else:
+                        try_sample = True
+                        while (try_sample):
+                            sample = random.sample(languages, k=2)
+                            if (_ts in self.not_zh_langs):
+                                if ('zh' not in not_language.keys()): not_language['zh'] = ['all']
+                                while ('zh' in sample): sample = random.sample(languages, k=2)
+                            elif (_ts in self.not_en_langs):
+                                if ('en' not in not_language.keys()): not_language['en'] = ['all']
+                                while ('en' in sample): sample = random.sample(languages, k=2)
+                            from_language, to_language = sample[0], sample[1]
 
-                    delay = time.time()
-                    _ = self.translators_dict[_ts](query_text=query_text, translator=_ts,
-                                                   from_language=from_language, to_language=to_language,
-                                                   if_print_warning=False, timeout=timeout,
-                                                   if_show_time_stat=if_show_time_stat)
-                    delay = time.time() - delay
-                    success_pool.append([_ts, delay])
-                except:
-                    fail_pool.append([_ts, float(timeout)])
+                            if (len(results) > 0):
+                                for result in results:
+                                    if ((from_language != result[0])and(to_language != result[1])):
+                                        try_sample = False
+                            else: try_sample = False
 
+                        if (from_language not in not_language.keys()): not_language[from_language] = [to_language]
+                        elif (to_language not in not_language[from_language]): not_language[from_language].append(to_language)
+
+                    result = translation_process(server = self, pattern_word = query_text, translator = _ts,
+                                                 origin = from_language, destiny = to_language, timeout = float(timeout),
+                                                 region = translators[_ts]["region"], exceptions = exceptions,
+                                                 not_language = not_language)
+                    if (result): count += 1
+                    results.append(result)
+
+                    result = translation_process(server = self, pattern_word = query_text, translator = _ts,
+                                                 origin = to_language, destiny = from_language, timeout = float(timeout),
+                                                 region = translators[_ts]["region"], exceptions = exceptions,
+                                                 not_language = not_language)
+                    if (result): count += 1
+                    results.append(result)
+
+                if (count == 2): success_pool.append([_ts, results, not_language])
+                else: fail_pool.append([_ts, results, not_language])
+                all_pool.append([_ts, results, not_language])
             self.pre_acceleration_label = True
-        return {'success': success_pool, 'fail': fail_pool}  # after first request, empty list forever.
+        return {'success': success_pool, 'fail': fail_pool, 'all': all_pool}  # after first request, empty list forever.
 
 tss = TranslatorsServer()
 translate_text = tss.translate_text

@@ -1,6 +1,7 @@
 from uliontsetranslators import translators as uliontset
 from threading import Thread
 import argparse
+import random
 import tqdm
 import time
 import json
@@ -8,29 +9,21 @@ import re
 import os
 
 class TranslationSupport:
-    def __init__ (self, pattern_language = 'en', pattern_word = '你好。\n欢迎你！',
-                  path_languages = None, timeout = 30.0, path_translators = None,
-                  path_write = "translation_support.json", cores = 1):
-        self.pattern_language    = pattern_language
+    def __init__ (self, pattern_word = '----------', path_languages = None,
+                  timeout = 30.0, path_translators = None,
+                  path_write = "translation_support.json"):
         self.pattern_word        = pattern_word
-        self.cores               = cores
         self.path_translators    = path_translators
         self.path_languages      = path_languages
         self.path_write          = path_write
         self.timeout             = timeout
+        self.pass_thread         = [True, True]
         self.exceptions          = []
-        self.init_values(timeout = timeout)
+        self.init_values()
 
-        try:
-            result = uliontset.preaccelerate(timeout = int(timeout), translators = self.translators,
-                                             exceptions = self.exceptions)
-            for translator in result["success"]:
-                self.translators[translator[0]] = self.translators[translator[0]]
-                self.translators[translator[0]]["time"] = translator[1]
-            for translator in result["fail"]:
-                self.translators[translator[0]] = self.translators[translator[0]]
-        except Exception as e: self.exceptions.append("[__init__] "+str(e))
-        self.range_progress = tqdm.tqdm(range(100), desc='Process Translation Support', ncols=100)
+        total = int(len(list(self.languages.keys()))**2)
+        total *= len(list(self.translators.keys()))
+        self.range_progress = tqdm.tqdm(range(total), desc='Process Translation Support', ncols=100)
 
     def read_translators (self):
         if (self.path_translators != None):
@@ -95,7 +88,7 @@ class TranslationSupport:
                 'wls', 'wlx', 'wo', 'wrs', 'wsk', 'xal', 'xh', 'xsm', 'yap', 'yi', 'yo', 'yon', 'yua',
                 'yue', 'zh', 'zne', 'zu', 'zyb']
 
-    def init_values (self, timeout = 30.0):
+    def init_values (self):
         self.read_translators()
         self.read_languages()
         self.available = {}
@@ -108,12 +101,21 @@ class TranslationSupport:
 
         for key in self.translators.keys():
             region = self.translators[key]
-            self.translators[key] = {"region": region, "nfrom": {},
-                                     "available": 0, "from": {},
-                                     "time": timeout}
+            self.translators[key] = {"region": region, "nfrom": {}, "available": 0, "from": {},
+                                     "time": self.timeout, "server": uliontset.server.TranslatorsServer()}
             for lang in self.languages.keys():
                 self.translators[key]["from"][lang] = []
                 self.translators[key]["nfrom"][lang] = []
+
+            if (key in self.translators[key]["server"].not_en_langs.keys()):
+                self.translators[key]["nfrom"]['en'] = list(self.languages.keys())
+                for lang in self.languages.keys():
+                    self.translators[key]["nfrom"][lang].append('en')
+
+            if (key in self.translators[key]["server"].not_zh_langs.keys()):
+                self.translators[key]["nfrom"]['zh'] = list(self.languages.keys())
+                for lang in self.languages.keys():
+                    self.translators[key]["nfrom"][lang].append('zh')
 
     def organize (self, data):
         removed_translators = []
@@ -156,13 +158,23 @@ class TranslationSupport:
         for lang in aux_avai: _ = data["available"].pop(lang)
 
     def write_data (self, final = False, path = None):
+        if (self.pass_thread[0] == False): return
+        self.pass_thread[0] = False
+
         path_data = path
         if (path == None): path_data = self.path_write
 
         data = {}
         data["languages"] = self.languages.copy()
+        data["translators"] = {}
+        for key in self.translators.keys():
+            data["translators"][key] = {}
+            data["translators"][key]["region"] = self.translators[key]["region"]
+            data["translators"][key]["nfrom"] = self.translators[key]["nfrom"].copy()
+            data["translators"][key]["available"] = self.translators[key]["available"]
+            data["translators"][key]["from"] = self.translators[key]["from"].copy()
+            data["translators"][key]["time"] = self.translators[key]["time"]
         data["available"] = self.available.copy()
-        data["translators"] = self.translators.copy()
         data["exceptions"] = self.exceptions
 
         if (final): data = self.organize(data)
@@ -176,9 +188,9 @@ class TranslationSupport:
             if (path == None): return
             if (path_data != self.path_write): self.write_data(final)
 
-    def get_pattern_language (self): return self.pattern_language
+        self.pass_thread[0] = True
+
     def get_pattern_word (self): return self.pattern_word
-    def get_cores (self): return self.cores
     def get_path_translators (self): return self.path_translators
     def get_path_languages (self): return self.path_languages
     def get_path_write (self): return self.path_write
@@ -188,9 +200,7 @@ class TranslationSupport:
     def get_available (self): return self.available
     def get_translators (self): return self.translators
 
-    def set_pattern_language (self, pattern_language): self.pattern_language = pattern_language
     def set_pattern_word (self, pattern_word): self.pattern_word = pattern_word
-    def set_cores (self, cores): self.cores = cores
     def set_timeout (self, timeout): self.timeout = timeout
     def set_exceptions (self, exceptions): self.exceptions = exceptions
     def set_translators (self, translators): self.translators = translators
@@ -222,6 +232,7 @@ class TranslationSupport:
                     self.translators[key]["from"][lng] = []
                 if (lng not in self.translators[key]["nfrom"].keys()):
                     self.translators[key]["nfrom"][lng] = []
+            self.translators[key]["server"] = uliontset.server.TranslatorsServer()
 
     def set_path_write (self, path_write, recover = False):
         self.path_write = path_write
@@ -238,79 +249,30 @@ class TranslationSupport:
                 self.exceptions.append("[set_path_write] "+str(e))
                 self.init_values()
 
-    def search_new_language (self, message, translator):
-        blocks = re.findall(r'\[([^]]+)\]', message)
-        if ((len(blocks) == 2)and((" from_" in message)or(" to_" in message)or
-            ((" from " in message)and(" to " in message)))):
-            try:
-                keys = blocks[0].replace("'", "").split(", ")
-                langs = blocks[1].replace("'", "").split(", ")
-
-                for key in keys:
-                    for lang in langs:
-                        mss_from, mss_to = key, lang
-                        if (" to_" in message): mss_from, mss_to = lang, key
-                        if (lang not in self.languages.keys()):
-                            self.languages[lang] = {"from": {}, "to": {}}
-                            self.available[lang] = {"from": [], "to": []}
-
-                        if (mss_from not in self.translators[translator]["nfrom"].keys()):
-                            self.translators[translator]["nfrom"][mss_from] = []
-                        if (mss_from not in self.translators[translator]["from"].keys()):
-                            self.translators[translator]["from"][mss_from] = []
-                        self.translators[translator]["nfrom"][mss_from].append(mss_to)
-                return True
-            except Exception as e:
-                self.exceptions.append("[search_new_language] Error: "+str(e)+
-                                       "; Message: "+message+
-                                       "; Translator: "+translator)
-                return False
-        else: return False
-
     def translation (self, origin, destiny, translator):
-        try:
-            delay = time.time()
-            tnl = uliontset.TranslatorsServer().translate_text(query_text = self.pattern_word,
-                                translator = translator, from_language = origin, to_language = destiny,
-                                if_print_warning = False, timeout = float(self.timeout),
-                                region = self.translators[translator]["region"], exceptions = self.exceptions)
-            delay = time.time() - delay
+        result = uliontset.server.translation_process(server = self.translators[translator]["server"],
+                                                      pattern_word = self.pattern_word, translator = translator,
+                                                      origin = origin, destiny = destiny, exceptions = self.exceptions,
+                                                      timeout = float(self.timeout),
+                                                      region = self.translators[translator]["region"],
+                                                      not_language = self.translators[translator]["nfrom"])
+        if (result[3]):
+            self.translators[translator]["from"][origin].append(destiny)
+            self.translators[translator]["available"] += 1
+            self.translators[translator]["time"] = result[2]
 
-            if (tnl != None):
-                self.translators[translator]["from"][origin].append(destiny)
-                self.languages[origin]["from"][translator] = delay
-                self.languages[destiny]["to"][translator] = delay
-                self.available[origin]["from"].append(destiny)
-                self.available[destiny]["to"].append(origin)
-                self.translators[translator]["available"] += 1
-                self.translators[translator]["time"] = delay
-            else:
-                if (origin not in self.translators[translator]["nfrom"].keys()):
-                    self.translators[translator]["nfrom"][origin] = []
-                self.translators[translator]["nfrom"][origin].append(destiny)
-        except Exception as e:
-            if (self.search_new_language(str(e), translator) == False):
-                if (origin not in self.translators[translator]["nfrom"].keys()):
-                    self.translators[translator]["nfrom"][origin] = []
-                self.translators[translator]["nfrom"][origin].append(destiny)
-                self.exceptions.append("[translation] Error: "+str(e)+
-                    "; From: "+origin+"; To: "+destiny+"; Translator: "+translator)
+            while (self.pass_thread[1] == False):
+                time.sleep(0.0001*float(random.randint(0, 1000)))
+            self.pass_thread[1] = False
+            self.languages[origin]["from"][translator] = result[2]
+            self.languages[destiny]["to"][translator] = result[2]
+            self.available[origin]["from"].append(destiny)
+            self.available[destiny]["to"].append(origin)
+            self.pass_thread[1] = True
 
-    def check_translation (self, lang, translator, processed):
-        if (processed[0] == False): self.translation(self.pattern_language, lang, translator)
-        if (processed[1] == False): self.translation(lang, self.pattern_language, translator)
-
-    def check_threads (self, threads, size = -1):
-        while (((size == -1)and(len(threads) == self.cores))or
-               ((size >= 0)and(len(threads) > size))):
-            remove_threads = []
-            for i in range(len(threads)):
-                if (threads[i].is_alive() == False):
-                    threads[i].join()
-                    remove_threads.append(i)
-            remove_threads.sort(reverse=True)
-            for rt in remove_threads: del(threads[rt])
-        return threads
+    def check_translation (self, pattern_language, lang, translator, processed):
+        if (processed[0] == False): self.translation(pattern_language, lang, translator)
+        if (processed[1] == False): self.translation(lang, pattern_language, translator)
 
     def check_processed (self, origin, destiny, translator):
         result = [False, False]
@@ -319,8 +281,9 @@ class TranslationSupport:
                 (destiny in self.translators[translator]["nfrom"][origin])):
                 result[0] = True
         except Exception as e:
-            self.exceptions.append("[check_processed] Error: "+str(e)+"; Phase: 0; "+
-                        "From: "+origin+"; To: "+destiny+"; Translator: "+translator)
+            self.exceptions.append("[check_processed] Error: "+str(e)+
+                                   "; Phase: 0; From: "+origin+
+                                   "; To: "+destiny+"; Translator: "+translator)
             result[0] = False
 
         try:
@@ -328,47 +291,47 @@ class TranslationSupport:
                 (origin in self.translators[translator]["nfrom"][destiny])):
                 result[1] = True
         except Exception as e:
-            self.exceptions.append("[check_processed] Error: "+str(e)+"; Phase: 1; "+
-                        "From: "+origin+"; To: "+destiny+"; Translator: "+translator)
+            self.exceptions.append("[check_processed] Error: "+str(e)+
+                                    "; Phase: 1; From: "+origin+
+                                    "; To: "+destiny+"; Translator: "+translator)
             result[1] = False
 
         return result
 
-    def progress_bar (self, processed, language, translator):
-        progress = 0.0
-        langs = len(list(self.languages.keys()))
-        trnlt = len(list(self.translators.keys()))
-        mult = langs*trnlt
-        total = langs*langs*trnlt
-        progress += float(mult*processed)
-        progress += float(list(self.languages.keys()).index(language)*trnlt+
-                          list(self.translators.keys()).index(translator))
-        if (progress != 0.0): progress = float(progress//total)
-        self.range_progress.update(int(progress*100.0))
+    def process_server (self, translator, path):
+        self.translators[translator]["server"].set_server_region(translator = translator,
+                        region = self.translators[translator]["region"],
+                        exceptions = self.exceptions)
+        origin_languages = list(self.languages.keys())
+        destiny_languages = list(self.languages.keys())
+        random.shuffle(origin_languages)
+        random.shuffle(destiny_languages)
+
+        for origin in origin_languages:
+            for destiny in destiny_languages:
+                if (destiny != origin):
+                    cprocessed = self.check_processed(origin, destiny, translator)
+                    if (False in cprocessed):
+                        self.check_translation(origin, destiny, translator, cprocessed)
+                self.range_progress.update(1)
+            self.write_data(False, path)
 
     def process (self, path = None):
-        path_data = path
+        path_data, threads = path, []
         if (path == None): path_data = self.path_write
-        processed, removel, threads = 0, [], []
 
-        while (len(list(self.languages.keys())) > processed):
-            self.pattern_language = list(self.languages.keys())[processed]
-            for lang in list(self.languages.keys()):
-                if (lang == self.pattern_language): continue
-                for translator in self.translators.keys():
-                    cprocessed = self.check_processed(self.pattern_language,
-                                                      lang, translator)
-                    if (False in cprocessed):
-                        threads = self.check_threads(threads)
-                        threads.append(Thread(target=self.check_translation,
-                                              args=(lang, translator, cprocessed,)))
-                        threads[-1].start()
-                    self.progress_bar(processed, lang, translator)
-                threads = self.check_threads(threads, 0)
-                self.write_data(False, path_data)
-            processed += 1
+        for translator in self.translators.keys():
+            threads.append(Thread(target=self.process_server, args=(translator, path_data,)))
+            threads[-1].start()
 
-        threads = self.check_threads(threads, 0)
+        while (len(threads) > 0):
+            remove_threads = []
+            for i in range(len(threads)):
+                if (threads[i].is_alive() == False):
+                    threads[i].join()
+                    remove_threads.append(i)
+            remove_threads.sort(reverse=True)
+            for rt in remove_threads: del(threads[rt])
         self.write_data(False, path_data)
 
     def execute (self, path = None, times = 3):
@@ -399,6 +362,6 @@ if __name__ == '__main__':
         path += "_.json"
         final += ".json"
 
-    translation_support = TranslationSupport(path_write = path, cores = 20)
+    translation_support = TranslationSupport(path_write = path)
     translation_support.execute(times = 1)
     translation_support.write_data(True, final)
