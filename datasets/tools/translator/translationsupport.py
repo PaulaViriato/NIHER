@@ -37,40 +37,45 @@ class TranslationSupport:
                 self.path_translators = None
                 self.read_translators()
         else:
-            if (self.version == 'v0'):
+            if (self.version == 'fa'): self.translators = {'niutrans': 'China', 'iflytekv1': 'China', 'googlev1': 'America'}
+            elif (self.version == 'fb'): self.translators = {'systran': 'France', 'tilde': 'Latvia', 'mirai': 'Japan'}
+            elif (self.version == 'fc'): self.translators = {'youdaov1': 'China', 'youdaov2': 'China', 'languagewire': 'Denmark'}
+            elif (self.version == 'va'): self.translators = {'alibabav1': 'China', 'alibabav2': 'China', 'baiduv1': 'China'}
+            elif (self.version == 'vb'): self.translators = {'baiduv2': 'China', 'iciba': 'China', 'mymemory': 'Italy'}
+            elif (self.version == 'vc'): self.translators = {'iflytekv2': 'China', 'googlev2': 'America', 'volcengine': 'China'}
+            elif (self.version == 'vd'): self.translators = {'lingvanex': 'Cyprus', 'bing': 'America', 'yandex': 'Russia'}
+            elif (self.version == 've'): self.translators = {'itranslate': 'Austria', 'sogou': 'China', 'modernmt': 'Italy'}
+            elif (self.version == 'vf'): self.translators = {'apertium': 'Apertium', 'reverso': 'France', 'cloudyi': 'China'}
+            elif (self.version == 'vg'): self.translators = {'deepl': 'Germany', 'qqtransmart': 'China', 'translatecom': 'America'}
+            elif (self.version == 'vh'): self.translators = {'qqfanyi': 'China', 'argos': 'America', 'translateme': 'Lithuania'}
+            elif (self.version == 'vi'): self.translators = {'youdaov3': 'China', 'papago': 'South Korea', 'iflyrec': 'China'}
+            elif (self.version == 'vj'): self.translators = {'yeekit': 'China', 'caiyun': 'China', 'elia': 'Spain'}
+            elif (self.version == 'vk'): self.translators = {'judic': 'Belgium', 'mglip': 'China', 'utibet': 'China'}
+            elif (self.version == 'failing'):
                 self.translators = {'niutrans': 'China', 'iflytekv1': 'China', 'googlev1': 'America',
                                     'systran': 'France', 'tilde': 'Latvia', 'mirai': 'Japan',
                                     'youdaov1': 'China', 'youdaov2': 'China', 'languagewire': 'Denmark'}
-            elif (self.version == 'v1'):
-                self.translators = {'alibabav1': 'China', 'alibabav2': 'China', 'baiduv1': 'China',
-                                    'baiduv2': 'China', 'iciba': 'China', 'mymemory': 'Italy',
-                                    'iflytekv2': 'China', 'googlev2': 'America', 'volcengine': 'China'}
-            elif (self.version == 'v2'):
-                self.translators = {'lingvanex': 'Cyprus', 'bing': 'America', 'yandex': 'Russia',
-                                    'itranslate': 'Austria', 'sogou': 'China', 'modernmt': 'Italy',
-                                    'apertium': 'Apertium', 'reverso': 'France', 'cloudyi': 'China'}
-            elif (self.version == 'v3'):
-                self.translators = {'deepl': 'Germany', 'qqtransmart': 'China', 'translatecom': 'America',
-                                    'qqfanyi': 'China', 'argos': 'America', 'translateme': 'Lithuania',
-                                    'youdaov3': 'China', 'papago': 'South Korea', 'iflyrec': 'China'}
-            elif (self.version == 'v4'):
-                self.translators = {'yeekit': 'China', 'caiyun': 'China', 'elia': 'Spain', 'judic': 'Belgium',
-                                    'mglip': 'China', 'utibet': 'China'}
+            elif (self.version == 'working'):
+                self.translators = {'alibabav1': 'China', 'alibabav2': 'China', 'baiduv1': 'China', 'baiduv2': 'China',
+                                    'iciba': 'China', 'mymemory': 'Italy', 'iflytekv2': 'China', 'googlev2': 'America',
+                                    'volcengine': 'China', 'lingvanex': 'Cyprus', 'bing': 'America', 'yandex': 'Russia',
+                                    'itranslate': 'Austria', 'sogou': 'China', 'modernmt': 'Italy', 'apertium': 'Apertium',
+                                    'reverso': 'France', 'cloudyi': 'China', 'deepl': 'Germany', 'qqtransmart': 'China',
+                                    'translatecom': 'America', 'qqfanyi': 'China', 'argos': 'America', 'translateme': 'Lithuania',
+                                    'youdaov3': 'China', 'papago': 'South Korea', 'iflyrec': 'China', 'yeekit': 'China',
+                                    'caiyun': 'China', 'elia': 'Spain', 'judic': 'Belgium', 'mglip': 'China', 'utibet': 'China'}
             else:
-                self.translators = {'niutrans': 'China', 'iflytekv1': 'China', 'googlev1': 'America',
-                                    'systran': 'France', 'tilde': 'Latvia', 'mirai': 'Japan',
-                                    'youdaov1': 'China', 'youdaov2': 'China', 'languagewire': 'Denmark',
-                                    'alibabav1': 'China', 'alibabav2': 'China', 'baiduv1': 'China',
-                                    'baiduv2': 'China', 'iciba': 'China', 'mymemory': 'Italy',
-                                    'iflytekv2': 'China', 'googlev2': 'America', 'volcengine': 'China',
-                                    'lingvanex': 'Cyprus', 'bing': 'America', 'yandex': 'Russia',
-                                    'itranslate': 'Austria', 'sogou': 'China', 'modernmt': 'Italy',
-                                    'apertium': 'Apertium', 'reverso': 'France', 'cloudyi': 'China',
-                                    'deepl': 'Germany', 'qqtransmart': 'China', 'translatecom': 'America',
-                                    'qqfanyi': 'China', 'argos': 'America', 'translateme': 'Lithuania',
-                                    'youdaov3': 'China', 'papago': 'South Korea', 'iflyrec': 'China',
-                                    'yeekit': 'China', 'caiyun': 'China', 'elia': 'Spain', 'judic': 'Belgium',
-                                    'mglip': 'China', 'utibet': 'China'}
+                self.translators = {'niutrans': 'China', 'iflytekv1': 'China', 'googlev1': 'America', 'systran': 'France',
+                                    'tilde': 'Latvia', 'mirai': 'Japan', 'youdaov1': 'China', 'youdaov2': 'China',
+                                    'languagewire': 'Denmark', 'alibabav1': 'China', 'alibabav2': 'China', 'baiduv1': 'China',
+                                    'baiduv2': 'China', 'iciba': 'China', 'mymemory': 'Italy', 'iflytekv2': 'China',
+                                    'googlev2': 'America', 'volcengine': 'China', 'lingvanex': 'Cyprus', 'bing': 'America',
+                                    'yandex': 'Russia', 'itranslate': 'Austria', 'sogou': 'China', 'modernmt': 'Italy',
+                                    'apertium': 'Apertium', 'reverso': 'France', 'cloudyi': 'China', 'deepl': 'Germany',
+                                    'qqtransmart': 'China', 'translatecom': 'America', 'qqfanyi': 'China', 'argos': 'America',
+                                    'translateme': 'Lithuania', 'youdaov3': 'China', 'papago': 'South Korea', 'iflyrec': 'China',
+                                    'yeekit': 'China', 'caiyun': 'China', 'elia': 'Spain', 'judic': 'Belgium', 'mglip': 'China',
+                                    'utibet': 'China'}
 
     def read_languages (self):
         if (self.path_languages != None):
@@ -329,27 +334,15 @@ def parse_args ():
                                      "translation.")
     parser.add_argument("--path", type=str, default=os.getcwd()+"\\translation_support_.json",
                         help="Path for storing the mapping between languages and translators.")
-    parser.add_argument("--version", type=str, default="all",
-                        help="Translator suite version available: all, v0, v1, v2, v3, v4.")
+    parser.add_argument("--version", type=str, default="all", help="Translator suite version "+
+                        "available: 'all', 'failing', 'working', 'fa', 'fb', 'fc', 'va', ..., 'vk'.")
     parser.add_argument("--timeout", type=int, default=300, help="Maximum translation time.")
     return parser.parse_args()
 
 if __name__ == '__main__':
     args = parse_args()
-    path, final, version, timeout = args.path, args.path, args.version, args.timeout
-    if ("_.json" in args.path): final = final.replace("_.json", ".json")
-    elif (".json" in args.path): path = final.replace(".json", "_.json")
-    elif (args.path[-1] == "_"):
-        path += ".json"
-        final = path.replace("_.json", ".json")
-    else:
-        path += "_.json"
-        final += ".json"
-
-    path = path.replace("_.json", "_"+version+"_.json")
-    final = final.replace(".json", "_"+version+".json")
-
+    path, version, timeout = args.path, args.version, args.timeout
+    path = path.replace(".json", "_"+version+".json")
     translation_support = TranslationSupport(path_write = path,
                           version = version, timeout = float(timeout))
     translation_support.execute(times = 1)
-    translation_support.write_data(final)
