@@ -142,47 +142,7 @@ class TranslationSupport:
                 for lang in self.languages.keys():
                     self.translators[key]["nfrom"][lang].append('zh')
 
-    def organize (self, data):
-        removed_translators = []
-        for key in data["translators"].keys():
-            aux_lng, max_to, max_from = [], 0, 0
-            for lng in data["translators"][key]["from"].keys():
-                data["translators"][key]["from"][lng] = sorted(
-                    set(data["translators"][key]["from"][lng]))
-                len_lng = len(data["translators"][key]["from"][lng])
-                if (len_lng == 0):
-                    aux_lng.append(lng)
-                    max_from -= 1
-                elif (len_lng > max_to): max_to = len_lng
-                max_from += 1
-            for lng in aux_lng: _ = data["translators"][key]["from"].pop(lng)
-            data["translators"][key]["available"] = int(max(max_to, max_from))
-            data["translators"][key].pop("nfrom")
-            if (data["translators"][key]["available"] == 0):
-                removed_translators.append(key)
-        for key in removed_translators: data["translators"].pop(key)
-
-        aux_lang, aux_avai = [], []
-        for lang in data["languages"].keys():
-            data["languages"][lang]["from"] = {key: value for key, value in sorted(
-                data["languages"][lang]["from"].items(), key=lambda item: item[1])}
-            data["languages"][lang]["to"] = {key: value for key, value in sorted(
-                data["languages"][lang]["to"].items(), key=lambda item: item[1])}
-
-            if ((len(list(data["languages"][lang]["from"].keys())) == 0)or
-                (len(list(data["languages"][lang]["to"].keys())) == 0)):
-                aux_lang.append(lang)
-
-            data["available"][lang]["from"] = sorted(set(data["available"][lang]["from"]))
-            data["available"][lang]["to"] = sorted(set(data["available"][lang]["to"]))
-
-            if ((len(data["available"][lang]["from"]) == 0)or
-                (len(data["available"][lang]["to"]) == 0)):
-                aux_avai.append(lang)
-        for lang in aux_lang: _ = data["languages"].pop(lang)
-        for lang in aux_avai: _ = data["available"].pop(lang)
-
-    def write_data (self, final = False, path = None):
+    def write_data (self, path = None):
         if (self.pass_thread[0] == False): return
         self.pass_thread[0] = False
 
@@ -202,17 +162,13 @@ class TranslationSupport:
         data["available"] = self.available.copy()
         data["exceptions"] = self.exceptions
 
-        if (final): data = self.organize(data)
         try:
-            with open(path_data, 'w') as jfile: json.dump(data, jfile, indent=4)
-            if (final):
-                self.init_values()
-                self.exceptions = []
+            with open(path_data, 'w') as jfile:
+                json.dump(data, jfile, indent=4)
         except Exception as e:
             self.exceptions.append("[write_data] "+str(e))
             if (path == None): return
-            if (path_data != self.path_write): self.write_data(final)
-
+            if (path_data != self.path_write): self.write_data()
         self.pass_thread[0] = True
 
     def get_pattern_word (self): return self.pattern_word
@@ -339,7 +295,7 @@ class TranslationSupport:
                     if (False in cprocessed):
                         self.check_translation(origin, destiny, translator, cprocessed)
                 self.range_progress.update(1)
-            self.write_data(False, path)
+            self.write_data(path)
 
     def process (self, path = None):
         path_data, threads = path, []
@@ -357,7 +313,7 @@ class TranslationSupport:
                     remove_threads.append(i)
             remove_threads.sort(reverse=True)
             for rt in remove_threads: del(threads[rt])
-        self.write_data(False, path_data)
+        self.write_data(path_data)
 
     def execute (self, path = None, times = 3):
         path_data = path
@@ -396,4 +352,4 @@ if __name__ == '__main__':
     translation_support = TranslationSupport(path_write = path,
                           version = version, timeout = float(timeout))
     translation_support.execute(times = 1)
-    translation_support.write_data(True, final)
+    translation_support.write_data(final)
