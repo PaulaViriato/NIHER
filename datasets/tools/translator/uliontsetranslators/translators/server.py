@@ -108,15 +108,14 @@ def translation_process (server, pattern_word: str = '----------', timeout: floa
                      timeout = timeout, region = region, exceptions = exceptions, **kwargs)
         delay = time.time() - delay
 
-        if (tnl != None): return [origin, destiny, delay, True]
-        else:
-            if (origin not in not_language.keys()): not_language[origin] = [destiny]
-            elif (destiny not in not_language[origin]): not_language[origin].append(destiny)
-            return [origin, destiny, timeout, False]
+        if ((tnl != None)and(isinstance(tnl, str))): return [origin, destiny, delay, True]
+        else: return [origin, destiny, timeout, False]
+        #if (origin not in not_language.keys()): not_language[origin] = [destiny]
+        #elif (destiny not in not_language[origin]): not_language[origin].append(destiny)   
     except Exception as e:
         if (unsupported_languages(str(e), translator, not_language, exceptions) == False):
-            if (origin not in not_language.keys()): not_language[origin] = [destiny]
-            elif (destiny not in not_language[origin]): not_language[origin].append(destiny)
+            #if (origin not in not_language.keys()): not_language[origin] = [destiny]
+            #elif (destiny not in not_language[origin]): not_language[origin].append(destiny)
             exceptions.append("[translation_process] Error: "+str(e)+"; From: "+origin+
                               "; To: "+destiny+"; Translator: "+translator)
         return [origin, destiny, timeout, False]

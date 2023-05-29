@@ -147,6 +147,71 @@ class TranslationSupport:
                 for lang in self.languages.keys():
                     self.translators[key]["nfrom"][lang].append('zh')
 
+    def merge_data (self, initial_path = None, final_path = None, filename = None):
+        if (initial_path == None): self.set_path_write(final_path, True)
+        else:
+            self.set_path_write(initial_path, True)
+            with open(final_path, 'r') as jfile:
+                data = json.load(jfile)
+                languages, available, translators, exceptions = {}, {}, {}, []
+                for lang in self.languages.keys():
+                    languages[lang] = {"from": {}, "to": {}}
+                    available[lang] = {"from": [], "to": []}
+                    for transl in self.languages[lang]["from"].keys():
+                        languages[lang]["from"][transl] = self.languages[lang]["from"][transl]
+                    for transl in self.languages[lang]["to"].keys():
+                        languages[lang]["to"][transl] = self.languages[lang]["to"][transl]
+                    for transl in data["languages"][lang]["from"].keys():
+                        languages[lang]["from"][transl] = data["languages"][lang]["from"][transl]
+                    for transl in data["languages"][lang]["to"].keys():
+                        languages[lang]["to"][transl] = data["languages"][lang]["to"][transl]
+                    for langf in self.languages[lang]["from"]:
+                        if (langf not in languages[lang]["from"]): languages[lang]["from"].append(langf)
+                    for langt in self.languages[lang]["to"]:
+                        if (langt not in languages[lang]["to"]): languages[lang]["to"].append(langt)
+                    for langf in data["languages"][lang]["from"]:
+                        if (langf not in languages[lang]["from"]): languages[lang]["from"].append(langf)
+                    for langt in data["languages"][lang]["to"]:
+                        if (langt not in languages[lang]["to"]): languages[lang]["to"].append(langt)
+
+                for key in self.translators.keys():
+                    translators[key] = {}
+                    translators[key]["region"] = self.translators[key]["region"]
+                    translators[key]["nfrom"] = self.translators[key]["nfrom"].copy()
+                    translators[key]["available"] = self.translators[key]["available"]
+                    translators[key]["from"] = self.translators[key]["from"].copy()
+                    translators[key]["time"] = self.translators[key]["time"]
+                    translators[key]["server"] = uliontset.server.TranslatorsServer()
+
+                for key in data["translators"].keys():
+                    if (len(data["translators"][key]["available"]) > 0):
+                        translators[key] = {}
+                        translators[key]["region"] = data["translators"][key]["region"]
+                        translators[key]["nfrom"] = data["translators"][key]["nfrom"].copy()
+                        translators[key]["available"] = data["translators"][key]["available"]
+                        translators[key]["from"] = data["translators"][key]["from"].copy()
+                        translators[key]["time"] = data["translators"][key]["time"]
+                        translators[key]["server"] = uliontset.server.TranslatorsServer()
+
+                for exception in self.exceptions: exceptions.append(exception)
+                for exception in data["exceptions"]: exceptions.append(exception)
+
+                self.languages = languages.copy()
+                self.available = available.copy()
+                self.translators = translators.copy()
+                self.exceptions = exceptions
+
+                for key in self.translators.keys():
+                    for lang in self.languages.keys():
+                        lnfrom, lfrom = [], []
+                        for item in self.translators[key]["from"][lang]:
+                            if (item not in lfrom): lfrom.append(item)
+                        for item in self.translators[key]["nfrom"][lang]:
+                            if (item not in lnfrom): lnfrom.append(item)
+                        self.translators[key]["from"][lang] = lfrom
+                        self.translators[key]["nfrom"][lang] = lnfrom
+        self.write_data(filename)
+
     def write_data (self, path = None):
         if (self.pass_thread[0] == False): return
         self.pass_thread[0] = False
@@ -226,9 +291,9 @@ class TranslationSupport:
             try:
                 with open(self.path_write, 'r') as jfile:
                     data = json.load(jfile)
-                    if ("languages" in data.keys()): self.languages = data["languages"]
-                    if ("available" in data.keys()): self.available = data["available"]
-                    if ("translators" in data.keys()): self.translators = data["translators"]
+                    if ("languages" in data.keys()): self.languages = data["languages"].copy()
+                    if ("available" in data.keys()): self.available = data["available"].copy()
+                    if ("translators" in data.keys()): self.translators = data["translators"].copy()
                     if ("exceptions" in data.keys()): self.exceptions = data["exceptions"]
                     self.recover_path_write()
             except Exception as e:
@@ -332,7 +397,7 @@ def parse_args ():
                                      "languages and translators. It uses UlionTse's translators library "+
                                      "(https://github.com/UlionTse/translators), version 5.7.1, for text "+
                                      "translation.")
-    parser.add_argument("--path", type=str, default=os.getcwd()+"\\translation_support_.json",
+    parser.add_argument("--path", type=str, default=os.getcwd()+"\\translation_support.json",
                         help="Path for storing the mapping between languages and translators.")
     parser.add_argument("--version", type=str, default="all", help="Translator suite version "+
                         "available: 'all', 'failing', 'working', 'fa', 'fb', 'fc', 'va', ..., 'vk'.")
