@@ -320,11 +320,6 @@ class TranslationSupport:
             self.available[destiny]["to"].append(origin)
             self.pass_thread[1] = True
 
-    def check_translation (self, pattern_language, lang, translator, processed):
-        if (processed[0] == False): self.translation(pattern_language, lang, translator)
-        if (processed[1] == False): self.translation(lang, pattern_language, translator)
-        self.translators[translator]["available"] += 1
-
     def check_processed (self, origin, destiny, translator):
         result = [False, False]
         try:
@@ -336,7 +331,6 @@ class TranslationSupport:
                                    "; Phase: 0; From: "+origin+
                                    "; To: "+destiny+"; Translator: "+translator)
             result[0] = False
-
         try:
             if ((origin in self.translators[translator]["from"][destiny])or
                 (origin in self.translators[translator]["nfrom"][destiny])):
@@ -346,25 +340,25 @@ class TranslationSupport:
                                     "; Phase: 1; From: "+origin+
                                     "; To: "+destiny+"; Translator: "+translator)
             result[1] = False
-
         return result
+
+    def check_translation (self, pattern_language, lang, translator):
+        checks = self.check_processed(pattern_language, lang, translator)
+        if (checks[0] == False): self.translation(pattern_language, lang, translator)
+        if (checks[1] == False): self.translation(lang, pattern_language, translator)
+        self.translators[translator]["available"] += 1
 
     def process_server (self, translator, path):
         self.translators[translator]["server"].set_server_region(translator = translator,
                         region = self.translators[translator]["region"],
                         exceptions = self.exceptions)
-        origin_languages = list(self.languages.keys())
-        destiny_languages = list(self.languages.keys())
-        random.shuffle(origin_languages)
-        random.shuffle(destiny_languages)
-
-        for origin in origin_languages:
-            for destiny in destiny_languages:
-                if (destiny != origin):
-                    cprocessed = self.check_processed(origin, destiny, translator)
-                    if (False in cprocessed):
-                        self.check_translation(origin, destiny, translator, cprocessed)
-                self.range_progress.update(1)
+        process_languages = list(self.languages.keys())
+        process_languages = random.sample(process_languages, k=len(process_languages))
+        for i in range(len(process_languages)):
+            for destiny in process_languages[i+1:]:
+                self.check_translation(process_languages[i], destiny, translator)
+                self.range_progress.update(2)
+            self.range_progress.update(1)
             self.write_data(path)
 
     def process (self, path = None):
